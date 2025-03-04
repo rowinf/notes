@@ -3,23 +3,37 @@
 namespace App\Livewire\Notes;
 
 use App\Models\Note;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Tag;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Index extends Component
 {
     public bool $is_archived;
+    public Tag $tag;
+    
+    public function mount(Tag $tag) 
+    {
+        $this->tag = $tag;
+    }
 
     #[Computed]
-    public function note(String $id) {
+    public function note(string $id)
+    {
         return $id;
     }
 
     #[Computed]
-    public function notes() {
-        return Note::where(['is_archived'=>request()->routeIs("archive")])->get();
+    public function notes()
+    {
+        if ($this->tag) {
+            return $this->tag->notes;
+        }
+        return Note::where([
+            'is_archived' => request()->routeIs("archive"),
+        ])->get();
     }
+
     public function render()
     {
         return view('livewire.notes.index');
