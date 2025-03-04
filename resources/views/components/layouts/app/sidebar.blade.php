@@ -14,6 +14,7 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group heading="Platform" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="archive-box-arrow-down" :href="route('archive')" :current="request()->routeIs('archive')" wire:navigate>{{ __('Archived Notes') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
