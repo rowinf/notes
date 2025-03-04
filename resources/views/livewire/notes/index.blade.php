@@ -25,7 +25,6 @@
             </form>
         </div>
         <div id="note-content">
-            {{$note}}
             @if (isset($note) && $note->content)
                 @markdown($note->content)
             @else
