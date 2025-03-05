@@ -18,15 +18,9 @@ class Index extends Component
     }
 
     #[Computed]
-    public function note(string $id)
-    {
-        return $id;
-    }
-
-    #[Computed]
     public function notes()
     {
-        if ($this->tag) {
+        if (request()->routeIs("tag")) {
             return $this->tag->notes;
         }
         return Note::where([

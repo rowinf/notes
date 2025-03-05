@@ -2,10 +2,10 @@
     <nav class="flex-auto border-r border-zinc-200">
         @foreach ($this->notes as $note)
             <a href="{{ url()->query(url()->current(), ['note' => $note->id]) }}"
-                class="block hover:bg-zinc-50 dark:hover:bg-zinc-600/75">
+                class="block hover:bg-zinc-50 dark:hover:bg-zinc-600/75"  wire:key="{{$note->id}}">
                 <div>{{ $note->title }}</div>
                 @foreach ($note->tags as $tag)
-                    <span class="p-1 bg-zinc-200 rounded-md">{{ $tag->name }}</span>
+                    <span class="p-1 bg-zinc-200 rounded-md"  wire:key="{{$tag->name}}">{{ $tag->name }}</span>
                 @endforeach
                 <div>{{ $note->last_edited_at }}</div>
             </a>

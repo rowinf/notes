@@ -14,7 +14,7 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
     Route::get('dashboard', Index::class)->name('dashboard');
     Route::get('dashboard/archive', Index::class)->name('archive');
-    Route::get('dashboard/tags/{tag}', Index::class)->name('tag');
+    Route::get('dashboard/tags/{tag?}', Index::class)->name('tag');
     Route::get('dashboard/search', Index::class)->name('search');
     Route::get('dashboard?note={note}', Index::class)->name('dashboard.note');
 
