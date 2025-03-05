@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/tags/{tag?}', Index::class)->name('tag');
     Route::get('dashboard/search', Index::class)->name('search');
     Route::get('dashboard?note={note}', Index::class)->name('dashboard.note');
+    Route::get('dashboard/create', Index::class)->name('dashboard.create');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');

@@ -12,6 +12,18 @@ class Note extends Model
     /** @use HasFactory<\Database\Factories\NoteFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        "title",
+        "content",
+        "last_edited_at",
+        "is_archived",
+    ];
+
+    public function getTitleAttribute($value)
+    {
+        return $value ?? "Untitle Note";
+    }
+
     public function getLastEditedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d M Y');
