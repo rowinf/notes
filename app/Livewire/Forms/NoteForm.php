@@ -18,7 +18,7 @@ class NoteForm extends Form
     {
         return Note::create([
             'title' => $this->title,
-            'content' => $this->content,
+            'content' => $this->content ?? '',
             'last_edited_at' => Date::now(),
             'is_archived' => false,
         ]);

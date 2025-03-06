@@ -2,7 +2,7 @@
     <nav class="flex-auto border-r border-zinc-200">
         <flux:button href="{{route('dashboard.create')}}" variant="primary" class="w-full">Create Note</flux:button>
         @foreach ($this->notes as $note)
-            <a href="{{ $note->id ? route('dashboard.note', parameters: $note->id) : route('dashboard.create') }}"
+            <a href="{{ route('dashboard.note', ['note' => $note]) }}"
                 class="block hover:bg-zinc-50 dark:hover:bg-zinc-600/75" wire:key="{{$note->id}}"
                 wire:current="bg-zinc-100">
                 <div>{{ $note->title }}</div>
@@ -14,15 +14,11 @@
         @endforeach
     </nav>
     <div class="flex-2/3">
-        @if (request()->routeIs('dashboard.create'))
-            <form wire:submit="save">
-                <flux:input type="text" id="title" name="title" wire:model="form.title"></flux:input>
-                <flux:textarea name="content" id="content" wire:model="form.content"></flux:textarea>
-                <flux:button type="submit" variant="primary">Save</flux:button>
-                <flux:button href="/dashboard">Cancel</flux:button>
-            </form>
-        @else
-            <livewire:notes.show :note="$form->note" />
-        @endif
+        <form wire:submit="save">
+            <flux:input type="text" id="title" name="title" wire:model="form.title"></flux:input>
+            <flux:textarea name="content" id="content" wire:model="form.content" rows="24"></flux:textarea>
+            <flux:button type="submit" variant="primary">Save</flux:button>
+            <flux:button href="{{ route('dashboard') }}">Cancel</flux:button>
+        </form>
     </div>
 </div>

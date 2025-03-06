@@ -5,7 +5,6 @@ namespace App\Livewire\Notes;
 use App\Livewire\Forms\NoteForm;
 use App\Models\Note;
 use App\Models\Tag;
-use Date;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -19,33 +18,41 @@ class Index extends Component
     public function mount(Tag $tag, Note $note)
     {
         $this->tag = $tag;
-        if ($note) {
-            $this->form->setNote($note);
-        }
+        $this->form->setNote($note);
     }
 
     #[Computed]
     public function notes()
     {
-        if (request()->routeIs("tag")) {
+        if (request()->routeIs("tag.note")) {
             return $this->tag->notes;
         }
         $notes = Note::where([
-            'is_archived' => request()->routeIs("archive"),
+            'is_archived' => request()->routeIs("archive.note"),
         ])->orderByDesc('last_edited_at')->get();
 
         if (request()->routeIs("dashboard.create")) {
-            $notes->prepend(new Note);
+            $note = new Note;
+            $notes->prepend($note);
+            $this->form->setNote($note);
         }
         return $notes;
     }
 
     public function save()
     {
-        $note = $this->form->store();
-        $this->redirect(route('dashboard.note', ['note' => $note]), navigate: true);
+        if ($this->form->note->id) {
+            $this->form->update();
+        } else {
+            $note = $this->form->store();
+            $this->redirect(route('dashboard.note', ['note' => $note]), navigate: true);
+        }
     }
 
+    public function update()
+    {
+        $this->form->update();
+    }
     public function render()
     {
         return view('livewire.notes.index');
