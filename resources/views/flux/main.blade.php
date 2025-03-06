@@ -11,14 +11,16 @@ $classes = Flux::classes('[grid-area:main]')
 @endphp
 
 <div {{ $attributes->class($classes) }} data-flux-main>
-    <div class="flex flex-0 justify-between border-b border-zinc-200 py-4 mb-4">
-        <h1 class="text-2xl">
-            @if (request()->routeIs("archive"))
+    <div class="flex flex-0 justify-between border-b border-zinc-200 dark:border-zinc-700 py-8 px-7">
+        <h1 class="text-2xl font-weight-700">
+            @if (request()->routeIs("archive.note"))
                 Archived Notes
-            @elseif (request()->routeIs("search"))
+            @elseif (request()->routeIs("tag.note"))
+                Notes tagged: {{ request()->route('tag')->name }}
+            @elseif (request()->routeIs("search.note"))
                 Showing Results for: (Term)
             @else
-                Notes
+                All Notes
             @endif
         </h1>
         <form wire:submit="searchNotes" class="flex">
@@ -26,6 +28,6 @@ $classes = Flux::classes('[grid-area:main]')
                 placeholder="{{ __('Search by title, content, or tags...') }}" />
         </form>
     </div>
-    
+
     {{ $slot }}
 </div>
