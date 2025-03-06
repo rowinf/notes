@@ -1,4 +1,5 @@
 @php
+    // when clicking on a note from different contexts, direct the user to the correct note
     function getNoteRoute(?App\Models\Note $note, ?App\Models\Tag $tag): string
     {
         $routeName = request()->route()->getName();
@@ -28,7 +29,7 @@
         <form wire:submit="save">
             <flux:input type="text" id="title" name="title" wire:model="form.title"></flux:input>
             <flux:textarea name="content" id="content" wire:model="form.content" rows="24"></flux:textarea>
-            <flux:button type="submit" variant="primary">Save</flux:button>
+            <flux:button type="submit" variant="primary" class="bg-blue-500 text-white disabled:opacity-75" wire:dirty.class="bg-blue-900">Save</flux:button>
             <flux:button href="{{ route('dashboard') }}">Cancel</flux:button>
         </form>
     </div>
