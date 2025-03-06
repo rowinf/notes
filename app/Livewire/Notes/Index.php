@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Notes;
 
+use App\Livewire\Forms\NoteForm;
 use App\Models\Note;
 use App\Models\Tag;
 use Date;
@@ -10,15 +11,17 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public bool $is_archived;
     public ?Tag $tag;
-
+    public NoteForm $form;
     public $title = '';
     public $content = '';
 
-    public function mount(Tag $tag)
+    public function mount(Tag $tag, Note $note)
     {
         $this->tag = $tag;
+        if ($note) {
+            $this->form->setNote($note);
+        }
     }
 
     #[Computed]
@@ -27,20 +30,20 @@ class Index extends Component
         if (request()->routeIs("tag")) {
             return $this->tag->notes;
         }
-        return Note::where([
+        $notes = Note::where([
             'is_archived' => request()->routeIs("archive"),
         ])->orderByDesc('last_edited_at')->get();
+
+        if (request()->routeIs("dashboard.create")) {
+            $notes->prepend(new Note);
+        }
+        return $notes;
     }
 
     public function save()
     {
-        Note::create([
-            'title' => $this->title,
-            'content' => $this->content,
-            'last_edited_at' => Date::now(),
-            'is_archived' => false,
-        ]);
-        $this->redirect("/dashboard", navigate: true);
+        $note = $this->form->store();
+        $this->redirect(route('dashboard.note', ['note' => $note]), navigate: true);
     }
 
     public function render()

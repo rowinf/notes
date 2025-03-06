@@ -1,9 +1,10 @@
 <div class="flex gap-4 h-full">
     <nav class="flex-auto border-r border-zinc-200">
-        <flux:button href="/dashboard/create" variant="primary" class="w-full">Create Note</flux:button>
+        <flux:button href="{{route('dashboard.create')}}" variant="primary" class="w-full">Create Note</flux:button>
         @foreach ($this->notes as $note)
-            <a href="{{ url()->query(url()->current(), ['note' => $note->id]) }}"
-                class="block hover:bg-zinc-50 dark:hover:bg-zinc-600/75" wire:key="{{$note->id}}">
+            <a href="{{ $note->id ? route('dashboard.note', parameters: $note->id) : route('dashboard.create') }}"
+                class="block hover:bg-zinc-50 dark:hover:bg-zinc-600/75" wire:key="{{$note->id}}"
+                wire:current="bg-zinc-100">
                 <div>{{ $note->title }}</div>
                 @foreach ($note->tags as $tag)
                     <span class="p-1 bg-zinc-200 rounded-md" wire:key="{{$tag->name}}">{{ $tag->name }}</span>
@@ -13,47 +14,15 @@
         @endforeach
     </nav>
     <div class="flex-2/3">
-        <div class="flex flex-0 justify-between border-b border-zinc-200 py-4 mb-4">
-            <h2 class="text-2xl">
-                @if (request()->routeIs("archive"))
-                    Archived Notes
-                @elseif (request()->routeIs("search"))
-                    Showing Results for: (Term)
-                @else
-                    Notes
-                @endif
-            </h2>
-            <form wire:submit="searchNotes" class="flex">
-                <flux:input wire:model="query" id="query" type="search" name="query" required
-                    placeholder="{{ __('Search by title, content, or tags...') }}" />
-            </form>
-        </div>
         @if (request()->routeIs('dashboard.create'))
             <form wire:submit="save">
-                <flux:input type="text" id="title" name="title" wire:model="title"></flux:input>
-                <flux:textarea name="content" id="content" wire:model="content"></flux:textarea>
+                <flux:input type="text" id="title" name="title" wire:model="form.title"></flux:input>
+                <flux:textarea name="content" id="content" wire:model="form.content"></flux:textarea>
                 <flux:button type="submit" variant="primary">Save</flux:button>
                 <flux:button href="/dashboard">Cancel</flux:button>
             </form>
         @else
-            <div id="note-content" class="space-y-4">
-                @if (isset($note) && $note->content)
-                    <p class="text-2xl">{{ $note->title }}</p>
-                    <dl class="space-y-4">
-                        <dt>Tags</dt>
-                        <dd>
-                            @foreach ($note->tags as $tag)
-                                <span>{{ $tag->name }}</span>
-                            @endforeach
-                        </dd>
-                        <dt>Last edited</dt>
-                        <dd>{{ $note->last_edited_at }}</dd>
-                    </dl>
-                    @markdown($note->content)
-                @else
-                    (empty)
-                @endif
-            </div>
+            <livewire:notes.show :note="$form->note" />
         @endif
     </div>
 </div>

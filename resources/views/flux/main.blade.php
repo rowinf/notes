@@ -11,5 +11,21 @@ $classes = Flux::classes('[grid-area:main]')
 @endphp
 
 <div {{ $attributes->class($classes) }} data-flux-main>
+    <div class="flex flex-0 justify-between border-b border-zinc-200 py-4 mb-4">
+        <h1 class="text-2xl">
+            @if (request()->routeIs("archive"))
+                Archived Notes
+            @elseif (request()->routeIs("search"))
+                Showing Results for: (Term)
+            @else
+                Notes
+            @endif
+        </h1>
+        <form wire:submit="searchNotes" class="flex">
+            <flux:input wire:model="query" id="query" type="search" name="query" required
+                placeholder="{{ __('Search by title, content, or tags...') }}" />
+        </form>
+    </div>
+    
     {{ $slot }}
 </div>
