@@ -15,7 +15,7 @@ class Index extends Component
     public $title = '';
     public $content = '';
 
-    public function mount(Tag $tag, Note $note)
+    public function mount(?Tag $tag, Note $note)
     {
         $this->tag = $tag;
         $this->form->setNote($note);
@@ -34,7 +34,6 @@ class Index extends Component
         if (request()->routeIs("dashboard.create")) {
             $note = new Note;
             $notes->prepend($note);
-            $this->form->setNote($note);
         }
         return $notes;
     }
