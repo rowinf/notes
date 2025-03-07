@@ -52,6 +52,17 @@ class Index extends Component
     {
         $this->form->update();
     }
+
+    public function delete()
+    {
+        $this->form->destroy();
+        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]), navigate: true);
+    }
+    public function archive()
+    {
+        $this->form->archive();
+        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]), navigate: true);
+    }
     public function render()
     {
         return view('livewire.notes.index');
