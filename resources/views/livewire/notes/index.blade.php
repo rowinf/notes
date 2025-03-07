@@ -15,13 +15,15 @@
         <flux:button href="{{route('dashboard.create')}}" variant="primary" class="w-full">Create Note</flux:button>
         @foreach ($this->notes as $note)
             <a href="{{ getNoteRoute($note, $this->tag) }}"
-                class="block hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 flex flex-col space-y-3" wire:key="{{$note->id}}"
-                wire:current="bg-zinc-100 dark:bg-zinc-800">
+                class="border-t border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 flex flex-col space-y-3 hover:rounded-xl"
+                wire:key="{{$note->id}}"
+                wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl">
                 <div class="font-weight-600">{{ $note->title }}</div>
                 <div>
-                @foreach ($note->tags as $tag)
-                    <span class="p-1 bg-zinc-200 rounded-md dark:bg-zinc-600 text-xs" wire:key="{{$tag->name}}">{{ $tag->name }}</span>
-                @endforeach
+                    @foreach ($note->tags as $tag)
+                        <span class="p-1 bg-zinc-200 rounded-md dark:bg-zinc-600 text-xs"
+                            wire:key="{{$tag->name}}">{{ $tag->name }}</span>
+                    @endforeach
                 </div>
                 <div class="text-xs">{{ $note->last_edited_at }}</div>
             </a>

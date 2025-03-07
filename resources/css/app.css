@@ -68,6 +68,11 @@ select:focus[data-flux-control] {
     @apply size-4;
 } */
 
+/* this is not possible with tailwind */
+[data-current] + a {
+    border-color: transparent!important;
+}
+
 #note-content {
     ol {
         list-style: decimal;
