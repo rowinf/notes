@@ -6,18 +6,21 @@ use App\Livewire\Forms\NoteForm;
 use App\Models\Note;
 use App\Models\Tag;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination, WithoutUrlPagination; 
+    use WithPagination, WithoutUrlPagination;
     public ?Tag $tag;
     public NoteForm $form;
     public $title = '';
     public $content = '';
     public $perPage = 20;
+    #[Url]
+    public $searchTerm = '';
 
     public function updatingPage($page)
     {
@@ -34,17 +37,24 @@ class Index extends Component
     public function notes()
     {
         if (request()->routeIs("tag.note")) {
-            return $this->tag->notes()->simplePaginate($this->perPage, page: 1);
+            $builder = $this->tag->notes();
+        } else {
+            $builder = Note::where([
+                'is_archived' => request()->routeIs("archive.note"),
+            ])->orderByDesc('last_edited_at');
         }
-        $notes = Note::where([
-            'is_archived' => request()->routeIs("archive.note"),
-        ])->orderByDesc('last_edited_at')->simplePaginate($this->perPage, page: 1);
+        if (filled($this->searchTerm)) {
+            $builder
+                ->where('title','like','%'.$this->searchTerm.'%')
+                ->orWhere('content','like','%'.$this->searchTerm.'%');
+        }
+        $paginator = $builder->simplePaginate($this->perPage, page: 1);
 
         if (request()->routeIs("dashboard.create")) {
             $note = new Note;
-            $notes->prepend($note);
+            $paginator->prepend($note);
         }
-        return $notes;
+        return $paginator;
     }
 
     public function save()

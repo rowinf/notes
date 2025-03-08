@@ -19,7 +19,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/tags/{tag}', Tag::class)->name('tag');
     Route::get('dashboard/tags/{tag}/notes/{note?}', Index::class)->name('tag.note');
     Route::get('dashboard/tags/{tag}/notes/create', Index::class)->name('tag.create');
-    Route::get('dashboard/search?query={searchQuery}', Index::class)->name('search');
     Route::get('dashboard/notes/create', Index::class)->name('dashboard.create');
     Route::get('dashboard/notes/{note}', Index::class)->name('dashboard.note');
 

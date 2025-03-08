@@ -15,18 +15,15 @@ $classes = Flux::classes('[grid-area:main]')
         <h1 class="text-2xl font-bold">
             @if (request()->routeIs("archive.note"))
                 Archived Notes
+            @elseif (filled(request()->get('searchTerm')))
+                Showing Results for: {{ request()->get('searchTerm') }}
             @elseif (request()->routeIs("tag.note"))
                 Notes tagged: {{ request()->route('tag')->name }}
-            @elseif (request()->routeIs("search.note"))
-                Showing Results for: (Term)
             @else
                 All Notes
             @endif
         </h1>
-        <form wire:submit="searchNotes" class="flex">
-            <flux:input wire:model="query" id="query" type="search" name="query" required
-                placeholder="{{ __('Search by title, content, or tags...') }}" />
-        </form>
+        <livewire:notes.search />
     </div>
 
     {{ $slot }}
