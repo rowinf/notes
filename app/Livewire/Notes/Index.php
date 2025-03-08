@@ -7,13 +7,22 @@ use App\Models\Note;
 use App\Models\Tag;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination, WithoutUrlPagination; 
     public ?Tag $tag;
     public NoteForm $form;
     public $title = '';
     public $content = '';
+    public $perPage = 20;
+
+    public function updatingPage($page)
+    {
+        $this->perPage = $page * 20;
+    }
 
     public function mount(?Tag $tag, Note $note)
     {
@@ -25,11 +34,11 @@ class Index extends Component
     public function notes()
     {
         if (request()->routeIs("tag.note")) {
-            return $this->tag->notes;
+            return $this->tag->notes()->simplePaginate($this->perPage, page: 1);
         }
         $notes = Note::where([
             'is_archived' => request()->routeIs("archive.note"),
-        ])->orderByDesc('last_edited_at')->get();
+        ])->orderByDesc('last_edited_at')->simplePaginate($this->perPage, page: 1);
 
         if (request()->routeIs("dashboard.create")) {
             $note = new Note;

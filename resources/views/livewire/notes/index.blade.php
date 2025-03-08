@@ -35,6 +35,9 @@
                     <div class="text-xs">{{ $note->last_edited_at }}</div>
                 </a>
             @endforeach
+            @if ($this->notes->hasMorePages())
+                <button x-intersect:enter="$wire.nextPage" wire:loading.attr="disabled" rel="next">Next</button>
+            @endif
         </nav>
     </div>
     <div class="flex-2/3 px-6 py-5">
