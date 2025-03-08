@@ -1,18 +1,24 @@
 @php
     // when clicking on a note from different contexts, direct the user to the correct note
-    function getNoteRoute(?App\Models\Note $note, ?App\Models\Tag $tag): string
+    function getNoteRoute(?App\Models\Note $note, ?App\Models\Tag $tag, String $searchTerm): string
     {
         $routeName = request()->route()->getName();
         if ($note->id) {
             $routeName = str_replace('create', 'note', $routeName);
         }
-        return route($routeName, ['note' => $note, 'tag' => $tag]);
+        $params = ['note' => $note, 'tag' => $tag];
+        if (filled($searchTerm)) {
+            $params['searchTerm']=$searchTerm;
+        }
+        return route($routeName, $params);
     }
 @endphp
 
 <div class="flex relative">
+    @persist('scrollbar')
     <div
-        class="h-[calc(100vh-105px)] overflow-auto flex-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
+        wire:scroll
+        class="h-[calc(100vh-105px)] overflow-y-auto flex-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
         <flux:button href="{{route('dashboard.create')}}" variant="primary" class="w-full mb-4">Create New Note
         </flux:button>
         @if (request()->routeIs('archive.note'))
@@ -22,9 +28,12 @@
         @endif
         <nav class="flex-auto">
             @foreach ($this->notes as $note)
-                <a href="{{ getNoteRoute($note, $this->tag) }}"
+                <a href="{{ getNoteRoute($note, $this->tag, $this->searchTerm) }}"
                     class="border-t first:border-none border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 flex flex-col space-y-3 hover:rounded-xl"
-                    wire:key="{{$note->id}}" wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl">
+                    wire:key="{{$note->id}}" 
+                    wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl"
+                    wire:navigate
+                    >
                     <div class="font-semibold">{{ $note->title }}</div>
                     <div>
                         @foreach ($note->tags as $tag)
@@ -40,6 +49,7 @@
             @endif
         </nav>
     </div>
+    @endpersist
     <div class="flex-2/3 px-6 py-5">
         <form wire:submit="save">
             <flux:input type="text" id="title" name="title" wire:model="form.title"></flux:input>

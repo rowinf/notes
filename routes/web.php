@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/tags/{tag}/notes/{note?}', Index::class)->name('tag.note');
     Route::get('dashboard/tags/{tag}/notes/create', Index::class)->name('tag.create');
     Route::get('dashboard/notes/create', Index::class)->name('dashboard.create');
-    Route::get('dashboard/notes/{note}', Index::class)->name('dashboard.note');
+    Route::get('dashboard/notes/{note?}', Index::class)->name('dashboard.note');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');

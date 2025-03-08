@@ -41,12 +41,12 @@ class Index extends Component
         } else {
             $builder = Note::where([
                 'is_archived' => request()->routeIs("archive.note"),
-            ])->orderByDesc('last_edited_at');
-        }
-        if (filled($this->searchTerm)) {
-            $builder
-                ->where('title','like','%'.$this->searchTerm.'%')
-                ->orWhere('content','like','%'.$this->searchTerm.'%');
+            ])->orderByDesc('last_edited_at')->with('tags');
+            if (filled($this->searchTerm)) {
+                $builder
+                    ->where('title','like','%'.$this->searchTerm.'%')
+                    ->orWhere('content','like','%'.$this->searchTerm.'%');
+            }
         }
         $paginator = $builder->simplePaginate($this->perPage, page: 1);
 

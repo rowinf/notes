@@ -7,10 +7,9 @@ use Livewire\Component;
 
 class Search extends Component
 {
-    #[Url]
     public String $searchTerm;
 
-    public function submitSearch() {
+    public function submit() {
         $this->redirect(route("dashboard.note", ["searchTerm"=> $this->searchTerm]));
     }
 
