@@ -1,6 +1,6 @@
 @php
     // when clicking on a note from different contexts, direct the user to the correct note
-    function getNoteRoute(?App\Models\Note $note, ?App\Models\Tag $tag, String $searchTerm): string
+    function getNoteRoute(?App\Models\Note $note, ?App\Models\Tag $tag, string $searchTerm): string
     {
         $routeName = request()->route()->getName();
         if ($note->id) {
@@ -8,7 +8,7 @@
         }
         $params = ['note' => $note, 'tag' => $tag];
         if (filled($searchTerm)) {
-            $params['searchTerm']=$searchTerm;
+            $params['searchTerm'] = $searchTerm;
         }
         return route($routeName, $params);
     }
@@ -16,24 +16,23 @@
 
 <div class="flex relative">
     @persist('scrollbar')
-    <div
-        wire:scroll
+    <div wire:scroll
         class="h-[calc(100vh-105px)] overflow-y-auto flex-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
         <flux:button href="{{route('dashboard.create')}}" variant="primary" class="w-full mb-4">Create New Note
         </flux:button>
-        @if (request()->routeIs('archive.note'))
-            <div class="pb-4 border-b mb-1 border-zinc-200 dark:border-zinc-800">
+        <div class="pb-4 border-b mb-1 border-zinc-200 dark:border-zinc-800">
+            @if (request()->routeIs('archive.note'))
                 <p>All your archived notes are stored here. You can restore or delete them anytime.</p>
-            </div>
-        @endif
+            @elseif (request()->routeIs('tag.note'))
+                <p>All notes with the "{{ request()->route('tag')->name }}" tag are shown here</p>
+            @endif
+        </div>
         <nav class="flex-auto">
             @foreach ($this->notes as $note)
                 <a href="{{ getNoteRoute($note, $this->tag, $this->searchTerm) }}"
                     class="border-t first:border-none border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 flex flex-col space-y-3 hover:rounded-xl"
-                    wire:key="{{$note->id}}" 
-                    wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl"
-                    wire:navigate
-                    >
+                    wire:key="{{$note->id}}" wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl"
+                    wire:navigate>
                     <div class="font-semibold">{{ $note->title }}</div>
                     <div>
                         @foreach ($note->tags as $tag)
@@ -62,8 +61,11 @@
     <div class="border-l dark:border-zinc-600 border-zinc-200 py-5 px-4">
         <flux:navlist variant="outline">
             <flux:navlist.group>
-                <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="archive" wire:confirm="archive it?">{{ __('Archive Note') }}</flux:navlist.item>
-                <flux:navlist.item icon="trash" href="#" wire:click="delete" wire:confirm="delete it?">{{ __('Delete Note') }}</flux:navlist.item>
+                <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="archive"
+                    wire:confirm="archive it?">{{ __('Archive Note') }}</flux:navlist.item>
+                <flux:navlist.item icon="trash" href="#" wire:click="delete" wire:confirm="delete it?">
+                    {{ __('Delete Note') }}
+                </flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
     </div>

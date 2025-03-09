@@ -14,7 +14,8 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination, WithoutUrlPagination;
-    public ?Tag $tag;
+    #[Url]
+    public ?Tag $tag = null;
     public NoteForm $form;
     public $title = '';
     public $content = '';
@@ -27,9 +28,8 @@ class Index extends Component
         $this->perPage = $page * 20;
     }
 
-    public function mount(?Tag $tag, Note $note)
+    public function mount(Note $note)
     {
-        $this->tag = $tag;
         $this->form->setNote($note);
     }
 
