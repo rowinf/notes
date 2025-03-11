@@ -27,6 +27,9 @@ class Note extends Model
 
     public function getLastEditedAtAttribute($value)
     {
+        if (!$value) {
+            return "";
+        }
         return Carbon::parse($value)->format('d M Y');
     }
 

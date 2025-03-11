@@ -20,27 +20,29 @@
         class="h-[calc(100vh-105px)] overflow-y-auto w-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
         <flux:button href="{{route('dashboard.create')}}" variant="primary" class="w-full mb-4">Create New Note
         </flux:button>
-        <div class="pb-4 border-b mb-1 border-zinc-200 dark:border-zinc-800">
-            @if (request()->routeIs('archive.note'))
+        @if (request()->routeIs('archive.note'))
+            <div class="pb-4 border-b mb-1 border-zinc-200 dark:border-zinc-800 empty:hidden">
                 <p>All your archived notes are stored here. You can restore or delete them anytime.</p>
-            @elseif (request()->routeIs('tag.note'))
+            </div>
+        @elseif (request()->routeIs('tag.note'))
+            <div class="pb-4 border-b mb-1 border-zinc-200 dark:border-zinc-800 empty:hidden">
                 <p>All notes with the "{{ request()->route('tag')->name }}" tag are shown here</p>
-            @endif
-        </div>
+            </div>
+        @endif
         <nav class="flex-auto">
             @foreach ($this->notes as $note)
                 <a href="{{ getNoteRoute($note, $this->tag, $this->searchTerm) }}"
-                    class="border-t first:border-none border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 flex flex-col space-y-3 hover:rounded-xl"
+                    class="border-t first:border-none border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 flex flex-col hover:rounded-xl"
                     wire:key="{{$note->id}}" wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl"
                     wire:navigate>
                     <div class="font-semibold">{{ $note->title }}</div>
-                    <div>
+                    <div class="empty:hidden pt-2">
                         @foreach ($note->tags as $tag)
                             <span class="p-1 bg-zinc-200 rounded-md dark:bg-zinc-600 text-xs"
                                 wire:key="{{$tag->name}}">{{ $tag->name }}</span>
                         @endforeach
                     </div>
-                    <div class="text-xs">{{ $note->last_edited_at }}</div>
+                    <div class="text-xs empty:hidden pt-3">{{ $note->last_edited_at }}</div>
                 </a>
             @endforeach
             @if ($this->notes->hasMorePages())
@@ -51,9 +53,36 @@
     @endpersist
     <div class="flex-2/3 px-6 py-5">
         <form wire:submit="save">
-            <flux:input type="text" wire:model="form.title" placeholder="Title"></flux:input>
-            <flux:input type="text" wire:model="form.tags" placeholder="Tags"></flux:input>
+            <div class="grid">
+                <div x-data="{open: false}">
+                    <button class="text-2xl font-bold text-left cursor-pointer mb-2" type="button" x-on:click="open = !open"
+                        x-text="$wire.form.title" x-show="!open"></button>
+                    <flux:field x-show="open">
+                        <flux:input type="text" wire:model="form.title" placeholder="Title"
+                            @click.outside="open = false" />
+                    </flux:field>
+                </div>
+                <div class="flex items-center mb-1" x-data="{open: false}">
+                    <div class="w-50 flex items-center mb-1">
+                        <flux:icon.tag class="size-4" /><span class="ml-1 text-sm align-baseline">Tags</span>
+                    </div>
+                    <button class="text-sm text-left cursor-pointer" type="button" x-on:click="open = !open" x-text="$wire.form.tags"
+                        x-show="!open"></button>
+                    <flux:field x-show="open">
+                        <flux:input type="text" wire:model="form.tags" placeholder="Tags"
+                            @click.outside="open = false" size="xs" />
+                    </flux:field>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center w-50">
+                        <flux:icon.clock class="size-4" /><span class="ml-1 text-sm align-baseline">Last Edited</span>
+                    </div>
+                    <p class="text-left text-sm">{{$note->last_edited_at}}</p>
+                </div>
+            </div>
+            <flux:separator class="my-4" />
             <flux:textarea name="content" id="content" wire:model="form.content" rows="24"></flux:textarea>
+            <flux:separator class="my-4" />
             <flux:button type="submit" variant="primary" class="disabled:opacity-75" wire:dirty.class="bg-blue-900">Save
             </flux:button>
             <flux:button href="{{ route('dashboard') }}">Cancel</flux:button>

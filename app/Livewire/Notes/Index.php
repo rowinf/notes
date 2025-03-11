@@ -37,7 +37,7 @@ class Index extends Component
     public function notes()
     {
         if (request()->routeIs("tag.note")) {
-            $builder = $this->tag->notes();
+            $builder = $this->tag->notes()->where(['is_archived' => false]);
         } else {
             $builder = Note::where([
                 'is_archived' => request()->routeIs("archive.note"),
