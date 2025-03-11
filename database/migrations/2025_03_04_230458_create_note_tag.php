@@ -6,8 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('note_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Note::class)->constrained()->unique();
-            $table->foreignIdFor(Tag::class)->constrained()->unique();
+            $table->foreignIdFor(Note::class)->constrained()->onUpdate('cascade')->onDelete('cascade')->unique();
+            $table->foreignIdFor(Tag::class)->constrained()->onUpdate('cascade')->onDelete('cascade')->unique();
             $table->timestamps();
         });
     }

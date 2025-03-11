@@ -17,7 +17,7 @@ class NoteSeeder extends Seeder
     {
         $json = File::get("database/data.json");
         $data = json_decode($json);
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 1; $i++) {
             foreach ($data->notes as $note_data) {
                 $note = Note::create([
                     "content"=> $note_data->content,

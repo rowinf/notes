@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
+    protected $fillable = ['name'];
     public function notes(): BelongsToMany
     {
         return $this->belongsToMany(Note::class)->orderByDesc('last_edited_at');

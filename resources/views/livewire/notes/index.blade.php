@@ -17,7 +17,7 @@
 <div class="flex relative">
     @persist('scrollbar')
     <div wire:scroll
-        class="h-[calc(100vh-105px)] overflow-y-auto flex-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
+        class="h-[calc(100vh-105px)] overflow-y-auto w-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
         <flux:button href="{{route('dashboard.create')}}" variant="primary" class="w-full mb-4">Create New Note
         </flux:button>
         <div class="pb-4 border-b mb-1 border-zinc-200 dark:border-zinc-800">
@@ -51,7 +51,8 @@
     @endpersist
     <div class="flex-2/3 px-6 py-5">
         <form wire:submit="save">
-            <flux:input type="text" id="title" name="title" wire:model="form.title"></flux:input>
+            <flux:input type="text" wire:model="form.title" placeholder="Title"></flux:input>
+            <flux:input type="text" wire:model="form.tags" placeholder="Tags"></flux:input>
             <flux:textarea name="content" id="content" wire:model="form.content" rows="24"></flux:textarea>
             <flux:button type="submit" variant="primary" class="disabled:opacity-75" wire:dirty.class="bg-blue-900">Save
             </flux:button>

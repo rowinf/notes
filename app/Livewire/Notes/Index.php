@@ -15,10 +15,10 @@ class Index extends Component
 {
     use WithPagination, WithoutUrlPagination;
     #[Url]
+    public ?Note $note = null;
+    #[Url]
     public ?Tag $tag = null;
     public NoteForm $form;
-    public $title = '';
-    public $content = '';
     public $perPage = 20;
     #[Url]
     public $searchTerm = '';
@@ -44,8 +44,7 @@ class Index extends Component
             ])->orderByDesc('last_edited_at')->with('tags');
             if (filled($this->searchTerm)) {
                 $builder
-                    ->where('title','like','%'.$this->searchTerm.'%')
-                    ->orWhere('content','like','%'.$this->searchTerm.'%');
+                    ->whereAny(['title', 'content'], 'like', '%' . $this->searchTerm . '%');
             }
         }
         $paginator = $builder->simplePaginate($this->perPage, page: 1);
@@ -60,11 +59,11 @@ class Index extends Component
     public function save()
     {
         if ($this->form->note->id) {
-            $this->form->update();
+            $this->note = $this->form->update();
         } else {
-            $note = $this->form->store();
-            $this->redirect(route('dashboard.note', ['note' => $note]), navigate: true);
+            $this->note = $this->form->store();
         }
+        $this->redirect(route('dashboard.note', ['note' => $this->note]));
     }
 
     public function update()
@@ -75,12 +74,12 @@ class Index extends Component
     public function delete()
     {
         $this->form->destroy();
-        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]), navigate: true);
+        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]));
     }
     public function archive()
     {
         $this->form->archive();
-        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]), navigate: true);
+        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]));
     }
     public function render()
     {

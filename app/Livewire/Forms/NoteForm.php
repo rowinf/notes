@@ -2,35 +2,54 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Tag;
 use App\Models\Note;
 use Date;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Str;
 
 class NoteForm extends Form
 {
 
     public ?Note $note;
-    public $title = '';
+    public string $title = '';
     public $content = '';
+    public string $tags;
 
     public function store()
     {
-        return Note::create([
+        $this->note = Note::create([
             'title' => $this->title,
             'content' => $this->content ?? '',
             'last_edited_at' => Date::now(),
             'is_archived' => false,
         ]);
+        $this->syncTags();
+        return $this->note;
     }
     public function update()
     {
-        return $this->note->update([
+        $this->note->update([
             'title' => $this->title,
             'content' => $this->content,
             'last_edited_at' => Date::now(),
             'is_archived' => false,
         ]);
+        $this->syncTags();
+        return $this->note;
+    }
+
+    public function syncTags() {
+        $tags = Str::of($this->tags)
+            ->explode(",")
+            ->map(function ($tag) {
+                return Tag::firstOrCreate([
+                    'name' => $tag,
+                ])->id;
+            });
+        $this->note->tags()->sync($tags);
+        $this->note->fresh();
     }
 
     public function destroy()
@@ -51,6 +70,8 @@ class NoteForm extends Form
         $this->title = $note->title;
         $this->content = $note->content;
         $this->note = $note;
+        $this->tags = $note->tags->map(function ($tag) {
+            return $tag->name;
+        })->join(',');
     }
-
 }
