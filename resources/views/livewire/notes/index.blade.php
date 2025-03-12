@@ -14,7 +14,7 @@
     }
 @endphp
 
-<div class="flex relative">
+<div class="overflow-y-hidden flex relative">
     @persist('scrollbar')
     <div wire:scroll
         class="h-[calc(100vh-105px)] overflow-y-auto w-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
@@ -51,8 +51,8 @@
         </nav>
     </div>
     @endpersist
-    <div class="flex-2/3 px-6 py-5">
-        <form wire:submit="save">
+    <div class="flex flex-2/3 px-6 py-5 h-[calc(100vh-105px)] ">
+        <form wire:submit="save" class="flex flex-col flex-1">
             <div class="grid">
                 <div x-data="{open: false}">
                     <button class="text-2xl font-bold text-left cursor-pointer mb-2" type="button" x-on:click="open = !open"
@@ -81,11 +81,14 @@
                 </div>
             </div>
             <flux:separator class="my-4" />
-            <flux:textarea name="content" id="content" wire:model="form.content" rows="24"></flux:textarea>
+
+            <flux:textarea class="flex-1 min-h-min" name="content" id="content" wire:model="form.content"></flux:textarea>
             <flux:separator class="my-4" />
-            <flux:button type="submit" variant="primary" class="disabled:opacity-75" wire:dirty.class="bg-blue-900">Save
-            </flux:button>
-            <flux:button href="{{ route('dashboard') }}">Cancel</flux:button>
+            <div>
+                <flux:button type="submit" variant="primary" class="disabled:opacity-75 mr-2" wire:dirty.class="bg-blue-900">Save Note
+                </flux:button>
+                <flux:button href="{{ route('dashboard') }}">Cancel</flux:button>
+            </div>
         </form>
     </div>
     <div class="border-l dark:border-zinc-600 border-zinc-200 py-5 px-4">
