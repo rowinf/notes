@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->boolean('is_archived');
             $table->timestamp('last_edited_at');
+            $table->foreignIdFor(App\Models\User::class);
             $table->timestamps();
         });
     }

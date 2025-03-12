@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Notes;
 
+use Illuminate\Support\Facades\Auth;
 use App\Livewire\Forms\NoteForm;
 use App\Models\Note;
 use App\Models\Tag;
@@ -39,7 +40,7 @@ class Index extends Component
         if (request()->routeIs("tag.note")) {
             $builder = $this->tag->notes()->where(['is_archived' => false]);
         } else {
-            $builder = Note::where([
+            $builder = Auth::user()->notes()->where([
                 'is_archived' => request()->routeIs("archive.note"),
             ])->orderByDesc('last_edited_at')->with('tags');
             if (filled($this->searchTerm)) {
