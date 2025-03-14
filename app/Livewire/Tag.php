@@ -8,6 +8,6 @@ class Tag extends Component
 {
     public function mount(\App\Models\Tag $tag)
     {
-        $this->redirect(route('tag.note', ['tag'=> $tag->id]));
+        $this->redirect(route('tag.index', ['tag'=> $tag]));
     }
 }

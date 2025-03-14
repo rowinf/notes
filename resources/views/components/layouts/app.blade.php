@@ -1,4 +1,3 @@
-
 <x-layouts.app.sidebar>
     <flux:main>
         <div class="overflow-y-hidden flex relative">

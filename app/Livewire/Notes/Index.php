@@ -17,7 +17,6 @@ class Index extends Component
     use WithPagination, WithoutUrlPagination;
     #[Url]
     public ?Note $note = null;
-    #[Url]
     public ?Tag $tag = null;
     public NoteForm $form;
     public $perPage = 20;
@@ -29,8 +28,9 @@ class Index extends Component
         $this->perPage = $page * 20;
     }
 
-    public function mount(?Note $note)
+    public function mount(?Note $note, ?Tag $tag)
     {
+        $this->tag = $tag;
         if ($note) {
             $this->form->setNote($note);
         } else if (request()->routeIs("note.create")) {

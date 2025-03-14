@@ -3,15 +3,22 @@
     function getNoteRoute(?App\Models\Note $note, ?App\Models\Tag $tag, ?string $searchTerm): string
     {
         $routeName = request()->route()->getName();
-        if ($note->id) {
-            $routeName = str_replace('create', 'show', $routeName);
-            $routeName = str_replace('index', 'show', $routeName);
-        }
         $params = ['note' => $note, 'tag' => $tag];
-        if (filled($searchTerm)) {
-            $params['searchTerm'] = $searchTerm;
+
+        if ($note->id) {
+            if (str_contains($routeName, 'archive')) {
+                return route('archive.show', $params);
+            } else if (str_contains($routeName, 'tag')) {
+                if ($tag)
+                    return route('tag.show', $params);
+            } else {
+                if (filled($searchTerm)) {
+                    $params['searchTerm'] = $searchTerm;
+                }
+                return route('note.show', ['note' => $note]);
+            }
         }
-        return route($routeName, $params);
+        return route('note.show', $params);
     }
 @endphp
 
@@ -30,8 +37,8 @@
         </div>
     @endif
     <nav class="flex-auto">
-        @forelse ($this->notes as $note)
-            <a href="{{ getNoteRoute($note, request()->route('tag'), request()->route('searchTerm')) }}"
+        @forelse ($notes as $note)
+            <a href="{{ getNoteRoute($note, $this->tag ?? request()->route('tag'), request()->route('searchTerm')) }}"
                 class="border-t first:border-none border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 mb-2 flex flex-col hover:rounded-xl"
                 wire:key="{{$note->id}}" wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl"
                 wire:navigate>
@@ -51,7 +58,7 @@
         @empty
             <p>No notes. Create some?</p>
         @endforelse
-        @if ($this->notes->hasMorePages())
+        @if ($notes->hasMorePages())
             <button x-intersect:enter="$wire.nextPage" wire:loading.attr="disabled" rel="next">Next</button>
         @endif
     </nav>
