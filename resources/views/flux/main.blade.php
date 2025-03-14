@@ -13,7 +13,7 @@ $classes = Flux::classes('[grid-area:main]')
 <div {{ $attributes->class($classes) }} data-flux-main>
     <div class="flex flex-0 justify-between border-b border-zinc-200 dark:border-zinc-700 py-8 px-7">
         <h1 class="text-2xl font-bold">
-            @if (request()->routeIs("archive.note"))
+            @if (request()->routeIs("archive.show"))
                 Archived Notes
             @elseif (filled(request()->get('searchTerm')))
                 Showing Results for: {{ request()->get('searchTerm') }}

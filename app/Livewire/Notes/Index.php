@@ -29,9 +29,13 @@ class Index extends Component
         $this->perPage = $page * 20;
     }
 
-    public function mount(Note $note)
+    public function mount(?Note $note)
     {
-        $this->form->setNote($note);
+        if ($note) {
+            $this->form->setNote($note);
+        } else if (request()->routeIs("note.create")) {
+            $this->form->setNote(new Note);
+        }
     }
 
     #[Computed]
@@ -41,7 +45,7 @@ class Index extends Component
             $builder = $this->tag->notes()->where(['is_archived' => false]);
         } else {
             $builder = Auth::user()->notes()->where([
-                'is_archived' => request()->routeIs("archive.note"),
+                'is_archived' => request()->routeIs('archive.index', 'archive.show'),
             ])->orderByDesc('last_edited_at')->with('tags');
             if (filled($this->searchTerm)) {
                 $builder
@@ -49,11 +53,6 @@ class Index extends Component
             }
         }
         $paginator = $builder->simplePaginate($this->perPage, page: 1);
-
-        if (request()->routeIs("dashboard.create")) {
-            $note = new Note;
-            $paginator->prepend($note);
-        }
         return $paginator;
     }
 
@@ -64,7 +63,7 @@ class Index extends Component
         } else {
             $this->note = $this->form->store();
         }
-        $this->redirect(route('dashboard.note', ['note' => $this->note]));
+        $this->redirect(route('note.show', ['note' => $this->note]));
     }
 
     public function update()
@@ -75,12 +74,12 @@ class Index extends Component
     public function delete()
     {
         $this->form->destroy();
-        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]));
+        $this->redirect(route('note.show', ['note' => $this->notes->first()]));
     }
     public function archive()
     {
         $this->form->archive();
-        $this->redirect(route('dashboard.note', ['note' => $this->notes->first()]));
+        $this->redirect(route('note.show', ['note' => $this->notes->first()]));
     }
     public function render()
     {

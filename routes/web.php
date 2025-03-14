@@ -14,13 +14,19 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
-    Route::get('dashboard/archive', Archive::class)->name('archive');
-    Route::get('dashboard/archive/notes/{note?}', Index::class)->name('archive.note');
-    Route::get('dashboard/tags/{tag}', Tag::class)->name('tag');
-    Route::get('dashboard/tags/{tag}/notes/{note?}', Index::class)->name('tag.note');
-    Route::get('dashboard/tags/{tag}/notes/create', Index::class)->name('tag.create');
-    Route::get('dashboard/notes/create', Index::class)->name('dashboard.create');
-    Route::get('dashboard/notes/{note?}', Index::class)->name('dashboard.note');
+    
+    Route::prefix('dashboard')->group(function () {
+        Route::get('archive', Archive::class)->name('archive');
+
+        Route::get('archive/notes', Index::class)->name('archive.index');
+        Route::get('archive/notes/{note?}', Index::class)->name('archive.show')->can('view', 'note');
+        Route::get('tags/{tag}', Tag::class)->name('tag.show');
+        Route::get('tags/{tag}/notes/{note?}', Index::class)->name('tag.note');
+        Route::get('tags/{tag}/notes/create', Index::class)->name('tag.create');
+        Route::get('notes', Index::class)->name('note.index');
+        Route::get('notes/create', Index::class)->name('note.create');
+        Route::get('notes/{note}', Index::class)->name('note.show')->can('view', 'note');
+    });
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
