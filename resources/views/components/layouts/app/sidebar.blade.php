@@ -71,7 +71,7 @@
                 </flux:menu>
             </flux:dropdown>
         </flux:sidebar>
-
+        @include("partials.page-heading")
         <!-- Mobile User Menu -->
         <flux:header class="lg:hidden">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />

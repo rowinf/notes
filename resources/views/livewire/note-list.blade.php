@@ -9,13 +9,12 @@
             if (str_contains($routeName, 'archive')) {
                 return route('archive.show', $params);
             } else if (str_contains($routeName, 'tag')) {
-                if ($tag)
-                    return route('tag.show', $params);
+                return route('tag.show', $params);
             } else {
                 if (filled($searchTerm)) {
                     $params['searchTerm'] = $searchTerm;
                 }
-                return route('note.show', ['note' => $note]);
+                return route('note.show', $params);
             }
         }
         return route('note.show', $params);
@@ -38,7 +37,7 @@
     @endif
     <nav class="flex-auto">
         @forelse ($notes as $note)
-            <a href="{{ getNoteRoute($note, $this->tag ?? request()->route('tag'), request()->route('searchTerm')) }}"
+            <a href="{{ getNoteRoute($note, $this->tag ?? request()->route('tag'), request()->get('searchTerm')) }}"
                 class="border-t first:border-none border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700/75 p-2 mb-2 flex flex-col hover:rounded-xl"
                 wire:key="{{$note->id}}" wire:current="bg-zinc-100 dark:bg-zinc-800 !border-transparent rounded-xl"
                 wire:navigate>

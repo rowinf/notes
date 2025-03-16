@@ -10,7 +10,7 @@ class Search extends Component
     public String $searchTerm;
 
     public function submit() {
-        $this->redirect(route("note.index", ["searchTerm"=> $this->searchTerm]));
+        $this->redirect(route("search.index", ["searchTerm"=> $this->searchTerm]));
     }
 
     public function render()
