@@ -43,6 +43,7 @@ class NoteForm extends Form
     public function syncTags() {
         $tags = Str::of($this->tags)
             ->explode(",")
+            ->filter(fn($tag) =>  filled($tag))
             ->map(function ($tag) {
                 return Auth::user()->tags()->firstOrCreate([
                     'name' => $tag,
