@@ -24,9 +24,9 @@ class NoteEditor extends Component
 
     public function save()
     {
-        $this->form->save();
+        $note = $this->form->save();
         if (request()->routeIs("note.create")) {
-            $this->redirect(route('note.show', ['note' => $this->note]));
+            $this->redirect(route('note.show', ['note' => $note]));
         }
     }
 

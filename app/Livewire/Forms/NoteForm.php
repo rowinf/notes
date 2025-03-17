@@ -20,10 +20,9 @@ class NoteForm extends Form
     public function save()
     {
         if ($this->note->id) {
-            $this->update();
-        } else {
-            $this->store();
+            return $this->update();
         }
+        return $this->store();
     }
 
     public function store()
@@ -49,10 +48,11 @@ class NoteForm extends Form
         return $this->note;
     }
 
-    public function syncTags() {
+    public function syncTags()
+    {
         $tags = Str::of($this->tags)
             ->explode(",")
-            ->filter(fn($tag) =>  filled($tag))
+            ->filter(fn($tag) => filled($tag))
             ->map(function ($tag) {
                 return Auth::user()->tags()->firstOrCreate([
                     'name' => $tag,
