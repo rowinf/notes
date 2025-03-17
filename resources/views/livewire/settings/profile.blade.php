@@ -8,7 +8,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Title('Settings')] #[Layout('components.layouts.settings')] class extends Component {
+new #[Layout('components.layouts.settings')] class extends Component {
     public string $name = '';
     public string $email = '';
 

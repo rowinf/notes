@@ -46,7 +46,7 @@
                     <div class="pt-2">
                         @foreach ($note->tags as $tag)
                             <span class="p-1 bg-zinc-200 rounded-md dark:bg-zinc-600 text-xs"
-                                wire:key="{{$tag->name}}">{{ $tag->name }}</span>
+                                wire:key="{{$tag->id}}">{{ $tag->name }}</span>
                         @endforeach
                     </div>
                 @endif
