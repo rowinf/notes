@@ -24,12 +24,10 @@ class NoteEditor extends Component
 
     public function save()
     {
-        if ($this->form->note->id) {
-            $this->note = $this->form->update();
-        } else {
-            $this->note = $this->form->store();
+        $this->form->save();
+        if (request()->routeIs("note.create")) {
+            $this->redirect(route('note.show', ['note' => $this->note]));
         }
-        $this->redirect(route('note.show', ['note' => $this->note]));
     }
 
     public function update()

@@ -17,6 +17,15 @@ class NoteForm extends Form
     public $content = '';
     public string $tags;
 
+    public function save()
+    {
+        if ($this->note->id) {
+            $this->update();
+        } else {
+            $this->store();
+        }
+    }
+
     public function store()
     {
         $this->note = Auth::user()->notes()->create([
