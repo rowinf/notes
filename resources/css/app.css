@@ -11,6 +11,8 @@
 /* Re-assign Flux's gray of choice... */
 @theme {
     --font-sans: Inter, sans-serif;
+    --font-code: 'Source Code Pro', monospace;
+    --font-serif: 'Noto Serif', serif;
     --color-zinc-50: var(--color-neutral-50);
     --color-zinc-100: var(--color-neutral-100);
     --color-zinc-200: var(--color-neutral-200);
@@ -55,7 +57,7 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
@@ -69,18 +71,6 @@ select:focus[data-flux-control] {
 } */
 
 /* this is not possible with tailwind */
-[data-current] + a {
-    border-color: transparent!important;
-}
-
-#note-content {
-    ol {
-        list-style: decimal;
-    }
-    ul {
-        list-style: unset;
-    }
-    li {
-        margin-inline-start: 2rem;
-    }
+[data-current]+a {
+    border-color: transparent !important;
 }

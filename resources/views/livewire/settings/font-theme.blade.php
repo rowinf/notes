@@ -11,15 +11,13 @@ new #[Layout('components.layouts.settings')] class extends Component {
     /**
      * Delete the currently authenticated user.
      */
-    public function deleteUser(Logout $logout): void
+    public function updateUser(): void
     {
-        $this->validate([
-            'password' => ['required', 'string', 'current_password'],
+        $attributes = $this->validate([
+            'font_theme' => ['required', 'string'],
         ]);
 
-        tap(Auth::user(), $logout(...))->delete();
-
-        $this->redirect('/', navigate: true);
+        Auth::user()->update($attributes);
     }
 }; ?>
 
@@ -29,6 +27,12 @@ new #[Layout('components.layouts.settings')] class extends Component {
         <div>
             {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
             Font Theme
+            <form wire:submit="updateUser">
+                <input type="radio" wire:model="font_theme" value="sans"> sans
+                <input type="radio" wire:model="font_theme" value="serif"> serif
+                <input type="radio" wire:model="font_theme" value="mono"> mono
+                <input type="submit">
+            </form>
         </div>
     </x-settings.layout>
 </section>

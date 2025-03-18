@@ -1,0 +1,5 @@
+@layer base {
+    html {
+        --default-font-family: var(--font-serif);
+    }
+}

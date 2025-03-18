@@ -4,7 +4,7 @@
             <flux:heading size="xl" level="1">{{ $heading }}</flux:heading>
             <flux:spacer />
             <livewire:notes.search :searchTerm="request()->get('searchTerm') ?? ''" />
-            <flux:button href="/settings/profile" icon="cog" variant="ghost" class="ml-2"></flux:button>
+            <flux:button href="{{ route('settings.profile') }}" icon="cog" variant="ghost" class="ml-2" wire:navigate></flux:button>
         </div>
     </div>
 </flux:header>
