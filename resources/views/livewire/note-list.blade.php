@@ -23,7 +23,7 @@
 
 @persist('scrollbar')
 <div wire:scroll
-    class="h-[calc(100vh-105px)] overflow-y-auto w-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
+    class="h-[calc(100vh-90px)] overflow-y-auto w-[290px] flex-col pt-5 pr-4 pl-8 border-r border-zinc-200 dark:border-zinc-800">
     <flux:button href="{{route('note.create')}}" variant="primary" class="w-full mb-4">Create New Note
     </flux:button>
     @if (request()->routeIs('archive.show'))

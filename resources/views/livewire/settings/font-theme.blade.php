@@ -8,7 +8,8 @@ use Livewire\Volt\Component;
 new #[Layout('components.layouts.settings')] class extends Component {
     public string $font_theme = '';
 
-    public function mount() {
+    public function mount()
+    {
         $this->font_theme = Auth::user()->font_theme;
     }
 
@@ -33,19 +34,14 @@ new #[Layout('components.layouts.settings')] class extends Component {
 </script>
 @endscript
 <section class="space-y-6">
-    <x-settings.layout heading="{{ __('Font Theme') }}" subheading="{{ __('Update your font') }}">
-
-        <div>
-            {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
-            Font Theme
-            <form wire:submit="updateUser">
-                <flux:radio.group wire:model="font_theme" label="Select your font theme">
-                    <flux:radio value="sans" label="Sans-serif" />
-                    <flux:radio value="serif" label="serif" />
-                    <flux:radio value="mono" label="monospace" />
-                </flux:radio.group>
-                <flux:button type="submit" variant="primary">Apply Changes</flux:button>
-            </form>
-        </div>
+    <x-settings.layout heading="{{ __('Font Theme') }}" subheading="{{ __('Choose your font theme:') }}">
+        <form wire:submit="updateUser" class="flex flex-col items-end">
+            <flux:radio.group wire:model="font_theme" class="flex-col mb-6">
+                <flux:radio value="sans" label="Sans-serif" description="Clean and modern, easy to read" />
+                <flux:radio value="serif" label="serif" description="Classic and elegant for a timeless feel." />
+                <flux:radio value="mono" label="monospace" description="Code-like, great for a technical vibe." />
+            </flux:radio.group>
+            <flux:button type="submit" variant="primary">Apply Changes</flux:button>
+        </form>
     </x-settings.layout>
 </section>
