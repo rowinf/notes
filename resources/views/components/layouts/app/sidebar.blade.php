@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
         @include('partials.head')
+        @include('partials.theme', ['font_theme' => Auth::user()->font_theme])
     </head>
     <body class="min-h-screen bg-white dark:bg-black">
         <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-white dark:border-zinc-700 dark:bg-black">

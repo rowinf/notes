@@ -11,7 +11,7 @@
 /* Re-assign Flux's gray of choice... */
 @theme {
     --font-sans: Inter, sans-serif;
-    --font-code: 'Source Code Pro', monospace;
+    --font-mono: 'Source Code Pro', monospace;
     --font-serif: 'Noto Serif', serif;
     --color-zinc-50: var(--color-neutral-50);
     --color-zinc-100: var(--color-neutral-100);
