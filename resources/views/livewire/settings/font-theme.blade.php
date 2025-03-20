@@ -36,10 +36,46 @@ new #[Layout('components.layouts.settings')] class extends Component {
 <section class="space-y-6">
     <x-settings.layout heading="{{ __('Font Theme') }}" subheading="{{ __('Choose your font theme:') }}">
         <form wire:submit="updateUser" class="flex flex-col items-end">
-            <flux:radio.group wire:model="font_theme" class="flex-col mb-6">
-                <flux:radio value="sans" label="Sans-serif" description="Clean and modern, easy to read" />
-                <flux:radio value="serif" label="serif" description="Classic and elegant for a timeless feel." />
-                <flux:radio value="mono" label="monospace" description="Code-like, great for a technical vibe." />
+            <flux:radio.group class="flex-col mb-6 space-y-8" wire:model="font_theme">
+                <flux:field
+                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 rounded-xl">
+                    <flux:label class="flex items-center gap-4 p-4">
+                        <div class="border p-4 bg-black rounded-xl dark:border-zinc-600 border-zinc-200">
+                            <flux:icon.icon-font-sans-serif />
+                        </div>
+                        <flux:description class="flex-1">
+                            <div>Sans-serif</div>
+                            <div>Clean and modern, easy to read</div>
+                        </flux:description>
+                        <flux:radio value="sans" />
+                    </flux:label>
+                </flux:field>
+                <flux:field
+                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 rounded-xl">
+                    <flux:label class="flex items-center gap-4 p-4">
+                        <div class="border p-4 bg-black rounded-xl dark:border-zinc-600 border-zinc-200">
+                            <flux:icon.icon-font-serif />
+                        </div>
+                        <flux:description>
+                            <div>Serif</div>
+                            <div>Classic and elegant for a timeless feel.</div>
+                        </flux:description>
+                        <flux:radio type="radio" value="serif" />
+                    </flux:label>
+                </flux:field>
+                <flux:field
+                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 rounded-xl">
+                    <flux:label class="flex items-center gap-4 p-4">
+                        <div class="border p-4 bg-black rounded-xl dark:border-zinc-600 border-zinc-200">
+                            <flux:icon.icon-font-monospace />
+                        </div>
+                        <flux:description>
+                            <div>Mono</div>
+                            <div>Code-like, great for a technical vibe.</div>
+                        </flux:description>
+                        <flux:radio type="radio" value="mono" />
+                    </flux:label>
+                </flux:field>
             </flux:radio.group>
             <flux:button type="submit" variant="primary">Apply Changes</flux:button>
         </form>

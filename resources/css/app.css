@@ -9,10 +9,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Re-assign Flux's gray of choice... */
-@theme {
+@theme static {
     --font-sans: Inter, sans-serif;
     --font-mono: 'Source Code Pro', monospace;
-    --font-serif: 'Noto Serif', serif;
+    --font-serif: 'Noto Serif', Times, serif;
+}
+
+@theme {
     --color-zinc-50: var(--color-neutral-50);
     --color-zinc-100: var(--color-neutral-100);
     --color-zinc-200: var(--color-neutral-200);
@@ -24,9 +27,7 @@
     --color-zinc-800: var(--color-neutral-800);
     --color-zinc-900: var(--color-neutral-900);
     --color-zinc-950: var(--color-neutral-950);
-}
-
-@theme {
+    
     --color-accent: var(--color-blue-500);
     --color-accent-content: var(--color-blue-600);
     --color-accent-foreground: var(--color-white);

@@ -1,5 +1,5 @@
 <style>
-html {
-    font-family: var(--font-{{ $font_theme ?? 'sans' }});
-}
+    html {
+        font-family: var(--font-{{ $font_theme }});
+    }
 </style>
