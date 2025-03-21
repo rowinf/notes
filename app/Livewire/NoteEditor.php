@@ -15,24 +15,22 @@ class NoteEditor extends Component
     public function mount(?Note $note, ?Tag $tag): void
     {
         $this->tag = $tag;
-        if ($note) {
-            $this->form->setNote($note);
-        } else if (request()->routeIs("note.create")) {
-            $this->form->setNote(new Note);
-        }
-    }
-
-    public function save()
-    {
-        $note = $this->form->save();
         if (request()->routeIs("note.create")) {
-            $this->redirect(route('note.show', ['note' => $note]));
+            $this->form->setNote(new Note(['content' => '']));
+        } else {
+            $this->form->setNote($note);
         }
     }
 
     public function update()
     {
-        $this->form->update();
+        $note = $this->form->save();
+        if (request()->routeIs("note.create")) {
+            $this->dispatch('note-saved', message: 'Note created!');
+            $this->redirect(route('note.show', ['note' => $note]), navigate: true);
+        } else {
+            $this->dispatch('note-saved', message: 'Note saved successfully!');
+        }
     }
 
     public function delete()

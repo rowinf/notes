@@ -10,7 +10,7 @@
     <flux:main>
         <div class="overflow-y-hidden flex relative">
             <livewire:note-list></livewire:note-list>
-            <div class="flex flex-2/3 h-[calc(100vh-105px)]">
+            <div class="flex flex-2/3 h-[calc(100vh-90px)]">
                 {{ $slot }}
             </div>
         </div>

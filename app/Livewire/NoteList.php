@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class NoteList extends Component
 {
-    use WithoutUrlPagination;
+    use WithPagination, WithoutUrlPagination;
     public ?Tag $tag = null;
     #[Url]
     public $searchTerm = '';

@@ -13,9 +13,10 @@ class NoteForm extends Form
 {
 
     public ?Note $note;
-    public $title = '';
-    public $content = '';
-    public string $tags;
+    public string $title = '';
+    public string $content = '';
+    public string $tags = '';
+    public ?string $last_edited_at = null;
 
     public function save()
     {
@@ -80,6 +81,9 @@ class NoteForm extends Form
         $this->title = $note->title;
         $this->content = $note->content;
         $this->note = $note;
+        if ($note->last_edited_at) {
+            $this->last_edited_at = $note->last_edited_at;
+        }
         $this->tags = $note->tags->map(function ($tag) {
             return $tag->name;
         })->join(',');
