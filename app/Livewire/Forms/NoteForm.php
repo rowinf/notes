@@ -34,6 +34,7 @@ class NoteForm extends Form
             'last_edited_at' => Date::now(),
             'is_archived' => false,
         ]);
+        $this->updatedTags();
         return $this->note->fresh();
     }
     public function update()

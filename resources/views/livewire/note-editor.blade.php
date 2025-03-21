@@ -9,7 +9,7 @@
         </div>
         <div class="flex items-center mb-1" x-data="{open: false}">
             <div class="w-50 flex items-center mb-1">
-                <flux:icon.tag class="size-4" /><span class="ml-1 text-sm align-baseline">Tags <span wire:dirty="form.tags">*</span></span>
+                <flux:icon.tag class="size-4" /><span class="ml-1 text-sm align-baseline">Tags</span>
             </div>
             <button @class(["text-sm text-left cursor-pointer", 'text-white' => filled($form->tags), 'text-zinc-400' => !filled($form->tags)]) type="button" x-on:click="open = !open" x-text="$wire.form.tags || ' tags, etc'"
                 x-show="!open"></button>

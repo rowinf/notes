@@ -35,13 +35,14 @@ class NoteEditor extends Component
 
     public function updated()
     {
-        $updates = $this->form->updatedTags();
-        if (count($updates['attached'])) {
-            $this->dispatch('toast', message: "Tags successfully added");
-        } else if (count($updates['detached'])) {
-            $this->dispatch('toast', message: "Tags successfully removed");
+        if ($this->form->note->id) {
+            $updates = $this->form->updatedTags();
+            if (count($updates['attached'])) {
+                $this->dispatch('toast', message: "Tags added successfully!");
+            } else if (count($updates['detached'])) {
+                $this->dispatch('toast', message: "Tags removed successfully!");
+            }
         }
-
     }
 
     public function delete()
