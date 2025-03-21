@@ -26,11 +26,22 @@ class NoteEditor extends Component
     {
         if ($this->form->note->id) {
             $note = $this->form->save();
-            $this->dispatch('note-saved', message: 'Note saved successfully!');
+            $this->dispatch('toast', message: 'Note saved successfully!');
         } else {
             $note = $this->form->save();
-            $this->redirect(route('note.show', ['note' => $note]), navigate: false);
+            $this->redirect(route('note.show', ['note' => $note, 'event' => 'note-created']), navigate: true);
         }
+    }
+
+    public function updated()
+    {
+        $updates = $this->form->updatedTags();
+        if (count($updates['attached'])) {
+            $this->dispatch('toast', message: "Tags successfully added");
+        } else if (count($updates['detached'])) {
+            $this->dispatch('toast', message: "Tags successfully removed");
+        }
+
     }
 
     public function delete()

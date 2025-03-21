@@ -6,9 +6,10 @@
     @include('partials.theme', ['font_theme' => Auth::user()->font_theme])
 </head>
 
-<body class="min-h-screen bg-white dark:bg-black"
-    x-data="{message: 'Note Saved', isOpen: false, toast(message) { this.message = message; this.isOpen = !this.isOpen; }}"
-    x-on:note-saved="toast($event.detail.message)">
+<body class="min-h-screen bg-white dark:bg-black overflow-x-hidden"
+    x-data="{message: '', isOpen: false, toast(message) { if (message) {console.log('toast'); this.message = message; this.isOpen = true;} }, untoast() {console.log('untoast'); this.isOpen = false;} }"
+    x-on:toast="toast($event.detail.message)"
+    x-init="if('{{ request()->get('event') }}' == 'note-created') { $nextTick(() => toast('Note Created!')) }">
     <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-white dark:border-zinc-700 dark:bg-black">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
@@ -123,12 +124,20 @@
     </flux:header>
 
     {{ $slot }}
-    <div x-cloak class="overflow-hidden h-9 absolute bottom-8 right-0 slide-in z-10" x-bind:class="isOpen ? 'w-102' : 'w-0'"
-        x-on:click.outside="isOpen && toast()">
+    <div x-cloak 
+        class="h-9 absolute bottom-8 right-0 z-10 w-102"
+        x-on:click.outside="untoast()"
+        x-show="isOpen"
+        x-transition:enter="transform-[transition] ease-in-out transition duration-500"
+        x-transition:enter-start="translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transform-[transition] ease-in-out transition duration-500"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full">
         <div class="flex items-center px-2 bg-zinc-800 border border-zinc-700 rounded-xl w-96">
             <flux:icon.icon-checkmark class="text-green-500 mr-2 size-5" />
             <p class="text-white text-xs flex-1" x-text="message"></p>
-            <flux:button variant="subtle" size="sm" icon="x-mark" x-on:click="toast()"></flux:button>
+            <flux:button variant="subtle" size="sm" icon="x-mark" x-on:click="untoast()"></flux:button>
         </div>
     </div>
     @fluxScripts

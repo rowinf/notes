@@ -1,20 +1,20 @@
 <form wire:submit="update" class="flex flex-2/3 flex-col px-6 py-5">
-    <div class="grid">
+    <div class="grid"> 
         <div x-data="{open: false}">
             <button class="text-2xl font-bold text-left cursor-pointer mb-2" type="button" x-on:click="open = !open"
                 x-text="$wire.form.title" x-show="!open"></button>
-            <flux:field x-show="open">
-                <flux:input type="text" wire:model="form.title" placeholder="Title" @click.outside="open = false" />
+            <flux:field x-show="open" x-cloak>
+                <flux:input type="text" wire:model="form.title" placeholder="Title" x-on:blur="open = false" x-trap="open" />
             </flux:field>
         </div>
         <div class="flex items-center mb-1" x-data="{open: false}">
             <div class="w-50 flex items-center mb-1">
-                <flux:icon.tag class="size-4" /><span class="ml-1 text-sm align-baseline">Tags</span>
+                <flux:icon.tag class="size-4" /><span class="ml-1 text-sm align-baseline">Tags <span wire:dirty="form.tags">*</span></span>
             </div>
-            <button @class(["text-sm text-left cursor-pointer", 'text-white' => $form->tags, 'text-zinc-100' => !$form->tags]) type="button" x-on:click="open = !open" x-text="$wire.form.tags || 'tags, etc'"
+            <button @class(["text-sm text-left cursor-pointer", 'text-white' => filled($form->tags), 'text-zinc-400' => !filled($form->tags)]) type="button" x-on:click="open = !open" x-text="$wire.form.tags || ' tags, etc'"
                 x-show="!open"></button>
-            <flux:field x-show="open">
-                <flux:input type="text" wire:model="form.tags" placeholder="Tags" @click.outside="open = false"
+            <flux:field x-show="open" x-cloak>
+                <flux:input type="text" wire:model.blur="form.tags" placeholder="Tags" x-on:blur="open = false" x-trap="open"
                     size="xs" />
             </flux:field>
         </div>

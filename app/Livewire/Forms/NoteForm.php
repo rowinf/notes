@@ -34,8 +34,7 @@ class NoteForm extends Form
             'last_edited_at' => Date::now(),
             'is_archived' => false,
         ]);
-        $this->syncTags();
-        return $this->note;
+        return $this->note->fresh();
     }
     public function update()
     {
@@ -45,11 +44,10 @@ class NoteForm extends Form
             'last_edited_at' => Date::now(),
             'is_archived' => false,
         ]);
-        $this->syncTags();
-        return $this->note;
+        return $this->note->fresh();
     }
 
-    public function syncTags()
+    public function updatedTags()
     {
         $tags = Str::of($this->tags)
             ->explode(",")
@@ -59,8 +57,7 @@ class NoteForm extends Form
                     'name' => $tag,
                 ])->id;
             });
-        $this->note->tags()->sync($tags);
-        $this->note->fresh();
+        return $this->note->tags()->sync($tags);
     }
 
     public function destroy()
