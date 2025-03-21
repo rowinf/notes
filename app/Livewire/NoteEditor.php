@@ -24,12 +24,12 @@ class NoteEditor extends Component
 
     public function update()
     {
-        $note = $this->form->save();
-        if (request()->routeIs("note.create")) {
-            $this->dispatch('note-saved', message: 'Note created!');
-            $this->redirect(route('note.show', ['note' => $note]), navigate: true);
-        } else {
+        if ($this->form->note->id) {
+            $note = $this->form->save();
             $this->dispatch('note-saved', message: 'Note saved successfully!');
+        } else {
+            $note = $this->form->save();
+            $this->redirect(route('note.show', ['note' => $note]), navigate: false);
         }
     }
 

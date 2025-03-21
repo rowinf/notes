@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    #[Url]
     public ?Note $note = null;
     public ?Tag $tag = null;
     public $perPage = 20;
