@@ -4,10 +4,17 @@
         <div class="border-l dark:border-zinc-600 border-zinc-200 py-5 px-4">
             <flux:navlist variant="outline">
                 <flux:navlist.group>
-                    <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="archive"
-                        wire:confirm="archive it?">
-                        {{ __('Archive Note') }}
-                    </flux:navlist.item>
+                    @if ($this->note->is_archived)
+                        <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="restore"
+                            wire:confirm="restore it?">
+                            {{ __('Restore Note') }}
+                        </flux:navlist.item>
+                    @else
+                        <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="archive"
+                            wire:confirm="archive it?">
+                            {{ __('Archive Note') }}
+                        </flux:navlist.item>
+                    @endif
                     <flux:navlist.item icon="trash" href="#" wire:click="delete" wire:confirm="delete it?">
                         {{ __('Delete Note') }}
                     </flux:navlist.item>

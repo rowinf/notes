@@ -17,6 +17,7 @@ class NoteForm extends Form
     public string $content = '';
     public string $tags = '';
     public ?string $last_edited_at = null;
+    public ?bool $is_archived = false;
 
     public function save()
     {
@@ -78,6 +79,7 @@ class NoteForm extends Form
     {
         $this->title = $note->title;
         $this->content = $note->content;
+        $this->is_archived = $note->is_archived;
         $this->note = $note;
         if ($note->last_edited_at) {
             $this->last_edited_at = $note->last_edited_at;
