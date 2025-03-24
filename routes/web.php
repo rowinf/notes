@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
-    
+
     Route::prefix('dashboard')->group(function () {
         Route::get('archive', Archive::class)->name('archive');
 

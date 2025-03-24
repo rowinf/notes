@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -43,6 +44,12 @@ class NoteList extends Component
     public function updatingPage($page)
     {
         $this->perPage = $page * 20;
+    }
+
+    #[On('load-next-note')]
+    public function loadNextNote()
+    {
+        $this->redirect(route('note.show', ['note' => $this->notes()->first()]));
     }
 
     public function render()

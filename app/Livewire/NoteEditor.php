@@ -45,16 +45,6 @@ class NoteEditor extends Component
         }
     }
 
-    public function delete()
-    {
-        $this->form->destroy();
-        $this->redirect(route('note.show', ['note' => $this->notes->first()]));
-    }
-    public function archive()
-    {
-        $this->form->archive();
-        $this->redirect(route('note.show', ['note' => $this->notes->first()]));
-    }
     public function render()
     {
         return view('livewire.note-editor');

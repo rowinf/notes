@@ -5,15 +5,26 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group>
                     @if ($this->note->is_archived)
-                        <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="restore"
+                    <div x-data="{ open: false }">
+                        <flux:navlist.item icon="archive-box-arrow-down" href="#" @click="open = !open"
                             wire:confirm="restore it?">
                             {{ __('Restore Note') }}
                         </flux:navlist.item>
+                        <dialog x-show="open" x-htmldialog.noscroll="open = false">
+                            Restore it?
+                            <button wire:click>Restore!</button>
+                        </dialog>
+                    </div>
                     @else
-                        <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="archive"
-                            wire:confirm="archive it?">
+                    <div x-data="{ open: false }">
+                        <flux:navlist.item icon="archive-box-arrow-down" href="#" @click="open = !open">
                             {{ __('Archive Note') }}
                         </flux:navlist.item>
+                        <dialog x-show="open" x-htmldialog.noscroll="open = false">
+                            Archive it?
+                            <flux:button wire:click="archive">Archive!</flux:button>
+                        </dialog>
+                    </div>
                     @endif
                     <flux:navlist.item icon="trash" href="#" wire:click="delete" wire:confirm="delete it?">
                         {{ __('Delete Note') }}

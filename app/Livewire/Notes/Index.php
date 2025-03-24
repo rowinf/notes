@@ -26,6 +26,19 @@ class Index extends Component
         $this->note = $note;
     }
 
+    public function delete()
+    {
+        $this->note->delete();
+        $this->dispatch('load-next-note');
+    }
+    public function archive()
+    {
+        $this->note->update([
+            'is_archived' => true,
+        ]);
+        $this->dispatch('load-next-note');
+    }
+
     public function render()
     {
         return view('livewire.notes.index');
