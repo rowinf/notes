@@ -60,6 +60,12 @@ class NoteList extends Component
         unset($this->notes);
     }
 
+    #[On('note-added')]
+    public function reloadNotes()
+    {
+        unset($this->notes);
+    }
+
     public function render()
     {
         return view('livewire.note-list', ['notes' => $this->notes]);
