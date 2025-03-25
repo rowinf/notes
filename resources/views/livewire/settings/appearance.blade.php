@@ -5,7 +5,7 @@ use Livewire\Volt\Component;
 
 new #[Layout('components.layouts.settings')] class extends Component {
 
-    public string $color_theme = '';
+    public ?string $color_theme;
 
     public function mount()
     {

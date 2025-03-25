@@ -1,7 +1,7 @@
 <div class="flex flex-1">
     <livewire:note-editor :note="$this->note" />
     @if ($this->note->id)
-        <div class="border-l dark:border-zinc-600 border-zinc-200 py-5 px-4">
+        <div class="border-l py-5 px-4">
             <flux:navlist variant="outline">
                 <flux:navlist.group>
                     @if ($this->note->is_archived)

@@ -38,9 +38,9 @@ new #[Layout('components.layouts.settings')] class extends Component {
         <form wire:submit="updateUser" class="flex flex-col items-end">
             <flux:radio.group class="flex-col mb-6 space-y-8" wire:model="font_theme">
                 <flux:field
-                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
+                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
                     <flux:label class="flex items-center gap-4 p-4">
-                        <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
+                        <div class="border p-4 dark:bg-black rounded-xl bg-white">
                             <flux:icon.icon-font-sans-serif />
                         </div>
                         <flux:description class="flex-1">
@@ -51,9 +51,9 @@ new #[Layout('components.layouts.settings')] class extends Component {
                     </flux:label>
                 </flux:field>
                 <flux:field
-                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
+                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
                     <flux:label class="flex items-center gap-4 p-4">
-                        <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
+                        <div class="border p-4 dark:bg-black rounded-xl bg-white">
                             <flux:icon.icon-font-serif />
                         </div>
                         <flux:description>
@@ -64,9 +64,9 @@ new #[Layout('components.layouts.settings')] class extends Component {
                     </flux:label>
                 </flux:field>
                 <flux:field
-                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
+                    class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
                     <flux:label class="flex items-center gap-4 p-4">
-                        <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
+                        <div class="border p-4 dark:bg-black rounded-xl bg-white">
                             <flux:icon.icon-font-monospace />
                         </div>
                         <flux:description>

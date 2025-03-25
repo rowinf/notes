@@ -10,7 +10,7 @@
     x-data="{message: '', isOpen: false}"
     x-on:toast.debounce="message = $event.detail.message; isOpen = !!$event.detail.message"
     x-init="if('{{ request()->get('event') }}' == 'note-created') { $nextTick(() => { message ='Note saved successfully!'; isOpen=true; }) }">
-    <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-white dark:border-zinc-700 dark:bg-black">
+    <flux:sidebar sticky stashable class="border-r bg-white dark:bg-black">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
@@ -129,7 +129,7 @@
         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
         x-transition:leave="transform-[transition] ease-in-out transition duration-500"
         x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full">
-        <div class="flex items-center px-2 bg-zinc-800 border border-zinc-700 rounded-xl w-96">
+        <div class="flex items-center px-2 bg-zinc-800 border rounded-xl w-96">
             <flux:icon.icon-checkmark class="text-green-500 mr-2 size-5" />
             <p class="text-white text-xs flex-1" x-text="message"></p>
             <flux:button variant="subtle" size="sm" icon="x-mark" x-on:click="$dispatch('toast', {message: false})"></flux:button>

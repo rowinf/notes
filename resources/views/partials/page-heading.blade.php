@@ -1,4 +1,4 @@
-<flux:header class="border-b dark:border-zinc-600 border-zinc-200 py-6 px-8">
+<flux:header class="border-b py-6 px-8">
     <div class="relative flex-wrap w-full">
         <div class="flex flex-row justify-between">
             <flux:heading size="xl" level="1">{{ $heading }}</flux:heading>
