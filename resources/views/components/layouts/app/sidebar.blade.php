@@ -135,6 +135,7 @@
             <flux:button variant="subtle" size="sm" icon="x-mark" x-on:click="$dispatch('toast', {message: false})"></flux:button>
         </div>
     </div>
+    @livewireScriptConfig
     @fluxScripts
 </body>
 
