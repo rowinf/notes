@@ -15,6 +15,12 @@
     --font-serif: 'Noto Serif', Times, serif;
 }
 
+@layer base {
+    .border, .border-b {
+        @apply border-gray-800 dark:border-zinc-600;
+    }
+}
+
 @theme {
     --color-zinc-50: #F5F7FA;
     --color-zinc-100: #E0E4EA;
@@ -80,4 +86,8 @@ select:focus[data-flux-control] {
 
 .slide-in {
     transition: width 0.3s ease;
+}
+
+dialog::backdrop {
+    @apply  bg-zinc-950/50;
 }

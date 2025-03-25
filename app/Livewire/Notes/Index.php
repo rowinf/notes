@@ -5,6 +5,7 @@ namespace App\Livewire\Notes;
 use App\Models\Note;
 use App\Models\Tag;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Index extends Component
@@ -28,15 +29,11 @@ class Index extends Component
 
     public function delete()
     {
-        $this->note->delete();
-        $this->dispatch('load-next-note');
+        $this->dispatch('note-removed', note: $this->note, is_archived: false);
     }
     public function archive()
     {
-        $this->note->update([
-            'is_archived' => true,
-        ]);
-        $this->dispatch('load-next-note');
+        $this->dispatch('note-removed', note: $this->note, is_archived: true);
     }
 
     public function render()

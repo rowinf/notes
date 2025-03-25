@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Note;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -24,6 +26,7 @@ class NoteList extends Component
         $this->tag = request()->route('tag');
     }
 
+    #[Computed]
     public function notes()
     {
         if ($this->tag) {
@@ -46,14 +49,19 @@ class NoteList extends Component
         $this->perPage = $page * 20;
     }
 
-    #[On('load-next-note')]
-    public function loadNextNote()
+    #[On('note-removed')]
+    public function loadNextNote(Note $note, bool $is_archived)
     {
-        $this->redirect(route('note.show', ['note' => $this->notes()->first()]));
+        if ($is_archived) {
+            $note->update(['is_archived' => true]);
+        } else {
+            $note->delete();
+        }
+        unset($this->notes);
     }
 
     public function render()
     {
-        return view('livewire.note-list', ['notes' => $this->notes()]);
+        return view('livewire.note-list', ['notes' => $this->notes]);
     }
 }

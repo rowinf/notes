@@ -7,6 +7,7 @@ use App\Livewire\NoteEmpty;
 use App\Livewire\Notes\Index;
 use App\Livewire\SearchResults;
 use App\Livewire\TagNoteEmpty;
+use App\Models\Note;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -26,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tags/{tag}', TagNoteEmpty::class)->name('tag.index');
         Route::get('tags/{tag}/notes/{note}', NoteEditor::class)->name('tag.show');
         Route::get('tags/{tag}/notes/create', NoteEditor::class)->name('tag.create');
-        Route::get('notes', NoteEmpty::class)->name('note.index')->can('create', 'note');
+        Route::get('notes', NoteEmpty::class)->name('note.index');
         Route::get('notes/create', Index::class)->name('note.create');
         Route::get('notes/{note}', Index::class)->name('note.show')->can('view', 'note');
         Route::get('search/notes', SearchResults::class)->name('search.index');
