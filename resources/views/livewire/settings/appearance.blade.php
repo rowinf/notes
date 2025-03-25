@@ -56,7 +56,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
                         <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
                             <flux:icon.icon-font-serif />
                         </div>
-                        <flux:description>
+                        <flux:description class="flex-1">
                             <div>Dark Mode</div>
                             <div>Select a sleek and modern dark theme</div>
                         </flux:description>
@@ -69,7 +69,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
                         <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
                             <flux:icon.icon-font-monospace />
                         </div>
-                        <flux:description>
+                        <flux:description class="flex-1">
                             <div>System</div>
                             <div>Adapts to your device's theme</div>
                         </flux:description>

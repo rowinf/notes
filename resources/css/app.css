@@ -17,7 +17,7 @@
 
 @layer base {
     .border, .border-b, .border-r, .border-t, .border-l {
-        @apply border-gray-800 dark:border-zinc-800;
+        @apply border-gray-200 dark:border-zinc-800;
     }
 }
 
