@@ -12,4 +12,13 @@
 
 <div {{ $attributes->class($classes) }} data-flux-main>
     {{ $slot }}
+
+    <div class="flex lg:hidden">
+        <div>Home</div>
+        <div>Search</div>
+        <div>Archived</div>
+        <div>Tags</div>
+        <div>Settings</div>
+    </div>
+
 </div>
