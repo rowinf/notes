@@ -1,4 +1,4 @@
-import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import { Livewire } from '../../vendor/livewire/livewire/dist/livewire.esm';
 
 Livewire.on('note-removed', (event) => {
     Livewire.navigate('/dashboard/notes');

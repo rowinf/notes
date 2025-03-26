@@ -11,3 +11,4 @@
 
 @vite($resources)
 @fluxAppearance
+@livewireStyles
