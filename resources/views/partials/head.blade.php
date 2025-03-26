@@ -1,6 +1,7 @@
 @php
     $resources = ['resources/css/app.css', 'resources/js/app.js'];
 @endphp
+@livewireScriptConfig
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="A beautiful demo note taking application, for a project portfolio, based on a design by front end mentor.">
