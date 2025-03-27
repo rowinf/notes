@@ -78,7 +78,9 @@ class NoteForm extends Form
     public function setNote(Note $note)
     {
         $this->title = $note->title;
-        $this->content = $note->content;
+        if ($note->content) {
+            $this->content = $note->content;
+        }
         $this->is_archived = $note->is_archived;
         $this->note = $note;
         if ($note->last_edited_at) {

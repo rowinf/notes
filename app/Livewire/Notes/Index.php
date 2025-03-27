@@ -4,8 +4,6 @@ namespace App\Livewire\Notes;
 
 use App\Models\Note;
 use App\Models\Tag;
-use Livewire\Attributes\Url;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Index extends Component
@@ -13,8 +11,6 @@ class Index extends Component
     public ?Note $note = null;
     public ?Tag $tag = null;
     public $perPage = 20;
-    #[Url]
-    public $searchTerm = '';
 
     public function updatingPage($page)
     {
