@@ -118,8 +118,8 @@ new #[Layout('components.layouts.auth')] class extends Component {
         </div>
     </form>
 
-    <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
+    <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-300">
         No account yet?
-        <flux:link href="{{ route('register') }}" wire:navigate>Sign up</flux:link>
+        <flux:link href="{{ route('register') }}" variant="subtle" wire:navigate>Sign up</flux:link>
     </div>
 </div>
