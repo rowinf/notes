@@ -104,7 +104,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
             />
 
             @if (Route::has('password.request'))
-                <flux:link class="absolute right-0 top-0 text-sm" href="{{ route('password.request') }}" wire:navigate>
+                <flux:link class="absolute right-0 top-0 text-sm underline underline-offset-2!" href="{{ route('password.request') }}" variant="subtle" wire:navigate>
                     {{ __('Forgot') }}
                 </flux:link>
             @endif
