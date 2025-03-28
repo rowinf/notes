@@ -19,24 +19,29 @@ class NoteList extends Component
     public int $perPage = 20;
 
     public bool $archived = false;
+    public bool $active = true;
 
-    public function mount(?Tag $tag)
+    public function mount(?Tag $tag, bool $active, bool $archived)
     {
         $this->tag = request()->route('tag');
-        $this->archived = request()->routeIs('archive.index', 'archive.show');
+        $this->archived = $archived;
+        $this->active = $active;
     }
 
     #[Computed]
     public function notes()
     {
+        $states = [];
+        if ($this->archived) $states[] = true;
+        if ($this->active) $states[] = false;
         if ($this->tag) {
-            $builder = $this->tag->notes()->where(['is_archived' => false]);
+            $builder = $this->tag->notes()->where('is_archived', 'in', $states);
         } else {
             $builder = Auth::user()->notes()
-                ->where(['is_archived' => $this->archived])
                 ->orderByDesc('last_edited_at')
+                ->whereIn('is_archived', $states)
                 ->with('tags');
-
+            
             if ($searchTerm = request()->get('searchTerm')) {
                 $builder->where(
                     fn($query) =>
