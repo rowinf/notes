@@ -1,24 +1,41 @@
 import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 
-document.addEventListener('alpine:init', () => {
-    console.log('init store toasts')
+document.addEventListener('alpine:init', function () {
     Alpine.store('toasts', {
         message: '',
         isOpen: false,
-        toast(msg) {
-            if (msg) this.message = msg;
-            this.isOpen = !!msg;
-        }
+        deferOpen: false,
+        init() {
+            // bind this to call from `livewire:navigated` event
+            this.deferToast = (msg) => {
+                this.deferOpen = true;
+                this.message = msg;
+            }
+            this.toast = (msg) => {
+                if (msg) this.message = msg;
+                this.isOpen = !!msg;
+                this.deferOpen = false;
+            }
+        },
     });
 });
 
-Livewire.on('note-removed', (event) => {
-    Livewire.navigate('/dashboard/notes');
-    Alpine.store('toasts').toast(event.message);
+document.addEventListener('livewire:navigated', () => {
+    const { deferOpen, message, toast } = Alpine.store('toasts');
+    if (deferOpen) {
+        toast(message);
+    }
+});
+
+Livewire.on('note-removed', async (event) => {
+    Alpine.store('toasts').deferToast(event.message);
 });
 
 Livewire.on('note-added', (event) => {
-    Livewire.navigate(`/dashboard/notes/${event.id}`);
+    Alpine.store('toasts').deferToast(event.message);
+});
+
+Livewire.on('toast', (event) => {
     Alpine.store('toasts').toast(event.message);
 });
 

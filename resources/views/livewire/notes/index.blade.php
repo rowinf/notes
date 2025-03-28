@@ -5,7 +5,7 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group>
                     @if ($this->note->is_archived)
-                        <flux:navlist.item icon="archive-box-arrow-down" href="#" x-on:click="restore">
+                        <flux:navlist.item icon="archive-box-arrow-down" href="#" wire:click="restoreNote">
                             {{ __('Restore Note') }}
                         </flux:navlist.item>
                     @else

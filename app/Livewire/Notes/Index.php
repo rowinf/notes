@@ -10,12 +10,6 @@ class Index extends Component
 {
     public ?Note $note = null;
     public ?Tag $tag = null;
-    public $perPage = 20;
-
-    public function updatingPage($page)
-    {
-        $this->perPage = $page * 20;
-    }
 
     public function mount(?Note $note, ?Tag $tag)
     {
@@ -25,16 +19,23 @@ class Index extends Component
 
     public function delete()
     {
-        $this->dispatch('note-removed', id: $this->note->id, is_archived: false, is_restored: false, message: 'Note permanently deleted.');
+        $this->dispatch('note-removed', id: $this->note->id, is_archived: $this->note->is_archived, is_restored: false, message: 'Note permanently deleted.');
+        if ($this->note->is_archived) {
+            $this->redirect(route('archive.index'), navigate: true);
+        } else {
+            $this->redirect(route('note.index'), navigate: true);
+        }
     }
     public function archive()
     {
         $this->dispatch('note-removed', id: $this->note->id, is_archived: true, is_restored: false, message: 'Note archived.', link: 'archive.index');
+        $this->redirect(route('note.index'), navigate: true);
     }
 
-    public function restore()
+    public function restoreNote()
     {
         $this->dispatch('note-removed', id: $this->note->id, is_archived: false, is_restored: true, message: 'Note restored to active notes.', link: 'note.index');
+        $this->redirect(route('archive.index'), navigate: true);
     }
 
     public function render()

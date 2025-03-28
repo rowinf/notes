@@ -6,8 +6,7 @@
     @include('partials.theme', ['font_theme' => Auth::user()->font_theme])
 </head>
 
-<body class="min-h-screen bg-white dark:bg-black overflow-x-hidden"
-     x-on:toast.debounce="$store.toasts.toast($event.detail.message)">
+<body class="min-h-screen bg-white dark:bg-black overflow-x-hidden">
     <flux:sidebar sticky stashable class="border-r bg-white dark:bg-black">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
@@ -36,7 +35,8 @@
 
     <div id="dialogs"></div>
     @persist('toast')
-    <div x-cloak x-data="$store.toasts" class="h-9 absolute bottom-8 right-0 z-100 w-102" x-on:click.outside="toast(false)" x-show="isOpen"
+    <div x-cloak x-data="$store.toasts" class="h-9 absolute bottom-8 right-0 z-100 w-102"
+        x-on:click.outside="toast(false)" x-show="isOpen"
         x-transition:enter="transform-[transition] ease-in-out transition duration-500"
         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
         x-transition:leave="transform-[transition] ease-in-out transition duration-500"
