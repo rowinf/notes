@@ -62,19 +62,6 @@ class NoteForm extends Form
         return $this->note->tags()->sync($tags);
     }
 
-    public function destroy()
-    {
-        return $this->note->delete();
-    }
-
-    public function archive()
-    {
-        return $this->note->update([
-            'is_archived' => true,
-        ]);
-    }
-
-
     public function setNote(Note $note)
     {
         $this->title = $note->title;

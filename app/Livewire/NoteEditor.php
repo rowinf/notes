@@ -29,7 +29,7 @@ class NoteEditor extends Component
             $this->dispatch('toast', message: 'Note saved successfully!');
         } else {
             $note = $this->form->save();
-            $this->dispatch('note-added', note: $note);
+            $this->dispatch('note-added', id: $note->id, message: 'Note saved successfully!');
         }
     }
 

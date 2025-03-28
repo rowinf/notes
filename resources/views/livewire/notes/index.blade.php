@@ -5,24 +5,16 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group>
                     @if ($this->note->is_archived)
-                        <div x-data="{ open: false }">
-                            <flux:navlist.item icon="archive-box-arrow-down" href="#" x-on:click="open = !open"
-                                wire:confirm="restore it?">
-                                {{ __('Restore Note') }}
-                            </flux:navlist.item>
-                            <dialog x-bind:open="open">
-                                Restore it?
-                                <flux:button wire:click="restore" variant="primary">Restore!</flux:button>
-                                <flux:button x-on:click="open = !open">Cancel</flux:button>
-                            </dialog>
-                        </div>
+                        <flux:navlist.item icon="archive-box-arrow-down" href="#" x-on:click="restore">
+                            {{ __('Restore Note') }}
+                        </flux:navlist.item>
                     @else
                         <div x-data="{ open: false }">
                             <flux:navlist.item icon="archive-box-arrow-down" href="#"
                                 x-on:click="open = true; $nextTick(() => $refs.dialog.showModal())">
                                 {{ __('Archive Note') }}
                             </flux:navlist.item>
-                            @teleport('body')
+                            @teleport('#dialogs')
                             <x-dialog>
                                 <div class="border-b p-5 flex items-start gap-4">
                                     <div
@@ -51,7 +43,7 @@
                             x-on:click="open = true; $nextTick(() => $refs.dialog.showModal())">
                             {{ __('Delete Note') }}
                         </flux:navlist.item>
-                        @teleport('body')
+                        @teleport('#dialogs')
                         <x-dialog>
                             <div class="border-b p-5 flex items-start gap-4">
                                 <div

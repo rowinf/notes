@@ -43,7 +43,7 @@
     </flux:textarea>
     <flux:separator class="my-4" />
     <div>
-        <flux:button type="submit" variant="primary" class="disabled:opacity-75 mr-2" wire:dirty.class="bg-blue-900">
+        <flux:button type="submit" variant="primary" class="disabled:opacity-75 mr-2">
             Save Note
         </flux:button>
         <flux:button href="{{ route('note.index') }}">Cancel</flux:button>

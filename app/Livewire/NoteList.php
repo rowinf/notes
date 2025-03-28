@@ -6,7 +6,6 @@ use App\Models\Note;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\Url;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -17,11 +16,14 @@ class NoteList extends Component
     use WithPagination, WithoutUrlPagination;
     public ?Tag $tag = null;
 
-    public $perPage = 20;
+    public int $perPage = 20;
+
+    public bool $archived = false;
 
     public function mount(?Tag $tag)
     {
         $this->tag = request()->route('tag');
+        $this->archived = request()->routeIs('archive.index', 'archive.show');
     }
 
     #[Computed]
@@ -31,7 +33,7 @@ class NoteList extends Component
             $builder = $this->tag->notes()->where(['is_archived' => false]);
         } else {
             $builder = Auth::user()->notes()
-                ->where('is_archived', request()->routeIs('archive.index', 'archive.show'))
+                ->where(['is_archived' => $this->archived])
                 ->orderByDesc('last_edited_at')
                 ->with('tags');
 
@@ -53,12 +55,14 @@ class NoteList extends Component
     }
 
     #[On('note-removed')]
-    public function loadNextNote(Note $note, bool $is_archived)
+    public function loadNextNote(int $id, bool $is_archived, bool $is_restored)
     {
-        if ($is_archived) {
-            $note->update(['is_archived' => true]);
+        if ($is_restored) {
+            Note::where(['id' => $id])->update(['is_archived' => false]);
+        } else if ($is_archived) {
+            Note::where(['id' => $id])->update(['is_archived' => true]);
         } else {
-            $note->delete();
+            Note::destroy($id);
         }
         unset($this->notes);
     }
