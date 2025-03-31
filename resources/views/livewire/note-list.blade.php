@@ -22,15 +22,17 @@
 @endphp
 
 @persist('scrollbar')
-<div wire:scroll class="h-[calc(100vh-90px)] overflow-y-auto w-[290px] flex-col pt-5 pr-4 pl-8 border-r">
-    <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">Create New Note
-    </flux:button>
+<div wire:scroll class="overflow-y-auto lg:w-[290px] pt-5 pr-4 pl-8 border-r">
+    <div class="hidden lg:block">
+        <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">Create New Note
+        </flux:button>
+    </div>
     @if (request()->routeIs('archive.index', 'archive.show'))
         <p class="text-sm pt-4">All your archived notes are stored here. You can restore or delete them anytime.</p>
     @elseif (request()->routeIs('tag.note'))
         <p class="text-sm pt-4">All notes with the "{{ request()->route('tag')->name }}" tag are shown here</p>
     @endif
-    <section class="flex-auto pt-4">
+    <section class="pt-4">
         @forelse ($notes as $note)
             <div class="note-list-item border-t has-hover:border-transparent">
                 <a href="{{ getNoteRoute($note, $this->tag ?? request()->route('tag'), request()->get('searchTerm')) }}"

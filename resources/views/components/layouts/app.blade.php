@@ -9,12 +9,20 @@
 @endphp
 <x-layouts.app.sidebar title="Notes" heading="{{ $heading }}">
     <flux:main>
-        <div class="overflow-y-hidden flex relative">
-            <livewire:note-list :active="!$archive"
-                :archived="$archive"></livewire:note-list>
-            <div class="flex flex-2/3 h-[calc(100vh-90px)]">
-                {{ $slot }}
+        <flux:header class="border-b py-6 px-8">
+            <div class="relative w-full">
+                <div class="flex flex-row justify-between">
+                    <flux:heading size="xl" level="1">{{ $heading }}</flux:heading>
+                    <div class="hidden">
+                        <flux:spacer />
+                        <livewire:notes.search :searchTerm="request()->get('searchTerm') ?? ''" />
+                        <flux:button href="{{ route('settings.profile') }}" icon="cog" variant="ghost" class="ml-2" wire:navigate></flux:button>
+                    </div>
+                </div>
             </div>
+        </flux:header>
+        <div class="overflow-y-hidden relative">
+            {{ $slot }}
         </div>
     </flux:main>
 </x-layouts.app.sidebar>
