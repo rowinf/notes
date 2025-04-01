@@ -101,3 +101,26 @@ dialog::backdrop {
 [x-cloak] {
     display: none;
 }
+
+[data-flux-main] {
+    grid-template-rows: min-content 1fr;
+    grid-template-areas: 
+        "header"
+        "main";
+}
+
+@media (width >= 64rem) {
+    [data-flux-main] {
+        grid-template-columns: min-content 1fr;
+        grid-template-areas: 
+            "sidebar main aside"
+            "sidebar main aside";
+    }
+}
+
+body:has(>[data-flux-main]) {
+    grid-template-areas:
+        "sidebar header header"
+        "sidebar main aside"
+        "sidebar footer aside";
+}

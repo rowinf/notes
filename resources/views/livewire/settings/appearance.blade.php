@@ -28,7 +28,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
 @script
 <script>
     $wire.on('update-appearance', ([event]) => {
-        Flux.appearance = event.color_theme;
+        $flux.appearance = event.color_theme;
     });
 </script>
 @endscript

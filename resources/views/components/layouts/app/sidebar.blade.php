@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="{{ Auth::user()->color_theme }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     @include('partials.head')
     @include('partials.theme', ['font_theme' => Auth::user()->font_theme])
 </head>
 
-<body class="min-h-screen bg-white dark:bg-black overflow-x-hidden">
-    <flux:sidebar sticky stashable class="border-r bg-white dark:bg-black">
+<body class="min-h-screen dark:bg-zinc-800 overflow-x-hidden">
+    <flux:sidebar sticky stashable class="border-r bg-white dark:bg-zinc-950">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
@@ -33,6 +33,7 @@
     </flux:sidebar>
 
     <div id="dialogs"></div>
+    @include('partials.mobile-nav')
     @persist('toast')
     <div x-cloak x-data="$store.toasts" class="h-9 absolute bottom-8 right-0 z-100 w-102"
         x-on:click.outside="toast(false)" x-show="isOpen"

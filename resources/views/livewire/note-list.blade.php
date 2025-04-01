@@ -1,29 +1,6 @@
-@php
-    // when clicking on a note from different contexts, direct the user to the correct note
-    function getNoteRoute(?App\Models\Note $note, ?App\Models\Tag $tag, ?string $searchTerm): string
-    {
-        $routeName = request()->route()->getName();
-        $params = ['note' => $note, 'tag' => $tag];
-
-        if ($note->id) {
-            if (str_contains($routeName, 'archive')) {
-                return route('archive.show', $params);
-            } else if (str_contains($routeName, 'tag')) {
-                return route('tag.show', $params);
-            } else {
-                if (filled($searchTerm)) {
-                    $params['searchTerm'] = $searchTerm;
-                }
-                return route('note.show', $params);
-            }
-        }
-        return route('note.show', $params);
-    }
-@endphp
-
 @persist('scrollbar')
 <div wire:scroll class="overflow-y-auto lg:w-[290px] pt-5 pr-4 pl-8 border-r">
-    <div class="hidden lg:block">
+    <div class="hidden lg:block"> 
         <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">Create New Note
         </flux:button>
     </div>
@@ -32,10 +9,10 @@
     @elseif (request()->routeIs('tag.note'))
         <p class="text-sm pt-4">All notes with the "{{ request()->route('tag')->name }}" tag are shown here</p>
     @endif
-    <section class="pt-4">
+    <section class="pt-4 h-[calc(100vh-250px)] lg:h-[calc(100vh-150px)]">
         @forelse ($notes as $note)
-            <div class="note-list-item border-t has-hover:border-transparent">
-                <a href="{{ getNoteRoute($note, $this->tag ?? request()->route('tag'), request()->get('searchTerm')) }}"
+            <div class="note-list-item border-t first:border-none has-hover:border-transparent">
+                <a href="{{ $this->getNoteRoute($note, $this->tag ?? request()->route('tag'), request()->get('searchTerm')) }}"
                     class="my-1 hover:bg-zinc-100 dark:hover:bg-zinc-700/75 p-2 flex flex-col hover:rounded-md"
                     wire:key="{{$note->id}}" wire:current="bg-zinc-100 dark:bg-zinc-800 border-transparent rounded-md"
                     wire:navigate>

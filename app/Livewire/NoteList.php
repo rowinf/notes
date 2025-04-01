@@ -59,6 +59,26 @@ class NoteList extends Component
         $this->perPage = $page * 20;
     }
 
+    function getNoteRoute(Note $note, ?Tag $tag, ?string $searchTerm): string
+    {
+        $routeName = request()->route()->getName();
+        $params = ['note' => $note, 'tag' => $tag];
+
+        if ($note->id) {
+            if (str_contains($routeName, 'archive')) {
+                return route('archive.show', $params);
+            } else if (str_contains($routeName, 'tag')) {
+                return route('tag.show', $params);
+            } else {
+                if (filled($searchTerm)) {
+                    $params['searchTerm'] = $searchTerm;
+                }
+                return route('note.show', $params);
+            }
+        }
+        return route('note.show', $params);
+    }
+
     #[On('note-removed')]
     public function loadNextNote(int $id, bool $is_archived, bool $is_restored)
     {
