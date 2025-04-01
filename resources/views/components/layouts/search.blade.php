@@ -1,10 +1,13 @@
-<x-layouts.app.sidebar title="Notes | Search" heading="Showing Results for: {{request()->get('searchTerm')}}">
+@php
+    $archive = request()->routeIs('archive.index', 'archive.show');
+@endphp
+<x-layouts.app.sidebar title="Notes | Search">
+    @include('partials.page-heading', ['heading' => "Showing Results for: " . request()->get('searchTerm')])
     <flux:main>
-        <div class="overflow-y-hidden flex relative">
-            <livewire:note-list :active="true" :archived="true"></livewire:note-list>
-            <div class="flex flex-2/3 h-[calc(100vh-105px)]">
-                {{ $slot }}
-            </div>
+        <div @class(["hidden lg:block" => request()->routeIs('note.show')])>
+            <livewire:note-list :active="!$archive" :archived="$archive"
+                class="hidden lg:block lg:w-[290px] [grid-area:sidebar]"></livewire:note-list>
         </div>
+        {{ $slot }}
     </flux:main>
 </x-layouts.app.sidebar>
