@@ -1,5 +1,5 @@
 @persist('scrollbar')
-<div wire:scroll class="overflow-y-auto lg:w-[290px] pt-5 pr-4 pl-8 border-r">
+<div wire:scroll class="overflow-y-auto lg:w-[290px] pr-4 pl-8 border-r">
     <div class="hidden lg:block"> 
         <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">Create New Note
         </flux:button>
@@ -9,7 +9,7 @@
     @elseif (request()->routeIs('tag.note'))
         <p class="text-sm pt-4">All notes with the "{{ request()->route('tag')->name }}" tag are shown here</p>
     @endif
-    <section class="pt-4 h-[calc(100vh-250px)] lg:h-[calc(100vh-150px)]">
+    <section class="pt-4 h-auto lg:h-[calc(100vh-150px)]">
         @forelse ($notes as $note)
             <div class="note-list-item border-t first:border-none has-hover:border-transparent">
                 <a href="{{ $this->getNoteRoute($note, $this->tag ?? request()->route('tag'), request()->get('searchTerm')) }}"

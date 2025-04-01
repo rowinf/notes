@@ -103,10 +103,13 @@ dialog::backdrop {
 }
 
 [data-flux-main] {
-    grid-template-rows: min-content 1fr;
+    overflow-y: auto;
+    grid-template-rows: min-content 65vh auto min-content;
     grid-template-areas: 
         "header"
-        "main";
+        "sidebar"
+        "main"
+        "footer";
 }
 
 @media (width >= 64rem) {

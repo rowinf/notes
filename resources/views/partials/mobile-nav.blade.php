@@ -7,27 +7,27 @@
     </div>
     <flux:separator vertical class="hidden sm:block" />
     <div class="w-[14vw]">
-        <a href="{{ route('search.index') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100">
+        <a wire:navigate href="{{ route('search.index') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
             <flux:icon.icon-search />
             <span class="hidden sm:block">Search</span>
         </a>
     </div>
     <flux:separator vertical class="hidden sm:block" />
     <div class="w-[14vw]">
-        <a href="{{ route('archive.index') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100">
+        <a wire:navigate href="{{ route('archive.index') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
             <flux:icon.icon-home />
             <span class="hidden sm:block">Archived</span></a>
     </div>
     <flux:separator vertical class="hidden sm:block" />
     <div class="w-[14vw]">
-        <a href="/tags" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100">
+        <a wire:navigate href="/tags" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
             <flux:icon.icon-tag />
             <span class="hidden sm:block">Tags</span>
         </a>
     </div>
     <flux:separator vertical class="hidden sm:block" />
     <div class="w-[14vw]">
-        <a href="{{ route('settings.profile') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100">
+        <a wire:navigate href="{{ route('settings.profile') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
             <flux:icon.icon-settings />
             <span class="hidden sm:block">Settings</span>
         </a>

@@ -13,9 +13,9 @@
         <flux:heading size="xl" level="1" @class(["border-r pt-5 pl-8 pr-4 [grid-area:header]", "hidden" => request()->routeIs('note.show')])>
             {{ $heading }}
         </flux:heading>
-        <div @class(["hidden lg:block" => request()->routeIs('note.show')])>
+        <div @class(["[grid-area:sidebar]", "hidden lg:block" => request()->routeIs('note.show')])>
             <livewire:note-list :active="!$archive" :archived="$archive"
-                class="hidden lg:block lg:w-[290px] [grid-area:sidebar]">
+                class="lg:w-[290px]">
             </livewire:note-list>
         </div>
         {{ $slot }}
