@@ -32,16 +32,18 @@ class NoteList extends Component
     public function notes()
     {
         $states = [];
-        if ($this->archived) $states[] = true;
-        if ($this->active) $states[] = false;
+        if ($this->archived)
+            $states[] = true;
+        if ($this->active)
+            $states[] = false;
         if ($this->tag) {
-            $builder = $this->tag->notes()->where('is_archived', 'in', $states);
+            $builder = $this->tag->notes()->whereIn('is_archived', $states);
         } else {
             $builder = Auth::user()->notes()
                 ->orderByDesc('last_edited_at')
                 ->whereIn('is_archived', $states)
                 ->with('tags');
-            
+
             if ($searchTerm = request()->get('searchTerm')) {
                 $builder->where(
                     fn($query) =>
