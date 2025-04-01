@@ -1,6 +1,7 @@
 <x-layouts.app.sidebar title="Notes | Search">
     @include('partials.page-heading', ['heading' => "Showing Results for: " . request()->get('searchTerm')])
     <flux:main>
+        <livewire:search-form :searchTerm="request()->get('searchTerm') ?? ''" />
         <div @class(["hidden lg:block" => request()->routeIs('note.show')])>
             <livewire:note-list :active="true" :archived="true"
                 class="hidden lg:block lg:w-[290px] [grid-area:sidebar]"></livewire:note-list>

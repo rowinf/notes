@@ -10,5 +10,5 @@ use Livewire\Attributes\Url;
 class SearchResults extends Index
 {
     #[Url]
-    public string $searchTerm = '';
+    public ?string $searchTerm = '';
 }

@@ -10,11 +10,13 @@ class Index extends Component
 {
     public ?Note $note = null;
     public ?Tag $tag = null;
+    public ?string $searchTerm = '';
 
     public function mount(?Note $note, ?Tag $tag)
     {
         $this->tag = $tag;
         $this->note = $note;
+        $this->searchTerm = request()->get('searchTerm');
     }
 
     public function delete()

@@ -10,7 +10,7 @@
                 {{ $heading }}
             </flux:heading>
             <flux:spacer />
-            <livewire:notes.search :searchTerm="request()->get('searchTerm') ?? ''" />
+            <livewire:search-form :searchTerm="request()->get('searchTerm') ?? ''" />
             <flux:button href="{{ route('settings.profile') }}" icon="cog" variant="ghost" class="ml-2" wire:navigate>
             </flux:button>
         </div>

@@ -4,6 +4,7 @@ use App\Livewire\Archive;
 use App\Livewire\Dashboard;
 use App\Livewire\NoteEmpty;
 use App\Livewire\Notes\Index;
+use App\Livewire\Notes\Search;
 use App\Livewire\SearchResults;
 use App\Livewire\TagNoteEmpty;
 use Illuminate\Support\Facades\Route;
@@ -20,13 +21,14 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::get('archive', Archive::class)->name('archive');
 
+        Route::get('search', Search::class)->name('search.index');
+        Route::get( 'search/{note}', SearchResults::class)->name('search.note');
         Route::get('archive/notes', NoteEmpty::class)->name('archive.index');
         Route::get('archive/notes/{note}', Index::class)->name('archive.show')->can('view', 'note');
         Route::get('tags/{tag}', TagNoteEmpty::class)->name('tag.index');
         Route::get('tags/{tag}/notes/{note}', Index::class)->name('tag.show');
         Route::get('tags/{tag}/notes/create', Index::class)->name('tag.create');
         Route::get('notes', NoteEmpty::class)->name('note.index');
-        Route::get('notes/search', SearchResults::class)->name('search.index');
         Route::get('notes/create', Index::class)->name('note.create');
         Route::get('notes/{note}', Index::class)->name('note.show')->can('view', 'note');
     });
