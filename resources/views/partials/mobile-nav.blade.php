@@ -1,4 +1,4 @@
-<nav id="mobile-nav" class="[grid-area:footer] flex bg-zinc-950 justify-between items-end py-3 px-4 md:px-8 lg:hidden">
+<nav id="mobile-nav" class="[grid-area:footer] flex dark:bg-zinc-950 bg-white justify-between items-end py-3 px-4 md:px-8 border-t lg:hidden">
     <div class="w-[14vw]">
         <a wire:navigate href="{{ route('note.index') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current.exact="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
             <flux:icon.icon-home /> 

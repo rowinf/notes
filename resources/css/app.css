@@ -16,7 +16,13 @@
 }
 
 @layer base {
-    .border, .border-b, .border-r, .border-t, .border-l {
+
+    .border,
+    .border-b,
+    .border-r,
+    .border-t,
+    .border-l,
+    .lg\:border-b {
         @apply border-gray-200 dark:border-zinc-800;
     }
 }
@@ -41,6 +47,7 @@
     --color-blue-100: #ebf1ff;
     --color-green-500: #21C16B;
     --color-green-100: #d1fbe9;
+    --inset-shadow-sm: inset 0 -4px 6px rgba(240, 240, 240, 0.6);
 }
 
 @layer theme {
@@ -48,6 +55,7 @@
         --color-accent: var(--color-blue-500);
         --color-accent-content: var(--color-blue-400);
         --color-accent-foreground: var(--color-white);
+        --inset-shadow-sm: inset 0 -4px 6px 0px rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -86,7 +94,8 @@ select:focus[data-flux-control] {
 } */
 
 /* this is not possible with tailwind */
-.note-list-item:has(a:hover, [data-current]),:has(a:hover, [data-current])+.note-list-item {
+.note-list-item:has(a:hover, [data-current]),
+:has(a:hover, [data-current])+.note-list-item {
     border-color: transparent !important;
 }
 
@@ -95,7 +104,7 @@ select:focus[data-flux-control] {
 }
 
 dialog::backdrop {
-    @apply  bg-zinc-950/50;
+    @apply bg-zinc-950/50;
 }
 
 [x-cloak] {
@@ -104,7 +113,7 @@ dialog::backdrop {
 
 body:has(>[data-flux-main]) {
     grid-template-columns: 100%;
-    grid-template-rows: repeat(4, min-content);
+    grid-template-rows: min-content minmax(0, auto) minmax(300px, 1fr) min-content;
     grid-template-areas:
         "header"
         "sidebar"
@@ -115,29 +124,51 @@ body:has(>[data-flux-main]) {
 [data-flux-main] {
     overflow-y: auto;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, min-content);
-    grid-template-areas: 
+    grid-template-rows: min-content minmax(300px, auto) auto;
+    grid-template-areas:
         "innerheader"
         "innersidebar"
         "innermain";
 }
 
-[data-note-sidebar] {
-    scroll-margin-bottom: 50px;
+[data-flux-main]:has(.note-editor) {
+    grid-template-rows: minmax(300px, auto);
+    grid-template-areas:
+        "innermain";
 }
 
-@media (width >= 64rem) {
+body:has(.note-editor) {
+    grid-template-rows: min-content minmax(300px, 1fr) min-content;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+@media (width >=64rem) {
+    body:has(.note-editor) {
+        grid-template-areas:
+            "sidebar header header"
+            "sidebar main aside";
+    }
+
+    [data-flux-main]:has(.note-editor) {
+        grid-template-areas:
+            "innersidebar innermain";
+    }
+
     body:has(>[data-flux-main]) {
+        grid-template-rows: min-content 1fr;
         grid-template-columns: min-content 1fr min-content;
         grid-template-areas:
             "sidebar header header"
-            "sidebar main aside"
-            "sidebar footer aside";
+            "sidebar main aside";
     }
+
     [data-flux-main] {
         grid-template-columns: min-content auto 1fr;
         grid-template-rows: min-content min-content;
-        grid-template-areas: 
+        grid-template-areas:
             "innersidebar innermain aside"
             "innersidebar innermain aside";
     }

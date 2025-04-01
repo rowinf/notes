@@ -1,4 +1,4 @@
-<flux:header class="lg:bg-zinc-950 border-b">
+<flux:header class="lg:dark:bg-zinc-950 lg:bg-white lg:border-b">
     <div class="relative w-full">
         <div class="py-6 lg:hidden">
             <a href="{{ route('dashboard') }}" wire:navigate>
