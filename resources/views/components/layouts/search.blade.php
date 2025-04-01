@@ -4,7 +4,7 @@
 <x-layouts.app.sidebar title="Notes | Search">
     @include('partials.page-heading', ['heading' => "Search"])
     <flux:main>
-        <flux:heading size="xl" level="1" @class(["border-r pt-5 pl-8 pr-4 [grid-area:header]", "hidden" => request()->routeIs('note.show')])>
+        <flux:heading size="xl" level="1" @class(["border-r pt-5 pl-8 pr-4 [grid-area:innerheader]", "hidden" => request()->routeIs('note.show')])>
             <div>Search</div>
             <div class="mt-4">
                 <livewire:search-form :searchTerm="request()->get('searchTerm') ?? ''" />
@@ -13,7 +13,7 @@
                 @endif
             </div>
         </flux:heading>
-        <div @class(["[grid-area:sidebar]", "hidden lg:block" => request()->routeIs('note.show')])>
+        <div data-note-sidebar @class(["[grid-area:innersidebar]", "hidden lg:block" => request()->routeIs('note.show')])>
             <livewire:note-list :active="true" :archived="true"
                 class="hidden lg:block lg:w-[290px]"></livewire:note-list>
         </div>

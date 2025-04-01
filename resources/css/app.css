@@ -102,28 +102,43 @@ dialog::backdrop {
     display: none;
 }
 
-[data-flux-main] {
-    overflow-y: auto;
-    grid-template-rows: min-content 65vh auto min-content;
-    grid-template-areas: 
+body:has(>[data-flux-main]) {
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(4, min-content);
+    grid-template-areas:
         "header"
         "sidebar"
         "main"
         "footer";
 }
 
-@media (width >= 64rem) {
-    [data-flux-main] {
-        grid-template-columns: min-content 1fr;
-        grid-template-areas: 
-            "sidebar main aside"
-            "sidebar main aside";
-    }
+[data-flux-main] {
+    overflow-y: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, min-content);
+    grid-template-areas: 
+        "innerheader"
+        "innersidebar"
+        "innermain";
 }
 
-body:has(>[data-flux-main]) {
-    grid-template-areas:
-        "sidebar header header"
-        "sidebar main aside"
-        "sidebar footer aside";
+[data-note-sidebar] {
+    scroll-margin-bottom: 50px;
+}
+
+@media (width >= 64rem) {
+    body:has(>[data-flux-main]) {
+        grid-template-columns: min-content 1fr min-content;
+        grid-template-areas:
+            "sidebar header header"
+            "sidebar main aside"
+            "sidebar footer aside";
+    }
+    [data-flux-main] {
+        grid-template-columns: min-content auto 1fr;
+        grid-template-rows: min-content min-content;
+        grid-template-areas: 
+            "innersidebar innermain aside"
+            "innersidebar innermain aside";
+    }
 }

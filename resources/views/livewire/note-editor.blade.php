@@ -1,4 +1,4 @@
-<form wire:submit="update" class="flex flex-1 flex-col px-6 py-5">
+<form wire:submit="update" class="flex flex-1 flex-col px-6 py-5 [grid-area:innermain]">
     <div class="grid text-sm">
         <div x-data="{open: false}">
             <button class="text-2xl font-bold text-left cursor-pointer mb-2" type="button" x-on:click="open = !open"
