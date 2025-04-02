@@ -61,7 +61,7 @@ class NoteList extends Component
         $this->perPage = $page * 20;
     }
 
-    function getNoteRoute(Note $note, ?Tag $tag, ?string $searchTerm): string
+    public function getNoteRoute(Note $note, ?Tag $tag, ?string $searchTerm): string
     {
         $routeName = request()->route()->getName();
         $params = ['note' => $note, 'tag' => $tag];
@@ -70,7 +70,7 @@ class NoteList extends Component
             if (str_contains($routeName, 'archive')) {
                 return route('archive.show', $params);
             } else if (str_contains($routeName, 'tag')) {
-                return route('tag.show', $params);
+                return route('tag.note.show', $params);
             } else {
                 if (filled($searchTerm)) {
                     $params['searchTerm'] = $searchTerm;

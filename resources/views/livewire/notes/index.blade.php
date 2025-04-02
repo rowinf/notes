@@ -1,6 +1,6 @@
 <div
     x-data="{ deleteDialogOpen: false, archiveDialogOpen: false }"
-    class="note-editor [grid-area:innermain] grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
+    class="note-editor flex-1 grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
     @if ($this->form->note->id)
         <div class="lg:hidden px-6 pt-3">
             <div class="flex">
@@ -39,7 +39,7 @@
                 <div class="flex w-36 items-center mb-1">
                     <flux:icon.tag class="size-4 mr-1" /><span class="align-baseline">Tags</span>
                 </div>
-                <button @class(["text-left cursor-pointer", 'text-white' => filled($form->tags), 'text-zinc-400' => !filled($form->tags)]) type="button" x-on:click="open = !open"
+                <button @class(["text-left cursor-pointer", 'dark:text-white' => filled($form->tags), 'text-zinc-400' => !filled($form->tags)]) type="button" x-on:click="open = !open"
                     x-text="$wire.form.tags || 'Add tags separated by commas (e.g. Work, Planning)'"
                     x-show="!open"></button>
                 <flux:field class="flex-1" x-show="open" x-cloak>

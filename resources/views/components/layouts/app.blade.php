@@ -2,7 +2,7 @@
     $heading = 'All Notes';
     if (request()->routeIs('archive.index')) {
         $heading = 'Archived Notes';
-    } else if (request()->routeIs(patterns: 'tag.index')) {
+    } else if (request()->routeIs(patterns: 'tag.show')) {
         $heading = 'Notes tagged: ' . request()->route('tag')->name;
     }
     $archive = request()->routeIs('archive.index', 'archive.show');
@@ -10,10 +10,10 @@
 <x-layouts.app.sidebar title="Notes">
     @include('partials.page-heading', ['heading' => $heading])
     <flux:main>
-        <flux:heading size="xl" level="1" @class(["lg:hidden border-r pt-5 pl-8 pr-4 [grid-area:innerheader]", "hidden" => request()->routeIs('note.show', 'archive.show')])>
+        <flux:heading size="xl" level="1" @class(["lg:hidden border-r pt-5 pl-8 pr-4", "hidden" => request()->routeIs('note.show', 'archive.show', 'tag.note.show')])>
             {{ $heading }}
         </flux:heading>
-        <div @class(["[grid-area:innersidebar]", "hidden lg:block" => request()->routeIs('note.show', 'archive.show')])>
+        <div @class(["hidden lg:block" => request()->routeIs('note.show', 'archive.show', 'tag.note.show')])>
             <livewire:note-list :active="!$archive" :archived="$archive"
                 class="lg:w-[290px]">
             </livewire:note-list>

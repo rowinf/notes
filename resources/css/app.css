@@ -121,22 +121,10 @@ body:has(>[data-flux-main]) {
 
 [data-flux-main] {
     overflow-y: auto;
-    grid-template-columns: 1fr;
-    grid-template-rows: min-content minmax(300px, auto) auto;
-    grid-template-areas:
-        "innerheader"
-        "innersidebar"
-        "innermain";
-}
-
-[data-flux-main]:has(.note-editor) {
-    grid-template-rows: minmax(300px, auto);
-    grid-template-areas:
-        "innermain";
 }
 
 body:has(.note-editor) {
-    grid-template-rows: min-content minmax(300px, 1fr) min-content;
+    grid-template-rows: minmax(100px, 1fr) minmax(300px, 1fr) min-content;
     grid-template-areas:
         "header"
         "main"
