@@ -124,7 +124,7 @@ body:has(>[data-flux-main]) {
 }
 
 body:has(.note-editor) {
-    grid-template-rows: minmax(100px, 1fr) minmax(300px, 1fr) min-content;
+    grid-template-rows: min-content minmax(300px, 1fr) min-content;
     grid-template-areas:
         "header"
         "main"
@@ -144,11 +144,6 @@ body:has(.note-editor) {
         grid-template-areas:
             "sidebar header header"
             "sidebar main aside";
-    }
-
-    [data-flux-main]:has(.note-editor) {
-        grid-template-areas:
-            "innersidebar innermain";
     }
 
     body:has(>[data-flux-main]) {
