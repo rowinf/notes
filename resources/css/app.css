@@ -47,15 +47,14 @@
     --color-blue-100: #ebf1ff;
     --color-green-500: #21C16B;
     --color-green-100: #d1fbe9;
-    --inset-shadow-sm: inset 0 -4px 6px rgba(240, 240, 240, 0.6);
+    --inset-shadow-subtle: rgba(240, 240, 240, 0.6) 0px -4px 6px inset;
 }
-
 @layer theme {
     .dark {
         --color-accent: var(--color-blue-500);
         --color-accent-content: var(--color-blue-400);
         --color-accent-foreground: var(--color-white);
-        --inset-shadow-sm: inset 0 -4px 6px 0px rgba(0, 0, 0, 0.3);
+        --inset-shadow-subtle: rgba(0, 0, 0, 0.3) 0px -4px 6px inset;
     }
 }
 
@@ -113,10 +112,9 @@ dialog::backdrop {
 
 body:has(>[data-flux-main]) {
     grid-template-columns: 100%;
-    grid-template-rows: min-content minmax(0, auto) minmax(300px, 1fr) min-content;
+    grid-template-rows: min-content minmax(300px, 1fr) min-content;
     grid-template-areas:
         "header"
-        "sidebar"
         "main"
         "footer";
 }
@@ -145,6 +143,14 @@ body:has(.note-editor) {
         "footer";
 }
 
+
+
+@media (width < 64rem) {
+    body:has(:is(>[data-flux-main],.note-editor)) [data-flux-sidebar] {
+        display: none;
+    }
+}
+
 @media (width >=64rem) {
     body:has(.note-editor) {
         grid-template-areas:
@@ -166,10 +172,9 @@ body:has(.note-editor) {
     }
 
     [data-flux-main] {
-        grid-template-columns: min-content auto 1fr;
-        grid-template-rows: min-content min-content;
+        grid-template-columns: min-content auto;
+        grid-template-rows: min-content;
         grid-template-areas:
-            "innersidebar innermain aside"
-            "innersidebar innermain aside";
+            "innersidebar innermain";
     }
 }

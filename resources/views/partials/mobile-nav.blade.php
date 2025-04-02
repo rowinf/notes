@@ -15,7 +15,7 @@
     <flux:separator vertical class="hidden sm:block" />
     <div class="w-[14vw]">
         <a wire:navigate href="{{ route('archive.index') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
-            <flux:icon.icon-home />
+            <flux:icon.icon-archive />
             <span class="hidden sm:block">Archived</span></a>
     </div>
     <flux:separator vertical class="hidden sm:block" />
