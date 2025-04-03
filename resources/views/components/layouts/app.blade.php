@@ -13,7 +13,7 @@
         <flux:heading size="xl" level="1" @class(["lg:hidden border-r pt-5 pl-8 pr-4", "hidden" => request()->routeIs('note.show', 'archive.show', 'tag.note.show')])>
             {{ $heading }}
         </flux:heading>
-        <div @class(["hidden lg:block" => request()->routeIs('note.show', 'archive.show', 'tag.note.show')])>
+        <div @class(["lg:flex-[290px] lg:max-w-[290px]", "hidden lg:block" => request()->routeIs('note.show', 'archive.show', 'tag.note.show')])>
             <livewire:note-list :active="!$archive" :archived="$archive"
                 class="lg:w-[290px]">
             </livewire:note-list>

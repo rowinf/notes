@@ -34,6 +34,7 @@ class Index extends Component
         } else {
             $note = $this->form->save();
             $this->dispatch('note-added', id: $note->id, message: 'Note saved successfully!');
+            $this->redirect(route('note.show', ['note' => $note]), navigate: true);
         }
     }
 
