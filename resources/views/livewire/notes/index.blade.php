@@ -18,7 +18,7 @@
                         x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
                     </flux:button>
                 @endif
-                <flux:button href="{{ route('note.index') }}" size="sm" variant="ghost" wire:navigate>Cancel</flux:button>
+                <flux:button href="{{ route('note.index') }}" size="sm" variant="ghost">Cancel</flux:button>
                 <flux:button type="submit" size="sm" variant="ghost" class="lg:hidden mr-0! pr-0 text-blue-500!">
                     Save Note
                 </flux:button>
@@ -76,7 +76,7 @@
             <flux:button type="submit" variant="primary" class="disabled:opacity-75 mr-2">
                 Save Note
             </flux:button>
-            <flux:button href="{{ route('note.index') }}" wire:navigate>Cancel</flux:button>
+            <flux:button href="{{ route('note.index') }}" variant="filled" wire:navigate>Cancel</flux:button>
         </div>
     </form>
     @if ($this->form->note->id)
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="p-4">
-                        <flux:button x-on:click="$refs.archiveDialog.close()">Cancel</flux:button>
+                        <flux:button x-on:click="$refs.archiveDialog.close()" variant="filled">Cancel</flux:button>
                         <flux:button x-on:click="$refs.archiveDialog.close()" wire:click="archive" variant="primary">
                             Archive Note</flux:button>
                     </div>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="p-4">
-                    <flux:button x-on:click="$refs.deleteDialog.close()">Cancel</flux:button>
+                    <flux:button x-on:click="$refs.deleteDialog.close()" variant="filled" >Cancel</flux:button>
                     <flux:button x-on:click="$refs.deleteDialog.close()" wire:click="delete" variant="danger">
                         Delete Note</flux:button>
                 </div>

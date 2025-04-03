@@ -25,6 +25,13 @@
     .lg\:border-b {
         @apply border-gray-200 dark:border-zinc-800;
     }
+
+    [data-flux-navlist-item] {
+        @apply text-zinc-700! dark:text-zinc-200!;
+    }
+    [data-current] [data-flux-icon] {
+        @apply text-blue-500; 
+    }
 }
 
 @theme {

@@ -16,8 +16,8 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('note.create', 'note.show', 'note.index')">{{ __('Dashboard') }}</flux:navlist.item>
-                <flux:navlist.item icon="archive-box-arrow-down" :href="route('archive')"
+                <flux:navlist.item icon="icon-home" :href="route('dashboard')" :current="request()->routeIs('note.create', 'note.show', 'note.index')">{{ __('Dashboard') }}</flux:navlist.item>
+                <flux:navlist.item icon="icon-archive" :href="route('archive')"
                     :current="request()->routeIs('archive.index', 'archive.show')">{{ __('Archived Notes') }}
                 </flux:navlist.item>
             </flux:navlist.group>
