@@ -1,11 +1,3 @@
-@php
-    $backroute = match(Route::currentRouteName()) {
-        'archive.show' => 'archive.index',
-        'tag.note.show' => 'tag.index',
-        'note.show' => 'note.index',
-        'search.note' => 'search.index'
-    }
-@endphp
 <div x-data="{ deleteDialogOpen: false, archiveDialogOpen: false }"
     class="note-editor flex-1 grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
     @if ($this->form->note->id)
@@ -27,14 +19,14 @@
                     </flux:button>
                 @endif
                 <flux:button href="{{ route('note.index') }}" size="sm" variant="ghost">Cancel</flux:button>
-                <flux:button type="submit" size="sm" variant="ghost" class="lg:hidden mr-0! pr-0 text-blue-500!">
+                <flux:button type="submit" form="note-form" size="sm" variant="ghost" class="lg:hidden mr-0! pr-0 text-blue-500!">
                     Save Note
                 </flux:button>
             </div>
             <flux:separator class="mt-1" />
         </div>
     @endif
-    <form wire:submit="update" class="flex px-6 py-5 flex-1 flex-col">
+    <form id="note-form" wire:submit="update" class="flex px-6 py-5 flex-1 flex-col">
         <div class="grid text-sm">
             <div x-data="{open: false}">
                 <button class="text-2xl font-bold text-left cursor-pointer mb-2" type="button" x-on:click="open = !open"

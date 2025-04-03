@@ -5,6 +5,7 @@ namespace App\Livewire\Notes;
 use App\Livewire\Forms\NoteForm;
 use App\Models\Note;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class Index extends Component
@@ -13,12 +14,19 @@ class Index extends Component
     public ?Note $note = null;
     public ?Tag $tag = null;
     public ?string $searchTerm = '';
+    public string $backroute = '';
 
     public function mount(?Note $note, ?Tag $tag)
     {
         $this->tag = request()->get('tag');
         $this->note = $note;
         $this->searchTerm = request()->get('searchTerm');
+        $this->backroute = match(Route::currentRouteName()) {
+            'archive.show' => 'archive.index',
+            'tag.note.show' => 'tag.index',
+            'note.show' => 'note.index',
+            'search.note' => 'search.index'
+        };
         if (request()->routeIs("note.create")) {
             $this->form->setNote(new Note(['content' => '']));
         } else {
