@@ -20,7 +20,7 @@
                     @if ($note->tags->isNotEmpty())
                         <div class="pt-2">
                             @foreach ($note->tags as $tag)
-                                <span class="p-1 bg-zinc-100 rounded-md dark:bg-zinc-600 text-xs"
+                                <span class="p-1 bg-zinc-100 rounded-md dark:bg-zinc-700 text-xs"
                                     wire:key="{{$tag->id}}">{{ $tag->name }}</span>
                             @endforeach
                         </div>
