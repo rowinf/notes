@@ -1,4 +1,5 @@
 {{-- Credit: Lucide (https://lucide.dev) --}}
+@php $attributes = $unescapedForwardedAttributes ?? $attributes; @endphp
 
 @props([
     'variant' => 'outline',
@@ -36,6 +37,8 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     aria-hidden="true"
+    width="24" 
+    height="24" 
     data-slot="icon"
 >
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"

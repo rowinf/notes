@@ -16,7 +16,7 @@ class Index extends Component
 
     public function mount(?Note $note, ?Tag $tag)
     {
-        $this->tag = $tag;
+        $this->tag = request()->get('tag');
         $this->note = $note;
         $this->searchTerm = request()->get('searchTerm');
         if (request()->routeIs("note.create")) {

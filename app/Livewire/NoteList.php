@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Note;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -63,7 +64,7 @@ class NoteList extends Component
 
     public function getNoteRoute(Note $note, ?Tag $tag, ?string $searchTerm): string
     {
-        $routeName = request()->route()->getName();
+        $routeName = Route::currentRouteName();
         $params = ['note' => $note, 'tag' => $tag];
 
         if ($note->id) {
@@ -71,10 +72,12 @@ class NoteList extends Component
                 return route('archive.show', $params);
             } else if (str_contains($routeName, 'tag')) {
                 return route('tag.note.show', $params);
-            } else {
+            } else if (str_contains($routeName, 'search')) {
                 if (filled($searchTerm)) {
                     $params['searchTerm'] = $searchTerm;
                 }
+                return route('search.note', $params);
+            } else {
                 return route('note.show', $params);
             }
         }

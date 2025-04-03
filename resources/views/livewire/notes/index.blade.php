@@ -1,9 +1,17 @@
+@php
+    $backroute = match(Route::currentRouteName()) {
+        'archive.show' => 'archive.index',
+        'tag.note.show' => 'tag.index',
+        'note.show' => 'note.index',
+        'search.note' => 'search.index'
+    }
+@endphp
 <div x-data="{ deleteDialogOpen: false, archiveDialogOpen: false }"
     class="note-editor flex-1 grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
     @if ($this->form->note->id)
         <div class="lg:hidden px-6 pt-3">
             <div class="flex">
-                <flux:button href="{{ route('note.index') }}" class="px-0! gap-0!" size="sm" icon:variant="micro"
+                <flux:button href="{{ route($backroute, request()->query()) }}" class="px-0! gap-0!" size="sm" icon:variant="micro"
                     variant="ghost" icon:leading="icon-chevron-right" wire:navigate>Go Back</flux:button>
                 <flux:spacer />
 
@@ -130,7 +138,7 @@
                     </div>
                 </div>
                 <div class="p-4">
-                    <flux:button x-on:click="$refs.deleteDialog.close()" variant="filled" >Cancel</flux:button>
+                    <flux:button x-on:click="$refs.deleteDialog.close()" variant="filled">Cancel</flux:button>
                     <flux:button x-on:click="$refs.deleteDialog.close()" wire:click="delete" variant="danger">
                         Delete Note</flux:button>
                 </div>
