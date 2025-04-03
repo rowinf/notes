@@ -4,21 +4,21 @@
         <div class="lg:hidden px-6 pt-3">
             <div class="flex">
                 <flux:button href="{{ route($backroute, request()->query()) }}" class="px-0! gap-0!" size="sm" icon:variant="micro"
-                    variant="ghost" icon:leading="icon-chevron-right" wire:navigate>Go Back</flux:button>
+                    variant="subtle" icon:leading="icon-chevron-right" wire:navigate>Go Back</flux:button>
                 <flux:spacer />
 
-                <flux:button variant="ghost" icon="icon-delete" icon:variant="micro" size="sm"
+                <flux:button variant="subtle" icon="icon-delete" icon:variant="micro" size="sm"
                     x-on:click="deleteDialogOpen = true; $nextTick(() => $refs.deleteDialog.showModal())">
                 </flux:button>
                 @if ($this->form->note->is_archived)
-                    <flux:button variant="ghost" icon:variant="micro" icon="icon-restore" icon:variant="micro" size="sm"
+                    <flux:button variant="subtle" icon:variant="micro" icon="icon-restore" icon:variant="micro" size="sm"
                         wire:click="restoreNote"></flux:button>
                 @else
-                    <flux:button variant="ghost" icon="icon-archive" icon:variant="micro" size="sm"
+                    <flux:button variant="subtle" icon="icon-archive" icon:variant="micro" size="sm"
                         x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
                     </flux:button>
                 @endif
-                <flux:button href="{{ route('note.index') }}" size="sm" variant="ghost">Cancel</flux:button>
+                <flux:button href="{{ route('note.index') }}" size="sm" variant="subtle">Cancel</flux:button>
                 <flux:button type="submit" form="note-form" size="sm" variant="ghost" class="lg:hidden mr-0! pr-0 text-blue-500!">
                     Save Note
                 </flux:button>

@@ -100,7 +100,6 @@ select:focus[data-flux-control] {
 } */
 
 /* this is not possible with tailwind */
-.note-list-item:has(a:hover, [data-current]),
 :has(a:hover, [data-current])+.note-list-item {
     border-color: transparent !important;
 }
@@ -161,10 +160,4 @@ body:has(.note-editor) {
             "sidebar main aside";
     }
 
-    [data-flux-main] {
-        grid-template-columns: min-content auto;
-        grid-template-rows: min-content;
-        grid-template-areas:
-            "innersidebar innermain";
-    }
 }

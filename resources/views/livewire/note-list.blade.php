@@ -6,8 +6,8 @@
     </div>
     @if (request()->routeIs('archive.index', 'archive.show'))
         <p class="text-sm pt-4">All your archived notes are stored here. You can restore or delete them anytime.</p>
-    @elseif (request()->routeIs('tag.note'))
-        <p class="text-sm pt-4">All notes with the "{{ request()->route('tag')->name }}" tag are shown here</p>
+    @elseif (request()->routeIs('tag.show'))
+        <p class="text-sm pt-4 dark:text-zinc-300">All notes with the "{{ request()->route('tag')->name }}" tag are shown here</p>
     @endif
     <section class="pt-4 h-auto lg:h-[calc(100vh-150px)]">
         @forelse ($notes as $note)

@@ -7,7 +7,7 @@
         </div>
         <div class="hidden flex-row justify-between py-6 lg:flex">
             <flux:heading size="xl" level="1">
-                {{ $heading }}
+                @include('partials.subheading')
             </flux:heading>
             <flux:spacer />
             <livewire:search-form :searchTerm="request()->get('searchTerm') ?? ''" />
