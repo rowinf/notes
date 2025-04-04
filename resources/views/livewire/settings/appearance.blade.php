@@ -5,11 +5,11 @@ use Livewire\Volt\Component;
 
 new #[Layout('components.layouts.settings')] class extends Component {
 
-    public ?string $color_theme;
+    public string $color_theme;
 
     public function mount()
     {
-        $this->color_theme = Auth::user()->color_theme;
+        $this->color_theme = Auth::user()->color_theme ?? 'system';
     }
 
     /**
@@ -29,6 +29,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
 <script>
     $wire.on('update-appearance', ([event]) => {
         $flux.appearance = event.color_theme;
+        Alpine.store('toasts').toast("Settings updated successfully!");
     });
 </script>
 @endscript
@@ -37,7 +38,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
     <flux:button icon:leading="icon-chevron-right" variant="ghost" class="px-0! self-start lg:hidden"
         :href="route('settings.index')">Settings</flux:button>
     <x-settings.layout heading="{{ __('Color Theme') }}" subheading="{{ __('Choose your color theme:') }}">
-        <form wire:submit="updateUser" class="flex flex-col pt-6">
+        <form wire:submit="updateUser" class="flex flex-col pt-6 max-w-[528px]">
             <flux:radio.group class="flex-col mb-6 space-y-8" wire:model="color_theme">
                 <flux:field
                     class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
@@ -62,7 +63,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
                             <div>Dark Mode</div>
                             <div>Select a sleek and modern dark theme</div>
                         </flux:description>
-                        <flux:radio type="radio" value="dark" />
+                        <flux:radio value="dark" />
                     </flux:label>
                 </flux:field>
                 <flux:field
@@ -75,7 +76,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
                             <div>System</div>
                             <div>Adapts to your device's theme</div>
                         </flux:description>
-                        <flux:radio type="radio" value="system" />
+                        <flux:radio value="system" checked="true" />
                     </flux:label>
                 </flux:field>
             </flux:radio.group>

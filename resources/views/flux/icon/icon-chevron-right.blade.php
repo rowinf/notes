@@ -1,8 +1,6 @@
-
 @props([
     'variant' => 'outline',
 ])
-
 @php
     if ($variant === 'solid') {
         throw new \Exception('The "solid" variant is not supported in Lucide.');

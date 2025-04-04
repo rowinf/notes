@@ -1,9 +1,9 @@
 <div class="flex items-start">
     <div class="mr-10 pt-5 pl-8 pr-4 border-r hidden md:block">
         <flux:navlist class="h-screen gap-1 w-52">
-            <flux:navlist.item href="{{ route('settings.appearance') }}" icon="icon-sun" wire:navigate>{{ __('Color Theme') }}</flux:navlist.item>
-            <flux:navlist.item href="{{ route('settings.font-theme') }}" icon="icon-font" wire:navigate>{{ __('Font Theme') }}</flux:navlist.item>
-            <flux:navlist.item href="{{ route('settings.password') }}" icon="icon-lock" wire:navigate>{{ __('Change Password') }}</flux:navlist.item>
+            <flux:navlist.item href="{{ route('settings.appearance') }}" icon="icon-sun" wire:current="bg-zinc-100 dark:bg-zinc-800" wire:navigate>{{ __('Color Theme') }}</flux:navlist.item>
+            <flux:navlist.item href="{{ route('settings.font-theme') }}" icon="icon-font" wire:current="bg-zinc-100 dark:bg-zinc-800" wire:navigate>{{ __('Font Theme') }}</flux:navlist.item>
+            <flux:navlist.item href="{{ route('settings.password') }}" icon="icon-lock" wire:current="bg-zinc-100 dark:bg-zinc-800" wire:navigate>{{ __('Change Password') }}</flux:navlist.item>
             <flux:separator />
             <form method="POST" action="{{route('logout')}}">
                 @csrf
