@@ -11,11 +11,12 @@ use App\Livewire\TagNoteEmpty;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::get('/', function () {
-    return redirect('login');
-})->name('home');
+$host = parse_url(config('app.url'), PHP_URL_HOST);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->domain($host)->group(function () {
+    Route::get('/', function () {
+        return redirect('login');
+    })->name('home');
     Route::redirect('settings', 'settings/profile');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
 
