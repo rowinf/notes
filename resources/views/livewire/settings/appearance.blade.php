@@ -32,10 +32,12 @@ new #[Layout('components.layouts.settings')] class extends Component {
     });
 </script>
 @endscript
-<div class="flex flex-col items-start">
 
+<section class="mx-4 flex flex-col">
+    <flux:button icon:leading="icon-chevron-right" variant="ghost" class="px-0! self-start lg:hidden"
+        :href="route('settings.index')">Settings</flux:button>
     <x-settings.layout heading="{{ __('Color Theme') }}" subheading="{{ __('Choose your color theme:') }}">
-        <form wire:submit="updateUser" class="flex flex-col items-end">
+        <form wire:submit="updateUser" class="flex flex-col pt-6">
             <flux:radio.group class="flex-col mb-6 space-y-8" wire:model="color_theme">
                 <flux:field
                     class="border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:border-zinc-600 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl">
@@ -77,7 +79,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
                     </flux:label>
                 </flux:field>
             </flux:radio.group>
-            <flux:button type="submit" variant="primary">Apply Changes</flux:button>
+            <flux:button type="submit" variant="primary" class="self-end">Apply Changes</flux:button>
         </form>
     </x-settings.layout>
-</div>
+</section>

@@ -27,7 +27,7 @@
     </div>
     <flux:separator vertical class="hidden sm:block" />
     <div class="w-[14vw]">
-        <a href="{{ route('settings.profile') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
+        <a href="{{ route('settings.index') }}" class="flex flex-col items-center px-4 py-1 rounded-md" wire:current="bg-blue-100 dark:bg-zinc-700 text-blue-500 fill-blue-500">
             <flux:icon.icon-settings />
             <span class="hidden sm:block">Settings</span>
         </a>

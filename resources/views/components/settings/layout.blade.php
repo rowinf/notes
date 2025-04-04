@@ -1,5 +1,5 @@
 <div class="flex items-start">
-    <div class="mr-10 pt-5 pl-8 pr-4 border-r dark:border-zinc-600 hidden md:block">
+    <div class="mr-10 pt-5 pl-8 pr-4 border-r hidden md:block">
         <flux:navlist class="h-screen gap-1 w-52">
             <flux:navlist.item href="{{ route('settings.appearance') }}" icon="icon-sun" wire:navigate>{{ __('Color Theme') }}</flux:navlist.item>
             <flux:navlist.item href="{{ route('settings.font-theme') }}" icon="icon-font" wire:navigate>{{ __('Font Theme') }}</flux:navlist.item>
@@ -13,11 +13,9 @@
     </div>
 
     <div class="flex-1 self-stretch pt-6">
-        <flux:heading>{{ $heading ?? '' }}</flux:heading>
+        <flux:heading size="xl" level="2">{{ $heading ?? '' }}</flux:heading>
         <flux:subheading>{{ $subheading ?? '' }}</flux:subheading>
 
-        <div class="mt-5 w-full max-w-lg">
-            {{ $slot }}
-        </div>
+        {{ $slot }}
     </div>
 </div>
