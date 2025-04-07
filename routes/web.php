@@ -11,11 +11,14 @@ use App\Livewire\TagNoteEmpty;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-$host = parse_url(config('app.url'), PHP_URL_HOST);
+$mainDomain = parse_url(config('app.url'), PHP_URL_HOST); // e.g. myprojects.online
+$notesDomain = 'notes.' . $mainDomain; // e.g. notes.myprojects.online
 
-Route::view('/', 'welcome');
+Route::domain($mainDomain)->group(function () {
+    Route::view('/', 'welcome');
+});
 
-Route::middleware(['auth'])->domain($host)->group(function () {
+Route::middleware(['auth'])->domain($notesDomain)->group(function () {
     Route::get('/', function () {
         return redirect('login');
     })->name('home');
