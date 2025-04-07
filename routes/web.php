@@ -13,6 +13,8 @@ use Livewire\Volt\Volt;
 
 $host = parse_url(config('app.url'), PHP_URL_HOST);
 
+Route::view('/', 'welcome');
+
 Route::middleware(['auth'])->domain($host)->group(function () {
     Route::get('/', function () {
         return redirect('login');
