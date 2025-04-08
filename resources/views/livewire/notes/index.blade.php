@@ -1,9 +1,9 @@
 <div x-data="{ deleteDialogOpen: false, archiveDialogOpen: false }"
     class="note-editor flex-1 grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
     <div class="lg:hidden px-6 pt-3">
-        <div class="flex">
-            <flux:button href="{{ route($backroute, request()->query()) }}" class="px-0! gap-0!" size="sm"
-                icon:variant="micro" variant="subtle" icon:leading="icon-chevron-right" wire:navigate>Go Back
+        <div class="flex items-center">
+            <flux:button href="{{ route($backroute, request()->query()) }}" inset size="sm"
+                icon:variant="micro" variant="subtle" icon:leading="icon-chevron-right" class="-ml-4" wire:navigate>Go Back
             </flux:button>
             <flux:spacer />
 
