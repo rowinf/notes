@@ -25,7 +25,8 @@ class Index extends Component
             'archive.show' => 'archive.index',
             'tag.note.show' => 'tag.index',
             'note.show' => 'note.index',
-            'search.note' => 'search.index'
+            'search.note' => 'search.index',
+            'note.create' => 'note.index'
         };
         if (request()->routeIs("note.create")) {
             $this->form->setNote(new Note(['content' => '']));
