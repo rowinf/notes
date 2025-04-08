@@ -21,8 +21,9 @@ class NoteList extends Component
 
     public bool $archived = false;
     public bool $active = true;
+    public string $newNoteTitle = '';
 
-    public function mount(?Tag $tag, bool $active, bool $archived)
+    public function mount(bool $active, bool $archived)
     {
         $this->tag = request()->route('tag');
         $this->archived = $archived;
@@ -103,7 +104,14 @@ class NoteList extends Component
     #[On('note-added')]
     public function reloadNotes()
     {
+        $this->newNoteTitle = '';
         unset($this->notes);
+    }
+
+    #[On('new-note-title-updated')]
+    public function newNoteTitleUpdated($title)
+    {
+        $this->newNoteTitle = $title;
     }
 
     public function render()

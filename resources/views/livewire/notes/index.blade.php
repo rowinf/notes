@@ -76,7 +76,7 @@
             <flux:button type="submit" variant="primary" class="disabled:opacity-75 mr-2">
                 Save Note
             </flux:button>
-            <flux:button href="{{ route('note.index') }}" variant="filled" wire:navigate>Cancel</flux:button>
+            <flux:button href="{{ route('note.index') }}" variant="filled">Cancel</flux:button>
         </div>
     </form>
     @if ($this->form->note->id)

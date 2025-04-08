@@ -21,7 +21,7 @@ class Index extends Component
         $this->tag = request()->get('tag');
         $this->note = $note;
         $this->searchTerm = request()->get('searchTerm');
-        $this->backroute = match(Route::currentRouteName()) {
+        $this->backroute = match (Route::currentRouteName()) {
             'archive.show' => 'archive.index',
             'tag.note.show' => 'tag.index',
             'note.show' => 'note.index',
@@ -30,6 +30,7 @@ class Index extends Component
         };
         if (request()->routeIs("note.create")) {
             $this->form->setNote(new Note(['content' => '']));
+            $this->dispatch('new-note-title-updated', $this->form->note->title);
         } else {
             $this->form->setNote($note);
         }
@@ -78,6 +79,11 @@ class Index extends Component
     {
         $this->dispatch('note-removed', id: $this->note->id, is_archived: false, is_restored: true, message: 'Note restored to active notes.', link: 'note.index');
         $this->redirect(route('archive.index'), navigate: true);
+    }
+
+    public function cancel()
+    {
+        $this->dispatch('new-note-title-updated', '');
     }
 
     public function render()
