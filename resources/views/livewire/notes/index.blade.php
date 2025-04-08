@@ -1,31 +1,31 @@
 <div x-data="{ deleteDialogOpen: false, archiveDialogOpen: false }"
     class="note-editor flex-1 grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
-    @if ($this->form->note->id)
-        <div class="lg:hidden px-6 pt-3">
-            <div class="flex">
-                <flux:button href="{{ route($backroute, request()->query()) }}" class="px-0! gap-0!" size="sm" icon:variant="micro"
-                    variant="subtle" icon:leading="icon-chevron-right" wire:navigate>Go Back</flux:button>
-                <flux:spacer />
+    <div class="lg:hidden px-6 pt-3">
+        <div class="flex">
+            <flux:button href="{{ route($backroute, request()->query()) }}" class="px-0! gap-0!" size="sm"
+                icon:variant="micro" variant="subtle" icon:leading="icon-chevron-right" wire:navigate>Go Back
+            </flux:button>
+            <flux:spacer />
 
-                <flux:button variant="subtle" icon="icon-delete" icon:variant="micro" size="sm"
-                    x-on:click="deleteDialogOpen = true; $nextTick(() => $refs.deleteDialog.showModal())">
+            <flux:button variant="subtle" icon="icon-delete" icon:variant="micro" size="sm"
+                x-on:click="deleteDialogOpen = true; $nextTick(() => $refs.deleteDialog.showModal())">
+            </flux:button>
+            @if ($this->form->note->is_archived)
+                <flux:button variant="subtle" icon:variant="micro" icon="icon-restore" icon:variant="micro" size="sm"
+                    wire:click="restoreNote"></flux:button>
+            @else
+                <flux:button variant="subtle" icon="icon-archive" icon:variant="micro" size="sm"
+                    x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
                 </flux:button>
-                @if ($this->form->note->is_archived)
-                    <flux:button variant="subtle" icon:variant="micro" icon="icon-restore" icon:variant="micro" size="sm"
-                        wire:click="restoreNote"></flux:button>
-                @else
-                    <flux:button variant="subtle" icon="icon-archive" icon:variant="micro" size="sm"
-                        x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
-                    </flux:button>
-                @endif
-                <flux:button href="{{ route('note.index') }}" size="sm" variant="subtle">Cancel</flux:button>
-                <flux:button type="submit" form="note-form" size="sm" variant="ghost" class="lg:hidden mr-0! pr-0 text-blue-500!">
-                    Save Note
-                </flux:button>
-            </div>
-            <flux:separator class="mt-1" />
+            @endif
+            <flux:button href="{{ route('note.index') }}" size="sm" variant="subtle">Cancel</flux:button>
+            <flux:button type="submit" form="note-form" size="sm" variant="ghost"
+                class="lg:hidden mr-0! pr-0 text-blue-500!">
+                Save Note
+            </flux:button>
         </div>
-    @endif
+        <flux:separator class="mt-1" />
+    </div>
     <form id="note-form" wire:submit="update" class="flex px-6 py-5 flex-1 flex-col">
         <div class="grid text-sm">
             <div x-data="{open: false}">

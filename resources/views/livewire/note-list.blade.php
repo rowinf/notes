@@ -4,6 +4,9 @@
         <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">Create New Note
         </flux:button>
     </div>
+    <div class="absolute lg:hidden bottom-4 right-4">
+        <flux:button href="{{ route('note.create') }}" class="rounded-full!" variant="primary" icon="icon-plus"></flux:button>
+    </div>
     @if (request()->routeIs('archive.index', 'archive.show'))
         <p class="text-sm pt-4">All your archived notes are stored here. You can restore or delete them anytime.</p>
     @elseif (request()->routeIs('tag.show'))
