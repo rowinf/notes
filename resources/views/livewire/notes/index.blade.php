@@ -90,52 +90,53 @@
                     x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
                     {{ __('Archive Note') }}
                 </flux:button>
-                @teleport('#dialogs')
-                <x-dialog x-ref="archiveDialog" x-on:close="archiveDialogOpen = false">
-                    <div class="border-b p-5 flex items-start gap-4">
-                        <div class="p-2 dark:bg-zinc-600 rounded-xl bg-white dark:border-zinc-600 border-zinc-100 block">
-                            <flux:icon.icon-archive class="size-6 color-white" />
-                        </div>
-                        <div>
-                            <h3 class="font-bold mb-1">Archive Note</h3>
-                            <p class="max-w-[40ch] text-sm">
-                                Are you sure you want to archive this note? You can find it in the Archived Notes
-                                section and restore it anytime.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <flux:button x-on:click="$refs.archiveDialog.close()" variant="filled">Cancel</flux:button>
-                        <flux:button x-on:click="$refs.archiveDialog.close()" wire:click="archive" variant="primary">
-                            Archive Note</flux:button>
-                    </div>
-                </x-dialog>
-                @endteleport
             @endif
             <flux:button icon="icon-delete" class="w-full"
-                x-on:click="open = true; $nextTick(() => $refs.deleteDialog.showModal())">
+                x-on:click="deleteDialogOpen = true; $nextTick(() => $refs.deleteDialog.showModal())">
                 {{ __('Delete Note') }}
             </flux:button>
-            @teleport('#dialogs')
-            <x-dialog x-ref="deleteDialog" x-on:close="deleteDialogOpen = false">
-                <div class="border-b p-5 flex items-start gap-4">
-                    <div class="p-2 dark:bg-zinc-600 rounded-xl bg-white dark:border-zinc-600 border-zinc-100 block">
-                        <flux:icon.icon-delete class="size-6 color-white" />
-                    </div>
-                    <div>
-                        <h3 class="font-bold mb-1">Delete Note</h3>
-                        <p class="max-w-[40ch] text-sm">
-                            Are you sure you want to permanently delete this note? This action cannot be undone.
-                        </p>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <flux:button x-on:click="$refs.deleteDialog.close()" variant="filled">Cancel</flux:button>
-                    <flux:button x-on:click="$refs.deleteDialog.close()" wire:click="delete" variant="danger">
-                        Delete Note</flux:button>
-                </div>
-            </x-dialog>
-            @endteleport
         </div>
     @endif
+
+    @teleport('#dialogs')
+    <x-dialog x-ref="archiveDialog" x-on:close="archiveDialogOpen = false">
+        <div class="border-b p-5 flex items-start gap-4">
+            <div class="p-2 dark:bg-zinc-600 rounded-xl bg-white dark:border-zinc-600 border-zinc-100 block">
+                <flux:icon.icon-archive class="size-6 color-white" />
+            </div>
+            <div>
+                <h3 class="font-bold mb-1">Archive Note</h3>
+                <p class="max-w-[40ch] text-sm">
+                    Are you sure you want to archive this note? You can find it in the Archived Notes
+                    section and restore it anytime.
+                </p>
+            </div>
+        </div>
+        <div class="p-4">
+            <flux:button x-on:click="$refs.archiveDialog.close()" variant="filled">Cancel</flux:button>
+            <flux:button x-on:click="$refs.archiveDialog.close()" wire:click="archive" variant="primary">
+                Archive Note</flux:button>
+        </div>
+    </x-dialog>
+    @endteleport
+    @teleport('#dialogs')
+    <x-dialog x-ref="deleteDialog" x-on:close="deleteDialogOpen = false">
+        <div class="border-b p-5 flex items-start gap-4">
+            <div class="p-2 dark:bg-zinc-600 rounded-xl bg-white dark:border-zinc-600 border-zinc-100 block">
+                <flux:icon.icon-delete class="size-6 color-white" />
+            </div>
+            <div>
+                <h3 class="font-bold mb-1">Delete Note</h3>
+                <p class="max-w-[40ch] text-sm">
+                    Are you sure you want to permanently delete this note? This action cannot be undone.
+                </p>
+            </div>
+        </div>
+        <div class="p-4">
+            <flux:button x-on:click="$refs.deleteDialog.close()" variant="filled">Cancel</flux:button>
+            <flux:button x-on:click="$refs.deleteDialog.close()" wire:click="delete" variant="danger">
+                Delete Note</flux:button>
+        </div>
+    </x-dialog>
+    @endteleport
 </div>

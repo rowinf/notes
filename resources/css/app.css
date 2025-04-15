@@ -30,7 +30,7 @@
         @apply text-zinc-700! dark:text-zinc-200!;
     }
     [data-current] [data-flux-icon] {
-        @apply text-blue-500; 
+        @apply text-blue-500;
     }
 }
 
@@ -74,6 +74,13 @@
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+.field-radio--card {
+    @apply border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:has-[ui-radio[data-checked]]:border-zinc-700 dark:border-zinc-800 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl;
+    label {
+        @apply flex items-center gap-4 p-4;
     }
 }
 
