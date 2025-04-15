@@ -12,4 +12,8 @@ class Tag extends Model
     {
         return $this->belongsToMany(Note::class)->orderByDesc('last_edited_at');
     }
+
+    public function __tostring() {
+        return $this->name;
+    }
 }
