@@ -10,9 +10,9 @@
                 @endif
             </div>
         </flux:heading>
-        <div data-note-sidebar @class(["lg:flex-[290px] lg:max-w-[290px]", "hidden lg:block" => Route::is('search.note')])>
+        <x-note-list.column>
             <livewire:note-list :active="true" :archived="true"></livewire:note-list>
-        </div>
+        </x-note-list.column>
         {{ $slot }}
     </flux:main>
 </x-layouts.app.sidebar>

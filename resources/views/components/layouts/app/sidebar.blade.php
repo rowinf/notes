@@ -6,7 +6,7 @@
     @include('partials.theme', ['font_theme' => Auth::user()->font_theme])
 </head>
 
-<body class="h-screen dark:bg-zinc-800 bg-zinc-100 overflow-hidden">
+<body class="h-screen dark:bg-zinc-800 bg-zinc-100 overflow-hidden text-zinc-950 dark:text-white">
     <flux:sidebar sticky stashable class="border-r bg-white dark:bg-zinc-950">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 

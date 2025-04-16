@@ -1,7 +1,7 @@
 @php
     $archive = Route::is('archive.index', 'archive.show');
 @endphp
-<x-layouts.app.sidebar title="Notes"> 
+<x-layouts.app.sidebar title="Notes">
     @include('partials.page-heading')
     <flux:main>
         @if (Route::is('tag.show'))
@@ -10,10 +10,10 @@
         <flux:heading size="xl" level="1" @class(["lg:hidden border-r pl-8 pr-4 pt-4", "hidden" => Route::is('note.show', 'archive.show', 'tag.note.show', 'note.create')])>
             @include('partials.subheading')
         </flux:heading>
-        <div @class(["lg:flex-[290px] lg:max-w-[290px]", "hidden lg:block" => Route::is('note.show', 'archive.show', 'tag.note.show', 'note.create')])>
+        <x-note-list.column>
             <livewire:note-list :active="!$archive" :archived="$archive">
             </livewire:note-list>
-        </div>
+        </x-note-list.column>
         {{ $slot }}
     </flux:main>
 </x-layouts.app.sidebar>

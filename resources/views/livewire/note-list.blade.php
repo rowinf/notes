@@ -1,5 +1,5 @@
 @persist('scrollbar')
-<div wire:scroll class="overflow-y-auto pr-4 pl-8 border-r">
+<div wire:scroll class="overflow-y-auto pr-4 pl-8">
     <div class="hidden lg:block pt-5">
         <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">+ Create New Note
         </flux:button>
@@ -14,7 +14,7 @@
         <p class="text-sm pt-4 dark:text-zinc-300">All notes with the "{{ request()->route('tag')->name }}" tag are shown
             here</p>
     @endif
-    <section class="pt-4 h-auto lg:h-[calc(100vh-150px)]">
+    <section class="pt-4 h-auto">
         <div class="bg-zinc-100 dark:bg-zinc-800 my-1 p-2 rounded-md empty:hidden" wire:cloak wire:show="newNoteTitle"
             wire:text="newNoteTitle">
         </div>

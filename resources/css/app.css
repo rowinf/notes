@@ -98,10 +98,6 @@ select:focus[data-flux-control] {
     transition: width 0.3s ease;
 }
 
-dialog::backdrop {
-    @apply bg-zinc-950/50;
-}
-
 [x-cloak] {
     display: none;
 }
@@ -123,10 +119,6 @@ body:has(.note-editor) {
         "footer";
 }
 
-body {
-    @apply text-zinc-950 dark:text-white;
-}
-
 [data-flux-button]:focus-visible {
     @apply ring-2 ring-zinc-500 ring-offset-1 ring-offset-transparent;
 }
@@ -145,10 +137,6 @@ body {
 
 [data-flux-label] {
     @apply !mb-0 !leading-tight;
-}
-
-[data-flux-main] {
-    overflow-y: auto;
 }
 
 @media (width < 64rem) {

@@ -73,7 +73,7 @@
         </div>
         <flux:separator class="my-4" />
 
-        <flux:textarea class="flex-1 min-h-min" wire:model="form.content">
+        <flux:textarea class="flex-1 min-h-min bg-transparent!" wire:model="form.content" placeholder="Start typing your note here...">
         </flux:textarea>
         <flux:separator class="my-4 hidden lg:block" />
         <div class="hidden lg:block">
@@ -87,17 +87,17 @@
     @if ($this->form->note->id)
         <div class="flex-0 border-l py-5 px-4 hidden lg:flex flex-col gap-3">
             @if ($this->note->is_archived)
-                <flux:button icon="icon-restore" class="w-full" icon:variant="micro" wire:click="restoreNote"
+                <flux:button icon="icon-restore" class="w-full bg-transparent!" icon:variant="micro" wire:click="restoreNote"
                     class="bg-transparent!">
                     {{ __('Restore Note') }}
                 </flux:button>
             @else
-                <flux:button icon="icon-archive" class="w-full"
+                <flux:button icon="icon-archive" class="w-full bg-transparent!"
                     x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
                     {{ __('Archive Note') }}
                 </flux:button>
             @endif
-            <flux:button icon="icon-delete" class="w-full"
+            <flux:button icon="icon-delete" class="w-full bg-transparent!"
                 x-on:click="deleteDialogOpen = true; $nextTick(() => $refs.deleteDialog.showModal())">
                 {{ __('Delete Note') }}
             </flux:button>
@@ -111,7 +111,7 @@
             </x-dialog.icon>
             <x-dialog.body>
                 <h3 class="font-bold mb-1">Archive Note</h3>
-                <p class="max-w-[40ch] text-sm text-zinc-700">
+                <p class="max-w-[40ch] text-sm text-zinc-700 dark:text-white">
                     Are you sure you want to archive this note? You can find it in the Archived Notes
                     section and restore it anytime.
                 </p>
@@ -131,7 +131,7 @@
             </x-dialog.icon>
             <x-dialog.body>
                 <h3 class="font-bold mb-1">Delete Note</h3>
-                <p class="max-w-[40ch] text-sm text-zinc-700">
+                <p class="max-w-[40ch] text-sm text-zinc-700 dark:text-white">
                     Are you sure you want to permanently delete this note? This action cannot be undone.
                 </p>
             </x-dialog.body>
