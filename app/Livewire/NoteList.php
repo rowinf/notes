@@ -51,7 +51,7 @@ class NoteList extends Component
                     fn($query) =>
                     $query->where('title', 'like', '%' . $searchTerm . '%')
                         ->orWhere('content', 'like', '%' . $searchTerm . '%')
-                        ->orWhereHas('tags', fn($tagQuery) => 
+                        ->orWhereHas('tags', fn($tagQuery) =>
                             $tagQuery->where('name', 'like', "%$searchTerm%")
                         )
                 );
@@ -108,8 +108,8 @@ class NoteList extends Component
         unset($this->notes);
     }
 
-    #[On('new-note-title-updated')]
-    public function newNoteTitleUpdated($title)
+    #[On('title-updated')]
+    public function titleUpdated($title)
     {
         $this->newNoteTitle = $title;
     }

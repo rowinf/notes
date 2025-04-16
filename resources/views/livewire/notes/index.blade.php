@@ -1,4 +1,5 @@
 <div x-data="{ deleteDialogOpen: true, archiveDialogOpen: false }"
+x-init="$watch('$wire.form.title', value => $dispatch('title-updated', {title: value}))"
     class="note-editor flex-1 grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
     <div class="lg:hidden px-6 pt-3">
         <div class="flex items-center">
