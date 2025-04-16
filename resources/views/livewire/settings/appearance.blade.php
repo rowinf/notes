@@ -34,7 +34,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
 @endscript
 
 <x-settings.layout heading="{{ __('Color Theme') }}" subheading="{{ __('Choose your color theme:') }}">
-    <form wire:submit="updateUser" class="flex flex-col pt-6 max-w-[528px]">
+    <form wire:submit="updateUser" class="flex flex-col pt-6 lg:max-w-[528px]">
         <flux:radio.group class="flex-col mb-6 space-y-8" wire:model="color_theme">
             <flux:field class="field-radio--card">
                 <label>

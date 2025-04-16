@@ -28,7 +28,7 @@ Route::middleware(['auth'])->domain($domain)->group(function () {
         Route::get('archive', Archive::class)->name('archive');
 
         Route::get('search', Search::class)->name('search.index');
-        Route::get( 'search/{note}', SearchResults::class)->name('search.note');
+        Route::get('search/{note}', SearchResults::class)->name('search.note');
         Route::get('archive/notes', NoteEmpty::class)->name('archive.index');
         Route::get('archive/notes/{note}', Index::class)->name('archive.show')->can('view', 'note');
         Route::get('tags', TagList::class)->name('tag.index');

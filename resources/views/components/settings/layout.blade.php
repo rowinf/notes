@@ -1,5 +1,5 @@
 <div class="flex items-start w-full">
-    <div class="pt-5 pl-8 pr-4 hidden md:block">
+    <div class="pt-5 pl-8 pr-4 hidden lg:block">
         <flux:navlist class="h-auto gap-1 w-52">
             <flux:navlist.item href="{{ route('settings.appearance') }}" icon="icon-sun" wire:current="bg-zinc-100 dark:bg-zinc-800" wire:navigate>{{ __('Color Theme') }}</flux:navlist.item>
             <flux:navlist.item href="{{ route('settings.font-theme') }}" icon="icon-font" wire:current="bg-zinc-100 dark:bg-zinc-800" wire:navigate>{{ __('Font Theme') }}</flux:navlist.item>
