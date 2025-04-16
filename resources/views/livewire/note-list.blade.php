@@ -1,7 +1,7 @@
 @persist('scrollbar')
 <div wire:scroll class="overflow-y-auto pr-4 pl-8 border-r">
     <div class="hidden lg:block pt-5">
-        <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">Create New Note
+        <flux:button href="{{route('note.create')}}" variant="primary" class="w-full">+ Create New Note
         </flux:button>
     </div>
     <div class="absolute lg:hidden bottom-4 right-4">

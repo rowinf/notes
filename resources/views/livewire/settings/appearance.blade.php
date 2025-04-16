@@ -38,8 +38,8 @@ new #[Layout('components.layouts.settings')] class extends Component {
         <flux:radio.group class="flex-col mb-6 space-y-8" wire:model="color_theme">
             <flux:field class="field-radio--card">
                 <label>
-                    <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
-                        <flux:icon.icon-font-sans-serif />
+                    <div>
+                        <flux:icon.icon-sun />
                     </div>
                     <flux:description class="flex-1">
                         <div>Light Mode</div>
@@ -50,8 +50,8 @@ new #[Layout('components.layouts.settings')] class extends Component {
             </flux:field>
             <flux:field class="field-radio--card">
                 <label>
-                    <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
-                        <flux:icon.icon-font-serif />
+                    <div>
+                        <flux:icon.icon-moon />
                     </div>
                     <flux:description class="flex-1">
                         <div>Dark Mode</div>
@@ -62,8 +62,8 @@ new #[Layout('components.layouts.settings')] class extends Component {
             </flux:field>
             <flux:field class="field-radio--card">
                 <label>
-                    <div class="border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600 border-zinc-100">
-                        <flux:icon.icon-font-monospace />
+                    <div>
+                        <flux:icon.icon-system-theme />
                     </div>
                     <flux:description class="flex-1">
                         <div>System</div>

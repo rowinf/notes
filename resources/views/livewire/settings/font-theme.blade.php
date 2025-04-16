@@ -39,7 +39,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
         <flux:radio.group class="flex-col mb-6 space-y-8" wire:model="font_theme">
             <flux:field class="field-radio--card">
                 <label>
-                    <div class="border p-4 dark:bg-black rounded-xl bg-white">
+                    <div>
                         <flux:icon.icon-font-sans-serif />
                     </div>
                     <flux:description class="flex-1">
@@ -51,7 +51,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
             </flux:field>
             <flux:field class="field-radio--card">
                 <label>
-                    <div class="border p-4 dark:bg-black rounded-xl bg-white">
+                    <div>
                         <flux:icon.icon-font-serif />
                     </div>
                     <flux:description class="flex-1">
@@ -63,7 +63,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
             </flux:field>
             <flux:field class="field-radio--card">
                 <label>
-                    <div class="border p-4 dark:bg-black rounded-xl bg-white">
+                    <div>
                         <flux:icon.icon-font-monospace />
                     </div>
                     <flux:description class="flex-1">

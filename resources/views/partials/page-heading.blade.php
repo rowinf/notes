@@ -11,7 +11,7 @@
             </flux:heading>
             <flux:spacer />
             <livewire:search-form :searchTerm="request()->get('searchTerm') ?? ''" />
-            <flux:button href="{{ route('settings.appearance') }}" icon="cog" variant="ghost" class="ml-2" wire:navigate>
+            <flux:button href="{{ route('settings.appearance') }}" icon="icon-settings" variant="ghost" class="ml-2 text-zinc-500! dark:text-zinc-400!" wire:navigate>
             </flux:button>
         </div>
     </div>
