@@ -17,6 +17,14 @@
 
 @layer base {
 
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
     .border,
     .border-b,
     .border-r,
@@ -24,13 +32,6 @@
     .border-l,
     .lg\:border-b {
         @apply border-gray-200 dark:border-zinc-800;
-    }
-
-    [data-flux-navlist-item] {
-        @apply text-zinc-700! dark:text-zinc-200!;
-    }
-    [data-current] [data-flux-icon] {
-        @apply text-blue-500;
     }
 }
 
@@ -65,40 +66,22 @@
     }
 }
 
-
-@layer base {
-
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
-    }
-}
-
 .field-radio--card {
-    @apply border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:has-[ui-radio[data-checked]]:border-zinc-700 dark:border-zinc-800 has-[ui-radio[data-checked]]:bg-zinc-50 rounded-xl;
+    @apply border dark:has-[ui-radio[data-checked]]:bg-zinc-800 dark:has-[ui-radio[data-checked]]:border-zinc-700 dark:border-zinc-800 has-[ui-radio[data-checked]]:bg-zinc-100 rounded-xl;
     label {
         @apply flex items-center gap-4 p-4;
     }
+    label > *:first-child {
+        @apply border p-4 dark:bg-black rounded-xl bg-white dark:border-zinc-600;
+    }
 }
 
-[data-flux-field] {
-    @apply grid gap-2;
+input {
+    @apply bg-transparent! dark:border-zinc-600! h-11;
 }
-
-[data-flux-label] {
-    @apply !mb-0 !leading-tight;
-}
-
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
-    @apply ring-2 ring-zinc-500 ring-offset-1 ring-offset-transparent;
-}
-
-[data-flux-button]:focus-visible {
     @apply ring-2 ring-zinc-500 ring-offset-1 ring-offset-transparent;
 }
 
@@ -106,7 +89,7 @@ select:focus[data-flux-control] {
     @apply size-4;
 } */
 
-/* this is not possible with tailwind */
+/* adjacent selector "+" is not supported in tailwind? */
 :has(a:hover, [data-current])+.note-list-item {
     border-color: transparent !important;
 }
@@ -132,10 +115,6 @@ body:has(>[data-flux-main]) {
         "footer";
 }
 
-[data-flux-main] {
-    overflow-y: auto;
-}
-
 body:has(.note-editor) {
     grid-template-rows: min-content minmax(300px, 1fr) min-content;
     grid-template-areas:
@@ -144,7 +123,33 @@ body:has(.note-editor) {
         "footer";
 }
 
+body {
+    @apply text-zinc-950 dark:text-white;
+}
 
+[data-flux-button]:focus-visible {
+    @apply ring-2 ring-zinc-500 ring-offset-1 ring-offset-transparent;
+}
+
+[data-flux-navlist-item] {
+    @apply text-zinc-700! dark:text-zinc-200!;
+}
+
+[data-current][data-flux-navlist-item] [data-flux-icon] {
+    @apply text-blue-500;
+}
+
+[data-flux-field] {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+[data-flux-main] {
+    overflow-y: auto;
+}
 
 @media (width < 64rem) {
     body:has(:is(>[data-flux-main],.note-editor)) [data-flux-sidebar] {
