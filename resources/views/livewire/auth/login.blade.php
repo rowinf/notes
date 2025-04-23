@@ -119,7 +119,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
     </form>
     <hr>
     <p class="text-center text-sm">Or log in with:</p>
-    <flux:button class="not-hover:bg-transparent!"><flux:icon.icon-google></flux:icon.icon-google> Google</flux:button>
+    <flux:button as="a" href="/auth/google" class="not-hover:bg-transparent!"><flux:icon.icon-google></flux:icon.icon-google> Google</flux:button>
 
     <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-300">
         No account yet?
