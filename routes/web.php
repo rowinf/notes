@@ -10,11 +10,14 @@ use App\Livewire\SearchResults;
 use App\Livewire\TagNoteEmpty;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\Auth\GoogleAuthController;
 
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
 
 Route::domain($domain)->group(function () {
     Route::view('/', 'welcome');
+    Route::get('/auth/google', [GoogleAuthController::class, 'index']);
+    Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 });
 
 Route::middleware(['auth'])->domain($domain)->group(function () {
