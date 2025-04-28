@@ -3,16 +3,18 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Note;
-use Date;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Date;
 use Str;
 
 class NoteForm extends Form
 {
 
     public ?Note $note;
+
+    #[Validate('required')]
     public string $title = '';
     public string $content = '';
     public string $tags = '';
@@ -21,6 +23,7 @@ class NoteForm extends Form
 
     public function save()
     {
+        $this->validate();
         if ($this->note->id) {
             return $this->update();
         }

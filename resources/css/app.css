@@ -77,7 +77,7 @@
 }
 
 input {
-    @apply bg-transparent! dark:border-zinc-600! h-11;
+    @apply bg-transparent! dark:border-zinc-600!;
 }
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],
@@ -96,6 +96,10 @@ select:focus[data-flux-control] {
 
 .slide-in {
     transition: width 0.3s ease;
+}
+
+[aria-invalid="true"] {
+    @apply border-red-300!;
 }
 
 [x-cloak] {
