@@ -21,7 +21,6 @@ class NoteList extends Component
 
     public bool $archived = false;
     public bool $active = true;
-    public string $newNoteTitle = '';
 
     public function mount(bool $active, bool $archived)
     {
@@ -104,14 +103,7 @@ class NoteList extends Component
     #[On('note-added')]
     public function reloadNotes()
     {
-        $this->newNoteTitle = '';
         unset($this->notes);
-    }
-
-    #[On('title-updated')]
-    public function titleUpdated($title)
-    {
-        $this->newNoteTitle = $title;
     }
 
     public function render()

@@ -1,5 +1,4 @@
 <div x-data="{ deleteDialogOpen: true, archiveDialogOpen: false }"
-x-init="$watch('$wire.form.title', value => $dispatch('title-updated', {title: value}))"
     class="note-editor flex-1 grid lg:grid-flow-col grid-rows-[min-content_1fr] lg:grid-rows-1 lg:grid-cols-[auto_min-content]">
     <div class="lg:hidden px-6 pt-3">
         <div class="flex items-center">
@@ -33,7 +32,8 @@ x-init="$watch('$wire.form.title', value => $dispatch('title-updated', {title: v
                 <button class="text-2xl font-bold text-left cursor-pointer mb-2" type="button"
                     x-on:click="open = !open" x-text="$wire.form.title" x-show="!open"></button>
                 <flux:field x-show="open" x-cloak>
-                    <flux:input type="text" wire:model="form.title" placeholder="Title" x-on:blur="open = false"
+                    <flux:input autocomplete="off" type="text" wire:model="form.title" placeholder="Title"
+                        x-on:blur="open = false; $wire.dispatch('title-updated.{{ $note->id ?? '-1' }}', {title: $event.srcElement.value})"
                         x-trap="open" />
                 </flux:field>
             </div>
@@ -74,7 +74,8 @@ x-init="$watch('$wire.form.title', value => $dispatch('title-updated', {title: v
         </div>
         <flux:separator class="my-4" />
 
-        <flux:textarea class="flex-1 min-h-min bg-transparent!" wire:model="form.content" placeholder="Start typing your note here...">
+        <flux:textarea class="flex-1 min-h-min bg-transparent!" wire:model="form.content"
+            placeholder="Start typing your note here...">
         </flux:textarea>
         <flux:separator class="my-4 hidden lg:block" />
         <div class="hidden lg:block">
@@ -82,14 +83,15 @@ x-init="$watch('$wire.form.title', value => $dispatch('title-updated', {title: v
                 Save Note
             </flux:button>
             <flux:button href="{{ route('note.index') }}" variant="filled" class="text-zinc-600! dark:text-zinc-400!">
-                Cancel</flux:button>
+                Cancel
+            </flux:button>
         </div>
     </form>
     @if ($this->form->note->id)
         <div class="flex-0 border-l py-5 px-4 hidden lg:flex flex-col gap-3">
             @if ($this->note->is_archived)
-                <flux:button icon="icon-restore" class="w-full bg-transparent!" icon:variant="micro" wire:click="restoreNote"
-                    class="bg-transparent!">
+                <flux:button icon="icon-restore" class="w-full bg-transparent!" icon:variant="micro"
+                    wire:click="restoreNote" class="bg-transparent!">
                     {{ __('Restore Note') }}
                 </flux:button>
             @else
@@ -121,7 +123,8 @@ x-init="$watch('$wire.form.title', value => $dispatch('title-updated', {title: v
                 <flux:button x-on:click="$refs.archiveDialog.close()" variant="filled"
                     class="dark:bg-zinc-500! text-zinc-600! dark:text-white!">Cancel</flux:button>
                 <flux:button x-on:click="$refs.archiveDialog.close()" wire:click="archive" variant="primary">
-                    Archive Note</flux:button>
+                    Archive Note
+                </flux:button>
             </x-dialog.footer>
         </x-dialog>
     @endteleport
@@ -140,7 +143,8 @@ x-init="$watch('$wire.form.title', value => $dispatch('title-updated', {title: v
                 <flux:button x-on:click="$refs.deleteDialog.close()" variant="filled"
                     class="dark:bg-zinc-500! text-zinc-600! dark:text-white!">Cancel</flux:button>
                 <flux:button x-on:click="$refs.deleteDialog.close()" wire:click="delete" variant="danger">
-                    Delete Note</flux:button>
+                    Delete Note
+                </flux:button>
             </x-dialog.footer>
         </x-dialog>
     @endteleport
