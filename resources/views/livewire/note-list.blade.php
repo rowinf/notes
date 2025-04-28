@@ -1,9 +1,11 @@
 @script
     <script>
         document.addEventListener('livewire:navigating', (event) => {
-            $wire.dispatch('title-updated.-1', {
-                title: ''
-            });
+            if (location.href.match(/\/dashboard\/notes\/create$/)) {
+                $wire.dispatch('title-updated.-1', {
+                    title: ''
+                });
+            }
         })
     </script>
 @endscript
@@ -28,14 +30,15 @@
             <livewire:notes.note-title
                 class="font-semibold bg-zinc-100 dark:bg-zinc-800 my-1 p-2 rounded-md empty:hidden"></livewire:notes.note-title>
             @forelse ($notes as $note)
-                <div  wire:key="{{ $note->id }}" @class([
+                <div wire:key="{{ $note->id }}" @class([
                     'note-list-item has-hover:border-transparent',
                     'border-t' => !$loop->first,
                 ])>
                     <a href="{{ $this->getNoteRoute($note, $this->tag, request('searchTerm')) }}"
                         class="font-semibold my-1 hover:bg-zinc-100 dark:hover:bg-zinc-700/75 p-2 flex flex-col hover:rounded-md"
                         wire:current="bg-zinc-100 dark:bg-zinc-800 rounded-md" wire:navigate>
-                        <livewire:notes.note-title wire:key="title_{{ $note->id }}" :noteId="$note->id" :title="$note->title"></livewire:notes.note-title>
+                        <livewire:notes.note-title wire:key="title_{{ $note->id }}" :noteId="$note->id"
+                            :title="$note->title"></livewire:notes.note-title>
                         @if ($note->tags->isNotEmpty())
                             <div class="pt-2">
                                 @foreach ($note->tags as $tag)
