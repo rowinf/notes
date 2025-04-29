@@ -14,9 +14,6 @@ This is a solution to the [Note-taking web app challenge on Frontend Mentor](htt
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -42,79 +39,70 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![screenshot of my notes solution](./screenshot.png)
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [notes.robertirwin.online](https://notes.robertirwin.online/)
 
 ## My process
 
+I have been a JavaScript developer for a long time. Laravel is a big departure from popular JS frameworks, but it is a very nice developer experience, and by offering cohesive starter packs, the idea is that I would not have to scrounge the internet for JavaScript packages that work together. The Laravel ecosystem has simplified so much of the configuration and deployment, it's hard to imagine going back to JavaScript voluntarily.
+
 ### Built with
 
-- HTML
+- HTML/CSS/JS
 - Desktop-first
 - Mobile view
-- [Tailwind 4](https://tailwindcss.com/)
-- [Laravel 12](https://laravel.com/)
-- [Livewire 3](https://livewire.laravel.com/)
-- [AlpineJS ](https://alpinejs.dev/)
-- [Flux UI](https://fluxui.dev/)
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- Laravel Livewire Starter Kit:
+    - [Laravel 12](https://laravel.com/)
+    - [Tailwind 4](https://tailwindcss.com/)
+    - [Livewire 3](https://livewire.laravel.com/)
+    - [AlpineJS ](https://alpinejs.dev/)
+    - [Flux UI](https://fluxui.dev/)
+- Amazon SES
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+I underestimated how long it takes to become productive with a new set of tools. Though I could never dedicate as much time as I would have liked in a given day, it still took longer than I thought. I had to unlearn some of my old JavaScript writing habits, and instead make better use out of the libraries available.
 
-To see how you can add code snippets, see below:
+I started out with the desktop view, but since Tailwind CSS is more geared towards mobile-first, maybe that would have been better.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+I am overall happy with how Alpine and Livewire work together, though the interplay between them can be tricky at times. The solution in the end can be nicely readable. This is how I eventually bound the title of a note in the sidebar with the note form field:
+
+```php
+<?php
+use Livewire\Volt\Component;
+
+use Livewire\Attributes\On;
+new class extends Component {
+
+    public int $noteId = -1;
+    public string $title = '';
+    public string $class = '';
+
+    #[On('title-updated.{noteId}')]
+    public function titleUpdatedEditor($title)
+    {
+        $this->title = $title;
+    }
+}; ?>
+
+<div class="{{ $this->class }}">{{ $this->title ?: "Untitled Note" }}</div>
 ```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+This is my first full-stack hypermedia application. Hypermedia is kind of a new frontier in modern web development as an alternative to JavaScript thick-client single-page-applications, and I'm eagerly watching this space. I feel confident in tackling another full-stack project with Laravel.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Hypermedia Systems](https://hypermedia.systems/) - Ultimately convinced me to look for alternatives to the typical JSON API + front-end framework architecture.
 
 ## Author
+This solution was developed by Robert Irwin using open source tools.
 
 - Website - [Robert Irwin](https://rowinf.github.io)
 - Frontend Mentor - [@rowinf](https://www.frontendmentor.io/profile/rowinf)
 - LinkedIn - [Rob](https://www.linkedin.com/in/robert-irwin-23019730/)
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
