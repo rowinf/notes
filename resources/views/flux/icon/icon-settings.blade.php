@@ -19,7 +19,7 @@
     );
 
     $strokeWidth = match ($variant) {
-        'outline' => 1.2,
+        'outline' => 0.5,
         'mini' => 0.5,
         'micro' => 2.5,
     };

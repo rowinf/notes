@@ -19,8 +19,8 @@
                 </flux:button>
             @endif
             <flux:button href="{{ route('note.index') }}" size="sm" variant="subtle">Cancel</flux:button>
-            <flux:button type="submit" form="note-form" size="sm" variant="ghost"
-                class="lg:hidden mr-0! pr-0 text-blue-500!">
+            <flux:button type="submit" form="note-form" size="sm" variant="ghost" inset
+                class="lg:hidden text-blue-500!">
                 Save Note
             </flux:button>
         </div>
@@ -93,22 +93,19 @@
         </div>
     </form>
     @if ($this->form->note->id)
-        <div class="flex-0 border-l py-5 px-4 hidden lg:flex flex-col gap-3">
+        <div class="border-l py-5 px-4 hidden lg:flex flex-col gap-3 w-[258px]">
             @if ($this->note->is_archived)
-                <flux:button icon="icon-restore" class="w-full bg-transparent!" icon:variant="micro"
-                    wire:click="restoreNote" class="bg-transparent!">
-                    {{ __('Restore Note') }}
-                </flux:button>
+                <button class="button-border" wire:click="restoreNote">
+                    <flux:icon icon="icon-restore" class="size-5"></flux:icon> {{ __('Restore Note') }}
+                </button>
             @else
-                <flux:button icon="icon-archive" class="w-full bg-transparent!"
-                    x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
-                    {{ __('Archive Note') }}
-                </flux:button>
+                <button class="button-border" x-on:click="archiveDialogOpen = true; $nextTick(() => $refs.archiveDialog.showModal())">
+                    <flux:icon icon="icon-archive" class="size-5"></flux:icon> {{ __('Archive Note') }}
+                </button>
             @endif
-            <flux:button icon="icon-delete" class="w-full bg-transparent!"
-                x-on:click="deleteDialogOpen = true; $nextTick(() => $refs.deleteDialog.showModal())">
-                {{ __('Delete Note') }}
-            </flux:button>
+            <button class="button-border" x-on:click="deleteDialogOpen = true; $nextTick(() => $refs.deleteDialog.showModal())">
+                <flux:icon icon="icon-delete" class="size-5"></flux:icon> {{ __('Delete Note') }}
+            </button>
         </div>
     @endif
 
