@@ -5,7 +5,7 @@ use Livewire\Attributes\On;
 new class extends Component {
 
     public int $noteId = -1;
-    public string $title = 'Untitled Note';
+    public string $title = '';
     public string $class = '';
 
     #[On('title-updated.{noteId}')]
@@ -15,4 +15,4 @@ new class extends Component {
     }
 }; ?>
 
-<div class="{{ $this->class }}">{{ $this->title }}</div>
+<div class="{{ $this->class }}">{{ $this->title ?: "Untitled Note" }}</div>

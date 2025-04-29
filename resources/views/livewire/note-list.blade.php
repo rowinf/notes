@@ -1,14 +1,3 @@
-@script
-    <script>
-        document.addEventListener('livewire:navigating', (event) => {
-            if (location.href.match(/\/dashboard\/notes\/create$/)) {
-                $wire.dispatch('title-updated.-1', {
-                    title: ''
-                });
-            }
-        })
-    </script>
-@endscript
 @persist('scrollbar')
     <div wire:scroll class="overflow-y-auto pr-4 pl-8">
         <div class="hidden lg:block pt-5">
@@ -26,9 +15,11 @@
                 All notes with the "{{ request()->route('tag')->name }}" tag are shown here
             </p>
         @endif
-        <section class="pt-4 h-auto">
-            <livewire:notes.note-title
-                class="font-semibold bg-zinc-100 dark:bg-zinc-800 my-1 p-2 rounded-md empty:hidden"></livewire:notes.note-title>
+        <section class="pt-4 h-auto" x-data="{hideUntitled: !location.href.match(/\/dashboard\/notes\/create$/)}">
+            <div x-bind:class="hideUntitled ? 'hidden' : ''" x-cloak>
+                <livewire:notes.note-title
+                    class="font-semibold bg-zinc-100 dark:bg-zinc-800 my-1 p-2 rounded-md"></livewire:notes.note-title>
+            </div>
             @forelse ($notes as $note)
                 <div wire:key="{{ $note->id }}" @class([
                     'note-list-item has-hover:border-transparent',
@@ -36,9 +27,10 @@
                 ])>
                     <a href="{{ $this->getNoteRoute($note, $this->tag, request('searchTerm')) }}"
                         class="my-1 hover:bg-zinc-100 dark:hover:bg-zinc-700/75 p-2 flex flex-col hover:rounded-md"
-                        wire:current="bg-zinc-100 dark:bg-zinc-800 rounded-md" wire:navigate>
-                        <livewire:notes.note-title class="font-semibold" wire:key="title_{{ $note->id }}" :noteId="$note->id"
-                            :title="$note->title"></livewire:notes.note-title>
+                        wire:current="bg-zinc-100 dark:bg-zinc-800 rounded-md"
+                        x-on:click="hideUntitled = true" wire:navigate>
+                        <livewire:notes.note-title class="font-semibold" wire:key="title_{{ $note->id }}"
+                            :noteId="$note->id" :title="$note->title"></livewire:notes.note-title>
                         @if ($note->tags->isNotEmpty())
                             <div class="pt-2">
                                 @foreach ($note->tags as $tag)

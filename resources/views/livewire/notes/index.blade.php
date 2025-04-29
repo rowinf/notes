@@ -26,13 +26,13 @@
         </div>
         <flux:separator class="mt-1" />
     </div>
-    <form id="note-form" wire:submit="update" class="flex px-6 py-5 flex-1 flex-col">
+    <form id="note-form" wire:submit="update" class="flex px-6 py-5 flex-1 flex-col" x-on:keyup.ctrl.enter="$el.submit()">
         <div class="grid text-sm">
             <div x-data="{ open: false, isValid: true, toggleInput() { this.open = !this.open; $focus.next(); } }">
                 <button class="text-2xl font-bold text-left cursor-pointer mb-2" type="button"
                     x-on:click="toggleInput()" x-text="$wire.form.title || 'Enter a title...'" x-show="!open"></button>
                 <flux:field x-show="open" x-cloak x-data="{emitTitle (title) { open = !title; $wire.dispatch('title-updated.{{ $note->id ?? '-1' }}', {title}) } }">
-                    <flux:input required autocomplete="off" type="text" wire:model="form.title" placeholder="Title"
+                    <flux:input autocomplete="off" type="text" wire:model="form.title" placeholder="Title"
                         x-on:blur="emitTitle($el.value); isValid = $el.checkValidity()"
                         x-on:keydown.tab="emitTitle($el.value)"
                         x-on:keydown.enter="emitTitle($el.value)"
