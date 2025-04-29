@@ -56,9 +56,6 @@ RUN chmod 754 /usr/local/bin/start-nginx
 COPY . /var/www/html
 WORKDIR /var/www/html
 
-RUN touch database/database.sqlite
-RUN chmod -R 775 database
-
 # 4. Setup application dependencies
 RUN composer install --optimize-autoloader --no-dev \
     && mkdir -p storage/logs \

@@ -29,10 +29,7 @@ console_command = 'php /var/www/html/artisan tinker'
   AWS_ACCESS_KEY_ID = 'AKIA4AQ3T6XCOH5ME35Q'
   AWS_DEFAULT_REGION = 'ap-southeast-2'
   MAIL_MAILER = 'ses'
-  DB_CONNECTION = 'sqlite'
-  DB_DATABASE = '/var/www/html/database/database.sqlite'
-  CACHE_DRIVER = 'file'
-  QUEUE_CONNECTION = 'sync'
+
 
 
 [http_service]
