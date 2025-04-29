@@ -15,7 +15,7 @@
                 All notes with the "{{ request()->route('tag')->name }}" tag are shown here
             </p>
         @endif
-        <section class="pt-4 h-auto" x-data="{hideUntitled: !location.href.match(/\/dashboard\/notes\/create$/)}">
+        <section class="pt-4 h-auto">
             <div x-bind:class="hideUntitled ? 'hidden' : ''" x-cloak>
                 <livewire:notes.note-title
                     class="font-semibold bg-zinc-100 dark:bg-zinc-800 my-1 p-2 rounded-md"></livewire:notes.note-title>

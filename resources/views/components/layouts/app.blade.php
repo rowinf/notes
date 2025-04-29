@@ -3,7 +3,8 @@
 @endphp
 <x-layouts.app.sidebar title="Notes">
     @include('partials.page-heading')
-    <flux:main>
+    <flux:main x-data="{hideUntitled: !location.href.match(/\/dashboard\/notes\/create$/)}"
+    x-on:note-added.window="hideUntitled = false">
         @if (Route::is('tag.show'))
             <flux:button icon:leading="icon-chevron-right" variant="ghost" class="px-7! self-start lg:hidden" :href="route('tag.index')">All tags</flux:button>
         @endif
