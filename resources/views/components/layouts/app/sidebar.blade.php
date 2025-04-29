@@ -3,7 +3,7 @@
 
 <head>
     @include('partials.head')
-    @include('partials.theme', ['font_theme' => Auth::user()->font_theme])
+    @include('partials.theme', ['font_theme' => Auth::user()?->font_theme])
 </head>
 
 <body class="h-screen dark:bg-zinc-800 bg-zinc-100 overflow-hidden text-zinc-950 dark:text-white">

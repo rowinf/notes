@@ -26,14 +26,13 @@ class NoteSeeder extends Seeder
                     "title" => $note_data->title,
                     "last_edited_at" => $note_data->lastEdited,
                     "is_archived" => $note_data->isArchived,
-                    "user_id" => $user->id,
                 ]);
                 foreach ($note_data->tags as $tagName) {
-                    $tag = Tag::createOrFirst([
+                    $tag = Tag::firstOrCreate([
                         "name" => $tagName,
-                        "user_id" => $user->id,
+                        "user_id" => null,
                     ]);
-                    $note->tags()->save($tag);
+                    $note->tags()->syncWithoutDetaching($tag);
                 }
             }
         }

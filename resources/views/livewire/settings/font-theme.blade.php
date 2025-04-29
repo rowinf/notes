@@ -6,11 +6,13 @@ use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
 new #[Layout('components.layouts.settings')] class extends Component {
-    public string $font_theme = '';
+    public string $font_theme = 'sans';
 
     public function mount()
     {
-        $this->font_theme = Auth::user()->font_theme;
+        if (Auth::check()) {
+            $this->font_theme = Auth::user()->font_theme;
+        }
     }
 
     /**

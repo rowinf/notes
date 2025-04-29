@@ -15,15 +15,12 @@ use App\Http\Controllers\Auth\GoogleAuthController;
 $domain = parse_url(config('app.url'), PHP_URL_HOST);
 
 Route::domain($domain)->group(function () {
-    Route::view('/', 'welcome');
+    Route::get('/', NoteEmpty::class)->name('home');
     Route::get('/auth/google', [GoogleAuthController::class, 'index']);
     Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 });
 
 Route::middleware(['auth'])->domain($domain)->group(function () {
-    Route::get('/', function () {
-        return redirect('login');
-    })->name('home');
     Route::redirect('settings', 'settings/profile');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
 

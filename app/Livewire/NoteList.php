@@ -33,16 +33,18 @@ class NoteList extends Component
     public function notes()
     {
         $states = [];
-        if ($this->archived)
+        if ($this->archived) {
             $states[] = true;
-        if ($this->active)
+        }
+        if ($this->active) {
             $states[] = false;
+        }
         if ($this->tag) {
             $builder = $this->tag->notes()->whereIn('is_archived', $states);
         } else {
-            $builder = Auth::user()->notes()
-                ->orderByDesc('last_edited_at')
+            $builder = Note::orderByDesc('last_edited_at')
                 ->whereIn('is_archived', $states)
+                ->where('user_id', Auth::id())
                 ->with('tags');
 
             if ($searchTerm = request()->get('searchTerm')) {
@@ -50,14 +52,16 @@ class NoteList extends Component
                     fn($query) =>
                     $query->where('title', 'like', '%' . $searchTerm . '%')
                         ->orWhere('content', 'like', '%' . $searchTerm . '%')
-                        ->orWhereHas('tags', fn($tagQuery) =>
+                        ->orWhereHas(
+                            'tags',
+                            fn($tagQuery) =>
                             $tagQuery->where('name', 'like', "%$searchTerm%")
                         )
                 );
             }
+            $paginator = $builder->simplePaginate($this->perPage, page: 1);
+            return $paginator;
         }
-        $paginator = $builder->simplePaginate($this->perPage, page: 1);
-        return $paginator;
     }
 
     public function updatingPage($page)

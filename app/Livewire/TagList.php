@@ -10,6 +10,6 @@ class TagList extends Component
 {
     public function render()
     {
-        return view('livewire.tag-list');
+        return view('livewire.tag-list', ['tags' => Tag::where(['user_id' => auth()->id()])]);
     }
 }
