@@ -22,7 +22,7 @@ class Note extends Model
 
     public function getTitleAttribute($value)
     {
-        return $value ?? "Untitle Note";
+        return $value ?? "";
     }
 
     public function getLastEditedAtAttribute($value)

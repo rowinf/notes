@@ -114,7 +114,7 @@ select:focus[data-flux-control] {
 }
 
 [aria-invalid="true"] {
-    @apply border-red-300!;
+    @apply border-red-500!;
 }
 
 [x-cloak] {

@@ -30,7 +30,6 @@ class Index extends Component
         };
         if (request()->routeIs("note.create")) {
             $this->form->setNote(new Note(['content' => '']));
-            $this->dispatch('title-updated.-1', title: $this->form->title);
         } else {
             $this->form->setNote($note);
         }
