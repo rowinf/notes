@@ -65,6 +65,16 @@ I have been a JavaScript developer for a long time. Laravel is a big departure f
 
 ### What I learned
 
+I'm proud that I learned Laravel Livewire for this project, and even though it took a lot longer than expected, it is finished and I was able to successfully build the note taking application. Normally I would have used a front end framework like React, but Livewire does the job too, and I'm happy with how it turned out. Next time I'd probably start with mobile-first and ironing out the design system a little better.
+
+Some challenges were
+- Unfamiliarity with the Laravel stack, I asked the AI lots of questions and had to refer to the documentation a lot
+- Getting acquainted with Amazon SES
+- Laravel Forge Deployment
+- The sometimes subtle interplay between Alpine.js and Livewire
+
+I got the solution as close to the design design specs as I could, feel free to check for bugs too. fly.io seems to take a while to boot up so I apoligize for any 502 errors.
+
 I underestimated how long it takes to become productive with a new set of tools. Though I could never dedicate as much time as I would have liked in a given day, it still took longer than I thought. I had to unlearn some of my old JavaScript writing habits, and instead make better use out of the libraries available.
 
 I started out with the desktop view, but since Tailwind CSS is more geared towards mobile-first, maybe that would have been better.
