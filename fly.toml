@@ -19,6 +19,7 @@ console_command = 'php /var/www/html/artisan tinker'
   LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
   SESSION_DRIVER = 'cookie'
   SESSION_SECURE_COOKIE = 'true'
+  SESSION_DOMAIN = '.fly.dev'
   APP_URL = 'https://notes-purple-water-711.fly.dev'
   APP_NAME = 'Notes'
   MAIL_FROM_ADDRESS = 'noreply@notes-purple-water-711.fly.dev'
@@ -26,7 +27,6 @@ console_command = 'php /var/www/html/artisan tinker'
   GOOGLE_CLIENT_ID = '984352955382-9n299g0bsvkfv41n027cvftsfs5tq1o5.apps.googleusercontent.com'
   AWS_ACCESS_KEY_ID = 'AKIA4AQ3T6XCOH5ME35Q'
   AWS_DEFAULT_REGION = 'ap-southeast-2'
-  SESSION_DOMAIN = '.fly.dev'
 
 [http_service]
   internal_port = 8080
