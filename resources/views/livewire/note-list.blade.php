@@ -35,14 +35,14 @@
                     'border-t' => !$loop->first,
                 ])>
                     <a href="{{ $this->getNoteRoute($note, $this->tag, request('searchTerm')) }}"
-                        class="font-semibold my-1 hover:bg-zinc-100 dark:hover:bg-zinc-700/75 p-2 flex flex-col hover:rounded-md"
+                        class="my-1 hover:bg-zinc-100 dark:hover:bg-zinc-700/75 p-2 flex flex-col hover:rounded-md"
                         wire:current="bg-zinc-100 dark:bg-zinc-800 rounded-md" wire:navigate>
-                        <livewire:notes.note-title wire:key="title_{{ $note->id }}" :noteId="$note->id"
+                        <livewire:notes.note-title class="font-semibold" wire:key="title_{{ $note->id }}" :noteId="$note->id"
                             :title="$note->title"></livewire:notes.note-title>
                         @if ($note->tags->isNotEmpty())
                             <div class="pt-2">
                                 @foreach ($note->tags as $tag)
-                                    <span class="p-1 bg-zinc-100 rounded-md dark:bg-zinc-700 text-xs"
+                                    <span class="p-1 bg-zinc-200 rounded-md dark:bg-zinc-700 text-xs"
                                         wire:key="{{ $tag->id }}">{{ $tag->name }}</span>
                                 @endforeach
                             </div>
