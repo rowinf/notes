@@ -28,7 +28,7 @@ console_command = 'php /var/www/html/artisan tinker'
   GOOGLE_CLIENT_ID = '984352955382-9n299g0bsvkfv41n027cvftsfs5tq1o5.apps.googleusercontent.com'
   AWS_ACCESS_KEY_ID = 'AKIA4AQ3T6XCOH5ME35Q'
   AWS_DEFAULT_REGION = 'ap-southeast-2'
-  MAIL_MAILER = 'ses'
+  MAIL_MAILER = 'log'
 
 
 
