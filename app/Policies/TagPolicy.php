@@ -10,8 +10,8 @@ class TagPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Tag $tag): bool
+    public function view(?User $user, Tag $tag): bool
     {
-        return $user->id === $tag->user_id;
+        return !($user || $tag->user_id) || $user->id === $tag->user_id;
     }
 }
