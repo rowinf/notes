@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Note;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
@@ -40,11 +39,11 @@ class NoteList extends Component
             $states[] = false;
         }
         if ($this->tag) {
-            $builder = $this->tag->notes()->whereIn('is_archived', $states);
+            $builder = request()->route('tag')->notes()->whereIn('is_archived', $states);
         } else {
             $builder = Note::orderByDesc('last_edited_at')
                 ->whereIn('is_archived', $states)
-                ->where('user_id', Auth::id())
+                ->where('user_id', auth()->id())
                 ->with('tags');
 
             if ($searchTerm = request()->get('searchTerm')) {
@@ -62,6 +61,9 @@ class NoteList extends Component
             $paginator = $builder->simplePaginate($this->perPage, page: 1);
             return $paginator;
         }
+        return Note::where('user_id', auth()->id())
+            ->whereRelation('tags', 'name', '=', request()->route('tag'))
+            ->simplePaginate($this->perPage, page: 1);
     }
 
     public function updatingPage($page)

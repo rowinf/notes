@@ -1,6 +1,6 @@
 <x-layouts.app.sidebar title="Notes | Search">
     @include('partials.page-heading')
-    <flux:main>
+    <flux:main x-data="{hideUntitled: true}">
         <flux:heading size="xl" level="1" @class(["lg:hidden border-r pt-5 pl-8 pr-4", "hidden" => Route::is('search.note')])>
             <div>Search</div>
             <div class="mt-4">

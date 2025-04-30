@@ -8,7 +8,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
 
     public function mount()
     {
-        $this->color_theme = Auth::user()->color_theme ?? 'system';
+        $this->color_theme = Auth::user()?->color_theme ?? 'system';
     }
 
     /**
@@ -20,7 +20,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
             'color_theme' => ['required', 'string'],
         ]);
 
-        Auth::user()->update($attributes);
+        Auth::user()?->update($attributes);
         $this->dispatch('update-appearance', $attributes);
     }
 }; ?>

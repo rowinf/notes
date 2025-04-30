@@ -24,7 +24,7 @@ new #[Layout('components.layouts.settings')] class extends Component {
             'font_theme' => ['required', 'string'],
         ]);
 
-        Auth::user()->update($attributes);
+        Auth::user()?->update($attributes);
         $this->dispatch('font-updated', $attributes);
     }
 }; ?>

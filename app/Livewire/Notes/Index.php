@@ -68,6 +68,7 @@ class Index extends Component
             $this->redirect(route('note.index'), navigate: true);
         }
     }
+
     public function archive()
     {
         $this->dispatch('note-removed', id: $this->note->id, is_archived: true, is_restored: false, message: 'Note archived.', link: 'archive.index');

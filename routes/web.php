@@ -18,9 +18,6 @@ Route::domain($domain)->group(function () {
     Route::get('/', NoteEmpty::class)->name('home');
     Route::get('/auth/google', [GoogleAuthController::class, 'index']);
     Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
-});
-
-Route::middleware(['auth'])->domain($domain)->group(function () {
     Route::redirect('settings', 'settings/profile');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
 
@@ -32,7 +29,7 @@ Route::middleware(['auth'])->domain($domain)->group(function () {
         Route::get('archive/notes', NoteEmpty::class)->name('archive.index');
         Route::get('archive/notes/{note}', Index::class)->name('archive.show')->can('view', 'note');
         Route::get('tags', TagList::class)->name('tag.index');
-        Route::get('tags/{tag}', TagNoteEmpty::class)->name('tag.show');
+        Route::get('tags/{tag}', TagNoteEmpty::class)->name('tag.show')->can('view', 'tag');
         Route::get('tags/{tag}/notes/{note}', Index::class)->name('tag.note.show');
         Route::get('notes', NoteEmpty::class)->name('note.index');
         Route::get('notes/create', Index::class)->name('note.create');

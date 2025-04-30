@@ -75,6 +75,7 @@
         @apply ring-2 ring-offset-2 border-zinc-950 ring-zinc-400 dark:border-white dark:ring-zinc-600;
     }
 }
+
 .dark {
     .button-border {
         --tw-ring-offset-width: 1px;

@@ -3,10 +3,8 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Note;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Tag;
 use Livewire\Form;
-use Date;
-use Str;
 
 class NoteForm extends Form
 {
@@ -29,11 +27,12 @@ class NoteForm extends Form
 
     public function store()
     {
-        $this->note = Auth::user()->notes()->create([
+        $this->note = Note::create([
             'title' => $this->title,
             'content' => $this->content ?? '',
-            'last_edited_at' => Date::now(),
+            'last_edited_at' => today(),
             'is_archived' => false,
+            'user_id', auth()->id()
         ]);
         $this->updatedTags();
         return $this->note->fresh();
@@ -43,7 +42,7 @@ class NoteForm extends Form
         $this->note->update([
             'title' => $this->title,
             'content' => $this->content,
-            'last_edited_at' => Date::now(),
+            'last_edited_at' => today(),
             'is_archived' => false,
         ]);
         return $this->note->fresh();
@@ -51,11 +50,11 @@ class NoteForm extends Form
 
     public function updatedTags()
     {
-        $tags = Str::of($this->tags)
+        $tags = str($this->tags)
             ->explode(",")
             ->filter(fn($tag) => filled($tag))
             ->map(function ($tag) {
-                return Auth::user()->tags()->firstOrCreate([
+                return Tag::where('user_id', auth()->id())->firstOrCreate([
                     'name' => $tag,
                 ])->id;
             });
