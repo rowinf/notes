@@ -1,20 +1,19 @@
 <?php
 
-namespace Database\Seeders;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use App\Models\User;
 use App\Models\Note;
 use App\Models\Tag;
-use File;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 
-class NoteSeeder extends Seeder
+
+return new class extends Migration
 {
     /**
-     * Run the database seeds.
+     * Run the migrations.
      */
-    public function run(): void
+    public function up(): void
     {
         $json = File::get("database/data.json");
         $data = json_decode($json);
@@ -36,4 +35,12 @@ class NoteSeeder extends Seeder
             }
         }
     }
-}
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        //
+    }
+};
